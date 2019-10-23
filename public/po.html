@@ -12,6 +12,36 @@
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     
+        <style type="text/css" media="print">
+        @media print {
+            .hidden-print{
+                visibility:hidden;
+            }
+            
+            #currencyChange{
+                position: absolute;
+                left: 400px;
+                top: 13px;
+                width: 100px;
+                visibility: visible;
+                text-shadow:none;
+            }
+            
+            #exchangeDisplay{
+                background-color: #dc3545;
+                border-color: #dc3545;
+            }
+            
+            :placeholder-shown{
+                color: transparent;
+            }
+            
+            body{
+                height: auto;
+            }
+        }
+        </style>
+        
 </head>
 
 <body id="page-top" class="my-md-4">
@@ -30,9 +60,9 @@
                 <button class="btn btn-danger my-md-5" type="button">
                     Delete
                 </button>
-                 <div class="form-group">
+                <div id="currencyChange" class="form-group">
                     <small for="exchangeRate">US Dollar to PhP: </small>
-                    <input type="text" class="form-control" id="exchangeRate" disabled value="50.00">
+                    <input id="exchangeDisplay" type="text" class="form-control" id="exchangeRate" disabled value="50.10">
                 </div>
             </div>
             
@@ -119,7 +149,7 @@
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
-                            <input type="text" class="form-control" id="totalField" placeholder="Enter Amount">
+                            <input type="text" class="form-control" id="totalField" placeholder="0.0" disabled>
                         </div>
                     </div>
                 </div>
