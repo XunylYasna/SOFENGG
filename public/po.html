@@ -42,6 +42,58 @@
         }
         </style>
         
+        <script>
+            
+                
+            function computeDollar(){
+                var total = parseFloat(document.getElementById("totalField").value);
+                var dollar = parseFloat(document.getElementById("dollarField").value);
+                var rate = parseFloat(document.getElementById("exchangeDisplay").value);
+                var peso = parseFloat(document.getElementById("pesoField").value);
+                
+                if(document.getElementById("dollarField") && dollar){
+                    if(document.getElementById("pesoField") && peso){
+                        document.getElementById("totalField").value = dollar * rate + peso;
+                    }else{
+                        total = 0;
+                        document.getElementById("totalField").value = dollar * rate + total;
+                    }
+                }else{
+                    if(document.getElementById("pesoField") && peso){
+                        document.getElementById("totalField").value = peso;
+                    }else{
+                        document.getElementById("totalField").value = 0;
+                    }
+                }
+                
+                
+                
+            }
+            
+            function computePeso(){
+                var total = parseFloat(document.getElementById("totalField").value);
+                var dollar = parseFloat(document.getElementById("dollarField").value);
+                var rate = parseFloat(document.getElementById("exchangeDisplay").value);
+                var peso = parseFloat(document.getElementById("pesoField").value);
+            
+                if(document.getElementById("pesoField") && peso){
+                    if(document.getElementById("dollarField") && dollar){
+                        document.getElementById("totalField").value = dollar * rate + peso;
+                    }else{
+                        total = 0;
+                        document.getElementById("totalField").value = peso + total;
+                    }
+                }else{
+                    if(document.getElementById("dollarField") && dollar){
+                        document.getElementById("totalField").value = rate * dollar;
+                    }else{
+                        document.getElementById("totalField").value = 0;
+                    }
+                }
+                
+            }
+        </script>
+        
 </head>
 
 <body id="page-top" class="my-md-4">
@@ -132,24 +184,24 @@
                         </div>
                     </div>
                 </div>
-                
+                    
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="dollarField">US$: &nbsp;</label>
-                            <input type="text" class="form-control" id="dollarField" placeholder="Enter Amount">
+                            <input type="number" id="dollarField" onkeydown="return event.keyCode !== 69" oninput="computeDollar()" class="form-control" id="dollarField" placeholder="Enter Amount">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="pesoField">PHP: &nbsp;</label>
-                            <input type="text" class="form-control" id="pesoField" placeholder="Enter Amount">
+                            <input type="number" id="pesoField" onkeydown="return event.keyCode !== 69" oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
-                            <input type="text" class="form-control" id="totalField" placeholder="0.0" disabled>
+                            <input type="text" id="totalField" class="form-control" id="totalField" value="0.0" disabled>
                         </div>
                     </div>
                 </div>
