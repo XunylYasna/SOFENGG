@@ -13,7 +13,7 @@
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     
-        <style type="text/css" media="print">
+        <style type="text/css">
         @media print {
             .hidden-print{
                 visibility:hidden;
@@ -41,6 +41,15 @@
                 height: auto;
             }
         }
+        
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0; 
+        }
+            
         </style>
     
         <script>
@@ -210,13 +219,13 @@
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="dollarField">US$: &nbsp;</label>
-                                <input type="text" id="dollarField" oninput="computeDollar()" class="form-control" id="dollarField" placeholder="Enter Amount">
+                                <input type="number" id="dollarField" onkeydown="return event.keyCode !== 69" oninput="computeDollar()" class="form-control" id="dollarField" placeholder="Enter Amount">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="pesoField">PHP: &nbsp;</label>
-                                <input type="text" id="pesoField" oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount">
+                                <input type="number" id="pesoField" onkeydown="return event.keyCode !== 69" oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount">
                             </div>
                         </div>
                         <div class="col-md-4">
