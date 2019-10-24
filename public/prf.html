@@ -44,19 +44,54 @@
         </style>
     
         <script>
+            
+                
             function computeDollar(){
                 var total = parseFloat(document.getElementById("totalField").value);
                 var dollar = parseFloat(document.getElementById("dollarField").value);
                 var rate = parseFloat(document.getElementById("exchangeDisplay").value);
+                var peso = parseFloat(document.getElementById("pesoField").value);
                 
-                document.getElementById("totalField").value = dollar * rate + total;
+                if(document.getElementById("dollarField") && dollar){
+                    if(document.getElementById("pesoField") && peso){
+                        document.getElementById("totalField").value = dollar * rate + peso;
+                    }else{
+                        total = 0;
+                        document.getElementById("totalField").value = dollar * rate + total;
+                    }
+                }else{
+                    if(document.getElementById("pesoField") && peso){
+                        document.getElementById("totalField").value = peso;
+                    }else{
+                        document.getElementById("totalField").value = 0;
+                    }
+                }
+                
+                
+                
             }
             
             function computePeso(){
                 var total = parseFloat(document.getElementById("totalField").value);
+                var dollar = parseFloat(document.getElementById("dollarField").value);
+                var rate = parseFloat(document.getElementById("exchangeDisplay").value);
                 var peso = parseFloat(document.getElementById("pesoField").value);
+            
+                if(document.getElementById("pesoField") && peso){
+                    if(document.getElementById("dollarField") && dollar){
+                        document.getElementById("totalField").value = dollar * rate + peso;
+                    }else{
+                        total = 0;
+                        document.getElementById("totalField").value = peso + total;
+                    }
+                }else{
+                    if(document.getElementById("dollarField") && dollar){
+                        document.getElementById("totalField").value = rate * dollar;
+                    }else{
+                        document.getElementById("totalField").value = 0;
+                    }
+                }
                 
-                document.getElementById("totalField").value = total + peso;
             }
         </script>
     </head>
@@ -175,13 +210,13 @@
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="dollarField">US$: &nbsp;</label>
-                                <input type="text" id="dollarField" onchange="computeDollar()" class="form-control" id="dollarField" placeholder="Enter Amount">
+                                <input type="text" id="dollarField" oninput="computeDollar()" class="form-control" id="dollarField" placeholder="Enter Amount">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="pesoField">PHP: &nbsp;</label>
-                                <input type="text" id="pesoField" onchange="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount">
+                                <input type="text" id="pesoField" oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount">
                             </div>
                         </div>
                         <div class="col-md-4">
