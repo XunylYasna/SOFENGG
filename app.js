@@ -67,6 +67,11 @@ app.use('/', require('./routes/index'))
 app.use('/users', require('./routes/users'))
 
 
+// Redirects
+app.get('/dashboard',(req,res)=> {
+  res.render("dashboard.hbs")
+})
+
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
