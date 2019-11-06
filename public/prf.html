@@ -8,7 +8,7 @@
 
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -53,7 +53,6 @@
         </style>
     
         <script>
-            
                 
             function computeDollar(){
                 var total = parseFloat(document.getElementById("totalField").value);
@@ -63,16 +62,16 @@
                 
                 if(document.getElementById("dollarField") && dollar){
                     if(document.getElementById("pesoField") && peso){
-                        document.getElementById("totalField").value = dollar * rate + peso;
+                        document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
                     }else{
                         total = 0;
-                        document.getElementById("totalField").value = dollar * rate + total;
+                        document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
                     }
                 }else{
                     if(document.getElementById("pesoField") && peso){
-                        document.getElementById("totalField").value = peso;
+                        document.getElementById("totalField").value = peso.toFixed(2);
                     }else{
-                        document.getElementById("totalField").value = 0;
+                        document.getElementById("totalField").value = 0.00;
                     }
                 }
                 
@@ -88,20 +87,67 @@
             
                 if(document.getElementById("pesoField") && peso){
                     if(document.getElementById("dollarField") && dollar){
-                        document.getElementById("totalField").value = dollar * rate + peso;
+                        document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
                     }else{
                         total = 0;
-                        document.getElementById("totalField").value = peso + total;
+                        document.getElementById("totalField").value = (peso + total).toFixed(2);
                     }
                 }else{
                     if(document.getElementById("dollarField") && dollar){
-                        document.getElementById("totalField").value = rate * dollar;
+                        document.getElementById("totalField").value = (rate * dollar).toFixed(2);
                     }else{
-                        document.getElementById("totalField").value = 0;
+                        document.getElementById("totalField").value = 0.00;
                     }
                 }
                 
             }
+            
+            $(document).ready(function() {
+                var names = [];
+                
+                $('table').on('click','.delete',function(){
+                    $(this).parents('tr').remove();
+                    
+                    var name = $(this).parents('tr').find('#lastname').val() + "," + $(this).parents('tr').find('#firstname').val();
+                    
+                    names = jQuery.grep(names, function(value) {
+                        return value != name;
+                    });
+                    
+                    console.log(names);
+                }); //remove table row
+                
+                $('#addPax').on('click', function(){
+                    var clone = $('table tr:last').clone();
+                    
+                    $('table tr:last .form-control').prop("disabled", true);
+                    $('table tr:last td:last .btn').prop("disabled", false);
+                    
+                    $('table tr:last').after(clone);
+                    var name = $('table tr:last #lastname').val() + "," + $('table tr:last #firstname').val();
+                    
+                    $('table tr:last .form-control').val("");
+                    
+                    names.push(name);
+                    console.log(names);
+                }) //add table row
+                
+                $("#addPax").click( function(event) {
+                    event.preventDefault();
+                });
+
+            });
+            
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
         </script>
     </head>
 
@@ -148,7 +194,7 @@
                             </div>
                         </div>
                         <div id="col-md-2  d-flex">
-                            <a class="btn btn-primary hidden-print" href="po.html" role="button">View PO</a>
+                            <a class="btn btn-primary hidden-print" href="po.html" role="button">Add PO</a>
                         </div>
                     </div>
                     
@@ -170,8 +216,24 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nameField">Pax Name/s: </label>
-                                <textarea class="form-control " rows="5" id="nameField" placeholder="Enter Names"></textarea>
+                                <label for="nameField" style="margin-bottom:1em">Pax Name/s: </label>   &nbsp;
+                                    <button id="addPax" style="margin-left:4em" class="btn btn-success btn-sm">+</button>   
+                                    <table class="table table-hover table-sm" id="nameField">
+                                        <thead>
+                                            <tr>
+                                                <th>Lastname</th>
+                                                <th>Firstname</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                              <td><input id="lastname" type="text" class="form-control" placeholder="Enter Passenger's Lastname"></td>
+                                              <td><input id="firstname" type="text" class="form-control" placeholder="Enter Passenger's Firstname"></td>
+                                              <td><button id="remove" class="btn btn-danger delete" disabled="true">Remove</button></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -231,7 +293,7 @@
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="totalField">Total: &nbsp;</label>
-                                <input type="text" id="totalField" class="form-control" id="totalField" value="0.0" disabled>
+                                <input type="text" id="totalField" class="form-control" id="totalField" value="0.00" disabled>
                             </div>
                         </div>
                     </div>
