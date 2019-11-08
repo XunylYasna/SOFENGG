@@ -136,6 +136,7 @@
                     event.preventDefault();
                 });
 
+                    
             });
             
 
@@ -178,7 +179,7 @@
                 
             </div>
             <div class="col-md-10">
-                <form>
+                <form method="POST">
                    
                     <div class="row">
                         <div class="col-md-4">
@@ -194,7 +195,7 @@
                             </div>
                         </div>
                         <div id="col-md-2  d-flex">
-                            <a class="btn btn-primary hidden-print" href="po.html" role="button">Add PO</a>
+                            <button class="btn btn-primary hidden-print" href="addpo" type="submit" role="button">Add PO</button>
                         </div>
                     </div>
                     
@@ -281,13 +282,13 @@
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="dollarField">US$: &nbsp;</label>
-                                <input type="number" id="dollarField" onkeydown="return event.keyCode !== 69" oninput="computeDollar()" class="form-control" id="dollarField" placeholder="Enter Amount">
+                                <input type="number" id="dollarField" onkeydown="return event.keyCode !== 69" oninput="computeDollar()" class="form-control" placeholder="Enter Amount">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="pesoField">PHP: &nbsp;</label>
-                                <input type="number" id="pesoField" onkeydown="return event.keyCode !== 69" oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount">
+                                <input type="number" id="pesoField" onkeydown="return event.keyCode !== 69" oninput="computePeso()" class="form-control" placeholder="Enter Amount">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -302,19 +303,19 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="prepField">Prepared By:</label>
-                                <input type="text" class="form-control" id="prepField" placeholder="Enter Name">
+                                <input id="prepared" type="text" class="form-control" id="prepField" placeholder="Enter Name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="apprField">Approved By: </label>
-                                <input type="text" class="form-control" id="apprField" placeholder="Enter Name">
+                                <input id="approved" type="text" class="form-control" id="apprField" placeholder="Enter Name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="recField">Received By:</label>
-                                <input type="text" class="form-control" id="recField" placeholder="Enter Name">
+                                <input id="received" type="text" class="form-control" id="recField" placeholder="Enter Name">
                             </div>
                         </div>
                     </div>

@@ -72,6 +72,33 @@ app.get('/dashboard',(req,res)=> {
   res.render("dashboard.hbs")
 })
 
+app.get('/prf',(req,res)=> {
+  res.render("prf.hbs")
+})
+
+app.get('/po',(req,res)=> {
+  res.render("po.hbs")
+})
+
+app.post('/addpo',(req,res)=> {
+    var names = req.body.names,
+    route = req.body.routeField,
+    particulars = req.body.partField,
+    dollar = req.body.dollarField,
+    peso = req.body.pesoField,
+    total = req.body.totalField,
+    prepared = req.body.prepared,
+    approved = req.body.approved,
+    received = req.body.received;
+    
+    
+    
+    
+    
+    res.render("po.hbs")
+})
+
+
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
