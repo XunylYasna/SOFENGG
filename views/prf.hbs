@@ -130,6 +130,13 @@
                     
                     names.push(name);
                     console.log(names);
+                    
+                    var hiddenInput = document.createElement("input");
+                    hiddenInput.setAttribute("type", "hidden");
+                    hiddenInput.setAttribute("name", "names");
+                    hiddenInput.setAttribute("value", names.join(","));
+                    
+
                 }) //add table row
                 
                 $("#addPax").click( function(event) {
