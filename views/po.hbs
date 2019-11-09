@@ -45,6 +45,7 @@
     <script>
 
 
+
         function computeDollar() {
             var total = parseFloat(document.getElementById("totalField").value);
             var dollar = parseFloat(document.getElementById("dollarField").value);
@@ -66,7 +67,20 @@
                 }
             }
 
-
+            if (document.getElementById("pesoField") && peso) {
+                if (document.getElementById("dollarField") && dollar) {
+                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+                } else {
+                    total = 0;
+                    document.getElementById("totalField").value = (peso + total).toFixed(2);
+                }
+            } else {
+                if (document.getElementById("dollarField") && dollar) {
+                    document.getElementById("totalField").value = (rate * dollar).toFixed(2);
+                } else {
+                    document.getElementById("totalField").value = 0.00;
+                }
+            }
 
         }
 
@@ -92,6 +106,30 @@
             }
 
         }
+        
+        $(document).ready(function() {
+            var total = parseFloat(document.getElementById("totalField").value);
+            var dollar = parseFloat(document.getElementById("dollarField").value);
+            var rate = parseFloat(document.getElementById("exchangeDisplay").value);
+            var peso = parseFloat(document.getElementById("pesoField").value);
+            
+            if (document.getElementById("dollarField") && dollar) {
+                if (document.getElementById("pesoField") && peso) {
+                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+                } else {
+                    total = 0;
+                    document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
+                }
+            } else {
+                if (document.getElementById("pesoField") && peso) {
+                    document.getElementById("totalField").value = peso.toFixed(2);
+                } else {
+                    document.getElementById("totalField").value = 0.00;
+                }
+            }
+
+        });
+            
     </script>
 
 </head>
@@ -165,8 +203,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="nameField">Pax Name/s: </label>
-                            <textarea class="form-control " rows="5" id="nameField" placeholder="Enter Names"
-                                value="{{names}}"></textarea>
+                            <textarea class="form-control " rows="5" id="nameField" placeholder="Enter Names"></textarea>
                         </div>
                     </div>
                 </div>
@@ -175,8 +212,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="routeField">Route: </label>
-                            <textarea class="form-control " rows="5" id="routeField" placeholder="Specify Route"
-                                value="{{routes}}"></textarea>
+                            <textarea class="form-control " rows="5" id="routeField" placeholder="Specify Route">{{route}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -185,8 +221,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="docuField">Description: </label>
-                            <textarea class="form-control" rows="5" id="docuField" placeholder="Enter Description"
-                                value="{{description}}"></textarea>
+                            <textarea class="form-control" rows="5" id="docuField" placeholder="Enter Description">{{description}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -211,8 +246,7 @@
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
-                            <input type="text" id="totalField" class="form-control" id="totalField" value="{{total}}"
-                                disabled>
+                            <input type="text" id="totalField" class="form-control" id="totalField" disabled>
                         </div>
                     </div>
                 </div>

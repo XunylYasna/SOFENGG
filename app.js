@@ -91,7 +91,9 @@ app.post('/addpo', (req, res) => {
   // approved = req.body.approved,
   // received = req.body.received;
 
-  var { names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
+  var { particulars, dollar, peso, total, prepared, approved, received } = req.body;
+    
+    
 
   res.render("po", {
     names,

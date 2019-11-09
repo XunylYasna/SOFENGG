@@ -12,7 +12,8 @@
 
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+       
         <style type="text/css">
         @media print {
             .hidden-print{
@@ -129,20 +130,27 @@
                     $('table tr:last .form-control').val("");
                     
                     names.push(name);
-                    console.log(names);
                     
-                    var hiddenInput = document.createElement("input");
-                    hiddenInput.setAttribute("type", "hidden");
-                    hiddenInput.setAttribute("name", "names");
-                    hiddenInput.setAttribute("value", names.join(","));
-                    
-
                 }) //add table row
+                
+
                 
                 $("#addPax").click( function(event) {
                     event.preventDefault();
                 });
 
+                
+                $("#addpo").click( function(){
+                    $.ajax({ 
+                        type: 'POST', 
+                        url: 'addpo', 
+                        data: { names: names }, 
+                        dataType: 'json',
+                        success: function (data) { 
+                            alert("Success");
+                        }
+                    });
+                })
                     
             });
             
@@ -186,7 +194,7 @@
                 
             </div>
             <div class="col-md-10">
-                <form method="POST">
+                <form method="POST" action="/addpo">
                    
                     <div class="row">
                         <div class="col-md-4">
@@ -202,7 +210,7 @@
                             </div>
                         </div>
                         <div id="col-md-2  d-flex">
-                            <button class="btn btn-primary hidden-print" href="addpo" type="submit" role="button">Add PO</button>
+                            <button id="addpo" class="btn btn-primary hidden-print" href="addpo" type="submit" role="button">Add PO</button>
                         </div>
                     </div>
                     
@@ -250,13 +258,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="routeField">Route: </label>
-                                <textarea class="form-control " rows="5" id="routeField" placeholder="Specify Route"></textarea>
+                                <textarea class="form-control " rows="5" id="routeField" name="route" placeholder="Specify Route"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="partField">Particulars: </label>
-                                <textarea class="form-control" rows="5" id="partField" placeholder="Specify Particulars"></textarea>
+                                <textarea class="form-control" rows="5" id="partField" name="particulars" placeholder="Specify Particulars"></textarea>
                             </div>   
                         </div>
                     </div>
@@ -265,7 +273,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fareField">Airfare: </label>
-                                <input type="text" class="form-control" id="fareField" placeholder="Specify Airfare">
+                                <input type="text" class="form-control" id="fareField" name="fareField" placeholder="Specify Airfare">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -289,19 +297,19 @@
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="dollarField">US$: &nbsp;</label>
-                                <input type="number" id="dollarField" onkeydown="return event.keyCode !== 69" oninput="computeDollar()" class="form-control" placeholder="Enter Amount">
+                                <input type="number" id="dollarField"  name="dollar" onkeydown="return event.keyCode !== 69" oninput="computeDollar()" class="form-control" placeholder="Enter Amount">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="pesoField">PHP: &nbsp;</label>
-                                <input type="number" id="pesoField" onkeydown="return event.keyCode !== 69" oninput="computePeso()" class="form-control" placeholder="Enter Amount">
+                                <input type="number" id="pesoField"  name="peso" onkeydown="return event.keyCode !== 69" oninput="computePeso()" class="form-control" placeholder="Enter Amount">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group form-inline">
                                 <label for="totalField">Total: &nbsp;</label>
-                                <input type="text" id="totalField" class="form-control" id="totalField" value="0.00" disabled>
+                                <input type="text" id="totalField"  name="total" class="form-control" id="totalField" value="0.00" disabled>
                             </div>
                         </div>
                     </div>
@@ -310,19 +318,19 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="prepField">Prepared By:</label>
-                                <input id="prepared" type="text" class="form-control" id="prepField" placeholder="Enter Name">
+                                <input id="prepared" type="text" class="form-control" id="prepField"  name="prepared" placeholder="Enter Name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="apprField">Approved By: </label>
-                                <input id="approved" type="text" class="form-control" id="apprField" placeholder="Enter Name">
+                                <input id="approved" type="text" class="form-control" id="apprField"  name="approved" placeholder="Enter Name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="recField">Received By:</label>
-                                <input id="received" type="text" class="form-control" id="recField" placeholder="Enter Name">
+                                <input id="received" type="text" class="form-control" id="recField"  name="received" placeholder="Enter Name">
                             </div>
                         </div>
                     </div>
