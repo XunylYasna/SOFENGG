@@ -42,6 +42,10 @@
                 height: auto;
             }
         }
+            
+        .bg-dark{
+            background-color:white !important;
+        }
         
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
@@ -106,10 +110,16 @@
             $(document).ready(function() {
                 var names = [];
                 
+                var hiddenInput = document.createElement("INPUT");
+                hiddenInput.setAttribute("type", "text");
+                hiddenInput.setAttribute("hidden", "true");
+                hiddenInput.setAttribute("name", "names");
+                $(".form").append(hiddenInput);
+                
                 $('table').on('click','.delete',function(){
                     $(this).parents('tr').remove();
                     
-                    var name = $(this).parents('tr').find('#lastname').val() + "," + $(this).parents('tr').find('#firstname').val();
+                    var name = $(this).parents('tr').find('#lastname').val() + ", " + $(this).parents('tr').find('#firstname').val();
                     
                     names = jQuery.grep(names, function(value) {
                         return value != name;
@@ -130,27 +140,16 @@
                     $('table tr:last .form-control').val("");
                     
                     names.push(name);
+                    hiddenInput.setAttribute("value", names.join("|"));
+                    
                     
                 }) //add table row
-                
+
 
                 
                 $("#addPax").click( function(event) {
                     event.preventDefault();
                 });
-
-                
-                $("#addpo").click( function(){
-                    $.ajax({ 
-                        type: 'POST', 
-                        url: 'addpo', 
-                        data: { names: names }, 
-                        dataType: 'json',
-                        success: function (data) { 
-                            alert("Success");
-                        }
-                    });
-                })
                     
             });
             
@@ -194,7 +193,7 @@
                 
             </div>
             <div class="col-md-10">
-                <form method="POST" action="/addpo">
+                <form class="form" method="POST" action="/addpo">
                    
                     <div class="row">
                         <div class="col-md-4">
