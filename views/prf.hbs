@@ -179,6 +179,14 @@
     				<button class="btn btn-primary my-md-1" type="button" onclick="window.print();return false;">
     					Print
     				</button>
+
+				<button class="btn btn-danger my-md-5" onclick="goBack()">Back</button>
+				<script>
+				function goBack() {
+				  window.history.back();
+				}
+				</script>
+
                     <button class="btn btn-danger my-md-5" type="button">Delete</button>
                     <div id="currencyChange" class="form-group">
                         <small for="exchangeRate">US Dollar to PhP: </small>
@@ -272,13 +280,17 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fareField">Airfare: </label>
+<<<<<<< HEAD:public/prf.html
+                                <input type="number" class="form-control" id="fareField" placeholder="Specify Airfare">
+=======
                                 <input type="text" class="form-control" id="fareField" name="fareField" placeholder="Specify Airfare">
+>>>>>>> 20e4f72ca19b57c28ade6344f201fd54b8596e0e:views/prf.hbs
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="taxField">Travel Tax: </label>
-                                <input type="text" class="form-control" id="taxField" placeholder="Specify Travel Tax">
+                                <input type="number" class="form-control" id="taxField" placeholder="Specify Travel Tax">
                             </div>   
                         </div>
                     </div>

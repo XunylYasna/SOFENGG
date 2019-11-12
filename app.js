@@ -72,6 +72,10 @@ app.get('/dashboard', (req, res) => {
   res.render("dashboard.hbs")
 })
 
+app.get('/headings', (req, res) => {
+  res.render("headings.hbs")
+})
+
 app.get('/prf', (req, res) => {
   res.render("prf.hbs")
 })
