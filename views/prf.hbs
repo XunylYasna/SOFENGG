@@ -119,7 +119,7 @@
                 $('table').on('click','.delete',function(){
                     $(this).parents('tr').remove();
                     
-                    var name = $(this).parents('tr').find('#lastname').val() + ", " + $(this).parents('tr').find('#firstname').val();
+                    var name = $(this).parents('tr').find('#name').val();
                     
                     names = jQuery.grep(names, function(value) {
                         return value != name;
@@ -135,7 +135,7 @@
                     $('table tr:last td:last .btn').prop("disabled", false);
                     
                     $('table tr:last').after(clone);
-                    var name = $('table tr:last #lastname').val() + "," + $('table tr:last #firstname').val();
+                    var name = $('table tr:last #name').val();
                     
                     $('table tr:last .form-control').val("");
                     
@@ -173,11 +173,11 @@
                     <button class="btn btn-primary my-md-1" type="button">
     				    New PRF
     				</button>
-    				<button class="btn btn-success my-md-1" type="button">
-    					Save
-    				</button>
     				<button class="btn btn-primary my-md-1" type="button" onclick="window.print();return false;">
     					Print
+    				</button>
+                    <button class="btn btn-success my-md-1" type="button">
+    					Save
     				</button>
 
 				<button class="btn btn-danger my-md-5" onclick="goBack()">Back</button>
@@ -225,13 +225,13 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="buyerField">To: </label>
-                                <input type="text" class="form-control" id="buyerField" placeholder="Recipient">
+                                <input name="buyer" type="text" class="form-control" id="buyerField" placeholder="Recipient">
                             </div>
                         </div>
                         <div class="col-md-4" >
                             <div class="form-group">
                                 <label for="purchaseDate">Date: </label>
-                                <input type="date" class="form-control" id="purchaseDate" placeholder="Enter Date">
+                                <input name="date" type="date" class="form-control" id="purchaseDate" placeholder="Enter Date">
                             </div>
                         </div>
                     </div>
@@ -244,15 +244,13 @@
                                     <table class="table table-hover table-sm" id="nameField">
                                         <thead>
                                             <tr>
-                                                <th>Lastname</th>
-                                                <th>Firstname</th>
+                                                <th>Name</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                              <td><input id="lastname" type="text" class="form-control" placeholder="Enter Passenger's Lastname"></td>
-                                              <td><input id="firstname" type="text" class="form-control" placeholder="Enter Passenger's Firstname"></td>
+                                              <td><input id="name" type="text" class="form-control" size="170" placeholder="Enter Passenger's Name"></td>
                                               <td><button id="remove" class="btn btn-danger delete" disabled="true">Remove</button></td>
                                             </tr>
                                         </tbody>
@@ -280,11 +278,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fareField">Airfare: </label>
-<<<<<<< HEAD:public/prf.html
                                 <input type="number" class="form-control" id="fareField" placeholder="Specify Airfare">
-=======
-                                <input type="text" class="form-control" id="fareField" name="fareField" placeholder="Specify Airfare">
->>>>>>> 20e4f72ca19b57c28ade6344f201fd54b8596e0e:views/prf.hbs
                             </div>
                         </div>
                         <div class="col-md-6">
