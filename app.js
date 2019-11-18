@@ -72,6 +72,10 @@ app.get('/dashboard',(req,res)=> {
   res.render("dashboard.hbs")
 })
 
+app.get('/grossreport',(req,res)=> {
+  res.render("grossreport.hbs")
+})
+
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
