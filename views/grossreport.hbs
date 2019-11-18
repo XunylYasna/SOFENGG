@@ -72,9 +72,9 @@
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		           
-            <i class="fa fa-user fa-fw"></i>
-	    <span>Transactions</span>
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Transactions</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Login Screens:</h6>
@@ -96,15 +96,8 @@
           <a class="nav-link" href="#" data-toggle="modal" data-target="#accessModal">
             <i class="fas fa-fw fa-table"></i>
             <span>Gross Report</span></a>
-        </li>   
-	<li class="nav-item">
-          <a class="nav-link" href="headings">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Headings</span></a>
-        </li>            
+        </li>
             
-            
-        
       </ul>
   
       <div id="content-wrapper">
@@ -129,12 +122,12 @@
                   </div>
                   <div class="mr-5">Passenger Request Form</div>
                 </div>
-                 <a class="card-footer text-white clearfix small z-1" href="prf">
+                <a class="card-footer text-white clearfix small z-1" href="prf.html">
                   <span class="float-left">Create new PRF</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
                   </span>
-                 </a>
+                </a>
               </div>
             </div>
             <div class="col-xl-3 col-sm-6 mb-3">
@@ -145,13 +138,12 @@
                   </div>
                   <div class="mr-5">Purchasing Order</div>
                 </div>
-                 <a class="card-footer text-white clearfix small z-1" href="po">
+                <a class="card-footer text-white clearfix small z-1" href="po.html">
                   <span class="float-left">Make New PO</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
                   </span>
-                 </a>
-
+                </a>
               </div>
             </div>
             {{!-- <div class="col-xl-3 col-sm-6 mb-3">
@@ -214,7 +206,8 @@
                     <tr>
                       <th>PRF#</th>
                       <th>Date</th>
-                      <th>Recepient</th>
+                      <th>PRF Amount</th>
+                      <th>Gross</th>
                       <th>Paid Date</th>
                       <th>PO1</th>
                       <th>PO2</th>
@@ -224,7 +217,8 @@
                     <tr>
                       <td>1234567</td>
                       <td>09-18-2019</td>
-                      <td>Mr. Allan</td>
+                      <td>1000</td>
+                      <td>1000</td>
                       <td>09-12-2019</td>
                       <td>...</td>
                       <td>...</td>
@@ -232,7 +226,8 @@
                     <tr>
                       <td>1234568</td>
                       <td>03-06-2019</td>
-                      <td>Mr. Jones</td>
+                      <td>1000</td>
+                      <td>1000</td>
                       <td>03-01-2019</td>
                       <td>...</td>
                       <td>...</td>
@@ -240,7 +235,8 @@
                     <tr>
                       <td>1234567</td>
                       <td>08-15-2019</td>
-                      <td>Mrs. Calley</td>
+                      <td>1000</td>
+                      <td>1000</td>
                       <td>08-14-2019</td>
                       <td>...</td>
                       <td>...</td>
@@ -248,7 +244,8 @@
                     <tr>
                       <td>1234569</td>
                       <td>05-30-2019</td>
-                      <td>Ms. Raden</td>
+                      <td>1000</td>
+                      <td>1000</td>
                       <td>01-15-2019</td>
                       <td>...</td>
                       <td>...</td>
@@ -256,7 +253,8 @@
                     <tr>
                       <td>1234570</td>
                       <td>04-20-2019</td>
-                      <td>Ms. Sammy</td>
+                      <td>1000</td>
+                      <td>1000</td>
                       <td>02-10-2019</td>
                       <td>...</td>
                       <td>...</td>
@@ -264,7 +262,8 @@
                     <tr>
                       <td>1234571</td>
                       <td>02-19-2019</td>
-                      <td>Mr. Don</td>
+                      <td>1000</td>
+                      <td>1000</td>
                       <td>01-12-2019</td>
                       <td>...</td>
                       <td>...</td>
@@ -319,13 +318,11 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">This page requires an admin password to proceed.</div>
-          <div class="card-body">
+          <div class="modal-body">Password:</div>
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" required="" autocomplete="new-password">
                 <div class="invalid-feedback">Enter your password too!</div>
-            </div>
             </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
