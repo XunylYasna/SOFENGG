@@ -10985,3 +10985,8 @@ body.sidebar-toggled footer.sticky-footer {
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
 
+textarea.headercss{
+	text-align: center;
+	font-family: 'Gudea';
+	font-size: 22px;
+}

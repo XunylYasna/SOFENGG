@@ -131,18 +131,28 @@
                 $('#addPax').on('click', function(){
                     var clone = $('table tr:last').clone();
                     
-                    $('table tr:last .form-control').prop("disabled", true);
-                    $('table tr:last td:last .btn').prop("disabled", false);
+                    if( $('table tr:last .form-control').val().length === 0 ) {
+                        $('table tr:last .form-control').addClass("is-invalid")
+                        $('table tr:last .text-danger').removeClass("invisible")
+                    }
+                    else{                  
+                        $('table tr:last .form-control').prop("disabled", true);
+                        $('table tr:last td:last .btn').prop("disabled", false);
+                        
+                        $('table tr:last').after(clone);
+                        var name = $('table tr:last #name').val();
+                        
+                        $('table tr:last .form-control').val("");
+                        
+                        names.push(name);
+                        hiddenInput.setAttribute("value", names.join("|"));
+                    }
                     
-                    $('table tr:last').after(clone);
-                    var name = $('table tr:last #name').val();
-                    
-                    $('table tr:last .form-control').val("");
-                    
-                    names.push(name);
-                    hiddenInput.setAttribute("value", names.join("|"));
-                    
-                    
+                $('table tr:last .form-control').on('keydown', function(){
+                    $('table tr:last .form-control').removeClass("is-invalid")
+                    $('table tr:last .text-danger').addClass("invisible")
+                })
+                
                 }) //add table row
 
 
@@ -151,11 +161,18 @@
                     event.preventDefault();
                 });
                     
+                $("#clear").on('click', function(){
+                    if(confirm("Want to clear?")){
+                        $(this).closest('body').find("input[type=text], textarea").not("#poNumber, #prfNumber, #exchangeDisplay, #name").val("");
+                    }
+                })
             });
             
 
             
-            
+            function goBack() {
+                window.history.back();
+            }
             
             
             
@@ -175,22 +192,20 @@
     				</button>
     				<button class="btn btn-primary my-md-1" type="button" onclick="window.print();return false;">
     					Print
+    				</button>    				
+    				<button class="btn btn-primary my-md-1" id="clear" type="button">
+    					Clear
     				</button>
                     <button class="btn btn-success my-md-1" type="button">
     					Save
     				</button>
 
 				<button class="btn btn-danger my-md-5" onclick="goBack()">Back</button>
-				<script>
-				function goBack() {
-				  window.history.back();
-				}
-				</script>
 
                     <button class="btn btn-danger my-md-5" type="button">Delete</button>
                     <div id="currencyChange" class="form-group">
                         <small for="exchangeRate">US Dollar to PhP: </small>
-                        <input id="exchangeDisplay" type="text" class="form-control" id="exchangeRate" disabled value="50.10">
+                        <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
                     </div>
                 </div>
                 
@@ -251,6 +266,11 @@
                                         <tbody>
                                             <tr>
                                               <td><input id="name" type="text" class="form-control" size="170" placeholder="Enter Passenger's Name"></td>
+                                              <td>
+                                                <div class="text-danger invisible">
+                                                    <small>Empty Text</small>
+                                                </div>
+                                              </td>
                                               <td><button id="remove" class="btn btn-danger delete" disabled="true">Remove</button></td>
                                             </tr>
                                         </tbody>
