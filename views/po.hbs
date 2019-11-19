@@ -132,9 +132,22 @@
                     document.getElementById("totalField").value = 0.00;
                 }
             }
+            
+            $("#clear").on('click', function(){
+                if(confirm("Want to clear?")){
+                    $(this).closest('body').find("input[type=text], textarea").not("#poNumber, #prfNumber, #exchangeDisplay").val("");
+                    
+                    
+                }
+            })
 
         });
+        
+        function goBack() {
+            window.history.back();
+		}
             
+
     </script>
 
 </head>
@@ -149,16 +162,14 @@
                 <button class="btn btn-primary my-md-1" type="button" onclick="window.print()">
                     Print
                 </button>
+                <button class="btn btn-primary my-md-1" id="clear" type="button">
+    				Clear
+                </button>
                 <button class="btn btn-success my-md-1" type="button">
                     Save
                 </button>
 		
 		<button class="btn btn-danger my-md-5" onclick="goBack()">Back</button>
-		<script>
-		function goBack() {
-		  window.history.back();
-		}
-		</script>
 
                 <button class="btn btn-danger my-md-5" type="button">
                     Delete
@@ -193,7 +204,7 @@
                         </div>
                     </div>
                     <div id="col-md-2  d-flex">
-                        <a class="btn btn-primary" href="/prf" role="button">View PRF</a>
+                        <a class="btn btn-primary" onclick="goBack()" role="button">View PRF</a>
                     </div>
                 </div>
 
@@ -234,7 +245,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="docuField">Description: </label>
-                            <textarea class="form-control" rows="5" id="docuField" placeholder="Enter Description">{{description}}</textarea>
+                            <textarea class="form-control" rows="5" id="docuField" placeholder="Enter Description">{{particulars}}</textarea>
                         </div>
                     </div>
                 </div>
