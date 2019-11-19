@@ -54,7 +54,43 @@
             appearance: none;
             margin: 0; 
         }
+        
+        .col-md-1#leftSide{
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 10%;
+            flex: 0 0 10%;
+            max-width: 10%;
+            position: fixed;
+        }
+
             
+        #btnsLeft{
+            margin: 10 0 0 8;
+            width: 100%;
+            max-width: 100%;
+            padding: 10 5 0 10;
+        }
+            
+            .mb-md-5#saveBtn{
+                margin-bottom: 30rem !important;
+            }
+            
+            #rightSide{
+                margin-top: 1rem !important;
+                margin-left: 11rem !important;
+            }
+            
+            input[type=checkbox]
+            {
+                /* Double-sized Checkboxes */
+                -ms-transform: scale(1.5); /* IE */
+                -moz-transform: scale(1.5); /* FF */
+                -webkit-transform: scale(1.5); /* Safari and Chrome */
+                -o-transform: scale(1.5); /* Opera */
+                padding: 10px;
+                margin-top: 13;
+                margin-left: 13;
+            }
         </style>
     
         <script>
@@ -167,28 +203,45 @@
                     }
                 })
             });
+            
+
+            
+            function goBack() {
+                window.history.back();
+            }
+            
+            
+            
+            
+            
+            
+            
         </script>
     </head>
 
     <body id="page-top" class="my-md-4">
         <div class="row">
             <div id="leftSide" class="border-right col-md-1 hidden-print ">
-                <div class="btn-group btn-group-vertical offset-md-4" role="group">
+                <div id="btnsLeft" class="btn-group btn-group-vertical offset-md-4" role="group">
                     <button class="btn btn-primary my-md-1" type="button">
-    				    New PRF
+    				    New PRF &nbsp;
+    				    <i class="fa fa-file" aria-hidden="true"></i>
     				</button>
     				<button class="btn btn-primary my-md-1" type="button" onclick="window.print();return false;">
-    					Print
+    					Print &nbsp;
+    					<i class="fa fa-print" aria-hidden="true"></i>
     				</button>    				
-    				<button class="btn btn-primary my-md-1" id="clear" type="button">
-    					Clear
+                    <button id="saveBtn" class="btn btn-success mt-md-1 mb-md-5" type="button">
+    					Save &nbsp;
+    					<i class="fa fa-save" aria-hidden="true"></i>
     				</button>
-                    <button class="btn btn-success my-md-1" type="button">
-    					Save
+
+    				<button class="btn btn-danger my-md-1" id="clear" type="button">
+    					Clear &nbsp;
+    					<i class="fa fa-eraser" aria-hidden="true"></i>
     				</button>
-                    <button class="btn btn-danger my-md-5" type="button">Delete</button>
                     <div id="currencyChange" class="form-group">
-                        <small for="exchangeRate">US Dollar to PhP: </small>
+                        <small for="exchangeRate">USD to PHP: </small>
                         <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
                     </div>
                 </div>
@@ -199,24 +252,40 @@
                 
                 
             </div>
-            <div class="col-md-10">
-                <form class="form" method="POST" action="/addpo">
+            <div id="rightSide" class="col-md-10">
+                <form class="form-horizontal" method="POST" action="/addpo">
                    
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="prfNumber">PRF #</label>
+                        <div class="col-md-4 mb-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color:white;">PRF# </span>
+                                </div>
                                 <input type="text" class="form-control" id="prfNumber" placeholder="Enter PRF#" disabled value="881234">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fa fa-pen" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4 offset-md-3">
-                            <div class="form-group">
-                                <label for="poNumber">PO #</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color:white;">PO# </span>
+                                </div>
                                 <input type="text" class="form-control" id="poNumber" placeholder="Enter PO#" disabled value="812345">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fa fa-pen" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div id="col-md-2  d-flex">
-                            <button id="addpo" class="btn btn-primary hidden-print" href="addpo" type="submit" role="button">Add PO</button>
+                            <button id="addpo" class="btn btn-primary hidden-print" href="addpo" type="submit" role="button">Add PO &nbsp;
+    					    <i class="fa fa-archive" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                     
@@ -238,23 +307,30 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nameField" style="margin-bottom:1em">Pax Name/s: </label>   &nbsp;
-                                    <button id="addPax" style="margin-left:4em" class="btn btn-success btn-sm">+</button>   
-                                    <table class="table table-hover table-sm" id="nameField">
+                                <label for="nameField" style="margin-bottom:1em">Pax Name/s: </label>
+                                    <button id="addPax" style="margin-left:1em" class="btn btn-success btn-sm">
+                                        <span class="fa fa-plus"></span> &nbsp; Add
+                                    </button>   
+                                    <table class="table table-unbordered table-hover table-sm" id="nameField">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                              <td><input id="name" type="text" class="form-control" size="170" placeholder="Enter Passenger's Name"></td>
-                                              <td>
-                                                <div class="text-danger invisible">
-                                                    <small>Empty Text</small>
-                                                </div>
-                                              </td>
+                                                <td>
+                                                    <input id="name" type="text" class="form-control" size="80" placeholder="Enter Passenger's Name">
+                                                </td>
+                                                <td>
+                                                    <div class="text-danger invisible">
+                                                        <large>Empty Text</large>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" value="">
+                                                    </div>
+                                                </td>
                                               <td><button id="remove" class="btn btn-danger delete" disabled="true">Remove</button></td>
                                             </tr>
                                         </tbody>
