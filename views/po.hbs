@@ -44,6 +44,31 @@
         .bg-dark {
             background-color: white !important;
         }
+        
+        .col-md-1#leftSide{
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 10%;
+            flex: 0 0 10%;
+            max-width: 10%;
+            height: 100%;
+            position: fixed;
+        }
+        #rightSide{
+            margin-top: 1rem !important;
+            margin-left: 11rem !important;
+        }
+        #btnsLeft{
+            margin: 10 0 0 8;
+            width: 100%;
+            max-width: 100%;
+            padding: 1 1 0 1;
+        }
+        .mb-md-5#saveBtn{
+            margin-bottom: 25rem !important;
+        }
+        #viewPRF{
+            margin-left: 15%;
+        }
     </style>
 
     <script>
@@ -148,56 +173,69 @@
 
 <body id="page-top" class="my-md-4">
     <div class="row">
-        <div class="border-right col-md-1 ">
-            <div class="btn-group btn-group-vertical offset-md-4" role="group">
-                <button class="btn btn-primary my-md-1" type="button">
-                    New PRF
-                </button>
-                <button class="btn btn-primary my-md-1" type="button" onclick="window.print()">
-                    Print
-                </button>
-                <button class="btn btn-success my-md-1" type="button">
-                    Save
-                </button>
+            <div id="leftSide" class="border-right col-md-1 hidden-print ">
+                <div id="btnsLeft" class="btn-group btn-group-vertical offset-md-4" role="group">
+                    <button class="btn btn-primary my-md-1" type="button">
+    				    New PRF &nbsp;
+    				    <i class="fa fa-file" aria-hidden="true"></i>
+    				</button>
+    				<button class="btn btn-primary my-md-1" type="button" onclick="window.print();return false;">
+    					Print &nbsp;
+    					<i class="fa fa-print" aria-hidden="true"></i>
+    				</button>    				
+                    <button id="saveBtn" class="btn btn-success mt-md-1 mb-md-5" type="button">
+    					Save &nbsp;
+    					<i class="fa fa-save" aria-hidden="true"></i>
+    				</button>
 
-                <button class="btn btn-danger my-md-1" id="clear" type="button">
-                    Clear
-                    <button class="btn btn-danger my-md-5" onclick="goBack()">Back</button>
-                    
-
-                    <button class="btn btn-danger my-md-5" type="button">
-                        Delete
-                    </button>
+    				<button class="btn btn-danger" id="clear" type="button">
+    					Clear &nbsp;
+    					<i class="fa fa-eraser" aria-hidden="true"></i>
+    				</button>
                     <div id="currencyChange" class="form-group">
-                        <small for="exchangeRate">US Dollar to PhP: </small>
-                        <input id="exchangeDisplay" type="text" class="form-control" id="exchangeRate" disabled
-                            value="50.10">
+                        <small for="exchangeRate">USD to PHP: </small>
+                        <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
                     </div>
+                </div>                
             </div>
-        </div>
-        <div class="col-md-10">
+            
+        <div id="rightSide" class="col-md-10">
             <form>
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="prfNumber">PRF #</label>
-                            <input type="text" class="form-control" id="prfNumber" placeholder="Enter PRF#" disabled
-                                value="881234">
+                    <div class="row">
+                        <div class="col-md-4 mb-md-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color:white;">PRF# </span>
+                                </div>
+                                <input type="text" class="form-control" id="prfNumber" placeholder="Enter PRF#" disabled value="881234">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fa fa-pen" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 offset-md-1">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color:white;">PO# </span>
+                                </div>
+                                <input type="text" class="form-control" id="poNumber" placeholder="Enter PO#" disabled value="812345">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fa fa-pen" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="viewPRF">
+                            <button id="addpo" class="btn btn-primary hidden-print" href="backprf" type="submit" role="button">View PRF &nbsp;
+    					    <i class="fa fa-file" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
-                    <div class="col-md-4 offset-md-3">
-                        <div class="form-group">
-                            <label for="poNumber">PO #</label>
-                            <input type="text" class="form-control" id="poNumber" placeholder="Enter PO#" disabled
-                                value="812345">
-                        </div>
-                    </div>
-                    <div id="col-md-2  d-flex">
-                        <a class="btn btn-primary" onclick="goBack()" role="button">View PRF</a>
-                    </div>
-                </div>
-
+                    
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">

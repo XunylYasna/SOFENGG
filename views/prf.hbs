@@ -15,6 +15,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
        
         <style type="text/css">
+
         @media print {
             .hidden-print{
                 visibility:hidden;
@@ -60,6 +61,7 @@
             -ms-flex: 0 0 10%;
             flex: 0 0 10%;
             max-width: 10%;
+            height: 100%;
             position: fixed;
         }
             
@@ -67,11 +69,11 @@
             margin: 10 0 0 8;
             width: 100%;
             max-width: 100%;
-            padding: 10 5 0 10;
+            padding: 1 1 0 1;
         }
             
             .mb-md-5#saveBtn{
-                margin-bottom: 30rem !important;
+                margin-bottom: 25rem !important;
             }
             
             #rightSide{
@@ -89,6 +91,9 @@
                 padding: 10px;
                 margin-top: 13;
                 margin-left: 13;
+            }
+            #POadd{
+                margin-left: 15%;
             }
         </style>
     
@@ -232,7 +237,7 @@
     					<i class="fa fa-save" aria-hidden="true"></i>
     				</button>
 
-    				<button class="btn btn-danger my-md-1" id="clear" type="button">
+    				<button class="btn btn-danger" id="clear" type="button">
     					Clear &nbsp;
     					<i class="fa fa-eraser" aria-hidden="true"></i>
     				</button>
@@ -240,14 +245,9 @@
                         <small for="exchangeRate">USD to PHP: </small>
                         <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
                     </div>
-                </div>
-                
-                
-                
-                
-                
-                
+                </div>                
             </div>
+            
             <div id="rightSide" class="col-md-10">
                 <form class="form-horizontal" method="POST" action="/addpo">
                    
@@ -265,7 +265,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 offset-md-3">
+                        <div class="col-md-4 offset-md-1">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="background-color:white;">PO# </span>
@@ -278,7 +278,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="col-md-2  d-flex">
+                        <div id="POadd">
                             <button id="addpo" class="btn btn-primary hidden-print" href="addpo" type="submit" role="button">Add PO &nbsp;
     					    <i class="fa fa-archive" aria-hidden="true"></i>
                             </button>
