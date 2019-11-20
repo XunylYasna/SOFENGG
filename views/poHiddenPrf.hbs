@@ -1,0 +1,305 @@
+<head>
+    {{!-- <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script> --}}
+
+    <style type="text/css">
+        @media print {
+            .hidden-print {
+                visibility: hidden;
+            }
+
+            #currencyChange {
+                position: absolute;
+                left: 400px;
+                top: 13px;
+                width: 100px;
+                visibility: visible;
+                text-shadow: none;
+            }
+
+            #exchangeDisplay {
+                background-color: #dc3545;
+                border-color: #dc3545;
+            }
+
+            :placeholder-shown {
+                color: transparent;
+            }
+
+            body {
+                height: auto;
+            }
+        }
+
+        .bg-dark {
+            background-color: white !important;
+        }
+    </style>
+
+    <script>
+
+
+
+        function computeDollar() {
+            var total = parseFloat(document.getElementById("totalField").value);
+            var dollar = parseFloat(document.getElementById("dollarField").value);
+            var rate = parseFloat(document.getElementById("exchangeDisplay").value);
+            var peso = parseFloat(document.getElementById("pesoField").value);
+
+            if (document.getElementById("dollarField") && dollar) {
+                if (document.getElementById("pesoField") && peso) {
+                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+                } else {
+                    total = 0;
+                    document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
+                }
+            } else {
+                if (document.getElementById("pesoField") && peso) {
+                    document.getElementById("totalField").value = peso.toFixed(2);
+                } else {
+                    document.getElementById("totalField").value = 0.00;
+                }
+            }
+
+            if (document.getElementById("pesoField") && peso) {
+                if (document.getElementById("dollarField") && dollar) {
+                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+                } else {
+                    total = 0;
+                    document.getElementById("totalField").value = (peso + total).toFixed(2);
+                }
+            } else {
+                if (document.getElementById("dollarField") && dollar) {
+                    document.getElementById("totalField").value = (rate * dollar).toFixed(2);
+                } else {
+                    document.getElementById("totalField").value = 0.00;
+                }
+            }
+
+        }
+
+        function computePeso() {
+            var total = parseFloat(document.getElementById("totalField").value);
+            var dollar = parseFloat(document.getElementById("dollarField").value);
+            var rate = parseFloat(document.getElementById("exchangeDisplay").value);
+            var peso = parseFloat(document.getElementById("pesoField").value);
+
+            if (document.getElementById("pesoField") && peso) {
+                if (document.getElementById("dollarField") && dollar) {
+                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+                } else {
+                    total = 0;
+                    document.getElementById("totalField").value = (peso + total).toFixed(2);
+                }
+            } else {
+                if (document.getElementById("dollarField") && dollar) {
+                    document.getElementById("totalField").value = (rate * dollar).toFixed(2);
+                } else {
+                    document.getElementById("totalField").value = 0.00;
+                }
+            }
+
+        }
+
+        $(document).ready(function () {
+            var total = parseFloat(document.getElementById("totalField").value);
+            var dollar = parseFloat(document.getElementById("dollarField").value);
+            var rate = parseFloat(document.getElementById("exchangeDisplay").value);
+            var peso = parseFloat(document.getElementById("pesoField").value);
+
+            if (document.getElementById("dollarField") && dollar) {
+                if (document.getElementById("pesoField") && peso) {
+                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+                } else {
+                    total = 0;
+                    document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
+                }
+            } else {
+                if (document.getElementById("pesoField") && peso) {
+                    document.getElementById("totalField").value = peso.toFixed(2);
+                } else {
+                    document.getElementById("totalField").value = 0.00;
+                }
+            }
+
+        });
+
+    </script>
+
+</head>
+
+<body id="page-top" class="my-md-4">
+    <div class="row">
+        <div class="border-right col-md-1 ">
+            <div class="btn-group btn-group-vertical offset-md-4" role="group">
+                <button class="btn btn-primary my-md-1" type="button">
+                    New PRF
+                </button>
+                <button class="btn btn-primary my-md-1" type="button" onclick="window.print()">
+                    Print
+                </button>
+                <button class="btn btn-success my-md-1" type="button">
+                    Save
+                </button>
+
+                <button class="btn btn-danger my-md-5" onclick="goBack()">Back</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+
+                <button class="btn btn-danger my-md-5" type="button">
+                    Delete
+                </button>
+                <div id="currencyChange" class="form-group">
+                    <small for="exchangeRate">US Dollar to PhP: </small>
+                    <input id="exchangeDisplay" type="text" class="form-control" id="exchangeRate" disabled
+                        value="50.10">
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="col-md-10">
+            <form>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="prfNumber">PRF #</label>
+                            <input type="text" class="form-control" id="prfNumber" placeholder="Enter PRF#" disabled
+                                value="881234">
+                        </div>
+                    </div>
+                    <div class="col-md-4 offset-md-3">
+                        <div class="form-group">
+                            <label for="poNumber">PO #</label>
+                            <input type="text" class="form-control" id="poNumber" placeholder="Enter PO#" disabled
+                                value="812345">
+                        </div>
+                    </div>
+                    <div id="col-md-2  d-flex">
+                        <a class="btn btn-primary" href="/prf" role="button">View PRF</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="buyerField">To: </label>
+                            <input name="buyer" type="text" class="form-control" id="buyerField" placeholder="Recipient"
+                                value="{{buyer}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="purchaseDate">Date: </label>
+                            <input name="date" type="date" class="form-control" id="purchaseDate"
+                                placeholder="Enter Date" value="{{date}}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="nameField">Pax Name/s: </label>
+                            <textarea class="form-control " rows="5" id="nameField"
+                                placeholder="Enter Names">{{names}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="routeField">Route: </label>
+                            <textarea class="form-control " rows="5" id="routeField"
+                                placeholder="Specify Route">{{route}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="docuField">Description: </label>
+                            <textarea class="form-control" rows="5" id="docuField"
+                                placeholder="Enter Description">{{description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group form-inline">
+                            <label for="dollarField">US$: &nbsp;</label>
+                            <input type="number" id="dollarField" onkeydown="return event.keyCode !== 69"
+                                oninput="computeDollar()" class="form-control" id="dollarField"
+                                placeholder="Enter Amount" value="{{dollar}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group form-inline">
+                            <label for="pesoField">PHP: &nbsp;</label>
+                            <input type="number" id="pesoField" onkeydown="return event.keyCode !== 69"
+                                oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount"
+                                value="{{peso}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group form-inline">
+                            <label for="totalField">Total: &nbsp;</label>
+                            <input type="text" id="totalField" class="form-control" id="totalField" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="prepField">Prepared By:</label>
+                            <input type="text" class="form-control" id="prepField" placeholder="Enter Name"
+                                value="{{prepared}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="apprField">Approved By: </label>
+                            <input type="text" class="form-control" id="apprField" placeholder="Enter Name"
+                                value="{{approved}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="recField">Received By:</label>
+                            <input type="text" class="form-control" id="recField" placeholder="Enter Name"
+                                value="{{received}}">
+                        </div>
+                    </div>
+                </div>
+
+                <input name="particulars" type="hidden" id="particualrs">
+                <input name="airfare" type="hidden" id="fareField">
+                <input name="taxField" type="hidden" id="taxField">
+                <input name="documentation" type="hidden" id="documentation">
+
+
+            </form>
+        </div>
+    </div>
+
+</body>
