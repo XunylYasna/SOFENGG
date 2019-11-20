@@ -1,0 +1,85 @@
+@media print {
+    .hidden-print {
+        visibility: hidden;
+    }
+
+    #currencyChange {
+        position: absolute;
+        left: 400px;
+        top: 13px;
+        width: 100px;
+        visibility: visible;
+        text-shadow: none;
+    }
+
+    #exchangeDisplay {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+    :placeholder-shown {
+        color: transparent;
+    }
+
+    body {
+        height: auto;
+    }
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+
+
+
+input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.5);
+    /* IE */
+    -moz-transform: scale(1.5);
+    /* FF */
+    -webkit-transform: scale(1.5);
+    /* Safari and Chrome */
+    -o-transform: scale(1.5);
+    /* Opera */
+    padding: 10px;
+    margin-top: 13;
+    margin-left: 13;
+}
+
+
+
+/* PO and PRF */
+.bg-white {
+    background-color: white !important;
+}
+
+.bg-white > .sidebar > .nav-item{
+    padding: 10px;
+}
+.form-page{
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.form-wrapper{
+    padding: 20px;
+    margin-bottom: 10px;
+    overflow-y: scroll !important;
+    max-height: 700px !important;
+}
+
+#currencyChange{
+    color:white;
+    padding: 10px;
+}
+
+textarea{
+    resize: none;
+}

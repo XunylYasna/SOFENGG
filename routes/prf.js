@@ -89,21 +89,17 @@ router.post('/add', (req, res) => {
 })
 
 router.post('/save', (req, res) => {
-    // var names = req.body.names,
-    // route = req.body.routeField,
-    // particulars = req.body.partField,
-    // dollar = req.body.dollarField,
-    // peso = req.body.pesoField,
-    // total = req.body.totalField,
-    // prepared = req.body.prepared,
-    // approved = req.body.approved,
-    // received = req.body.received;
 
-    var { buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
+    const { prfNumber, poNumber, buyer, date, names, route, particulars, airFare, taxField, documentation, dollar, peso, total, prepared, approved, received } = req.body;
 
-    console.log(buyer);
 
-    const newPO = new PO({
+
+    const newPRF = new PRF({
+        prfNumber,
+        poNumber,
+        airFare,
+        taxField,
+        documentation,
         buyer: buyer,
         date: date,
         names: names,
@@ -117,10 +113,10 @@ router.post('/save', (req, res) => {
         received: received
     })
 
-    newPO.save()
+    newPRF.save()
         .then(post => {
-            req.flash('success_msg', 'New PO added.')
-            res.render("po.hbs", {
+            req.flash('success_msg', 'New PRF added.')
+            res.render("prf.hbs", {
                 message: "Successfully Saved PRF #" + "number"
             })
         })

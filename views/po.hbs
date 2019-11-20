@@ -1,245 +1,100 @@
 <head>
-    {{!-- <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script> --}}
-
-    <style type="text/css">
-        @media print {
-            .hidden-print {
-                visibility: hidden;
-            }
-
-            #currencyChange {
-                position: absolute;
-                left: 400px;
-                top: 13px;
-                width: 100px;
-                visibility: visible;
-                text-shadow: none;
-            }
-
-            #exchangeDisplay {
-                background-color: #dc3545;
-                border-color: #dc3545;
-            }
-
-            :placeholder-shown {
-                color: transparent;
-            }
-
-            body {
-                height: auto;
-            }
-        }
-
-        .bg-dark {
-            background-color: white !important;
-        }
-        
-        .col-md-1#leftSide{
-            -webkit-box-flex: 0;
-            -ms-flex: 0 0 10%;
-            flex: 0 0 10%;
-            max-width: 10%;
-            height: 100%;
-            position: fixed;
-        }
-        #rightSide{
-            margin-top: 1rem !important;
-            margin-left: 11rem !important;
-        }
-        #btnsLeft{
-            margin: 10 0 0 8;
-            width: 100%;
-            max-width: 100%;
-            padding: 1 1 0 1;
-        }
-        .mb-md-5#saveBtn{
-            margin-bottom: 25rem !important;
-        }
-        #viewPRF{
-            margin-left: 15%;
-        }
-    </style>
-
-    <script>
-
-
-
-        function computeDollar() {
-            var total = parseFloat(document.getElementById("totalField").value);
-            var dollar = parseFloat(document.getElementById("dollarField").value);
-            var rate = parseFloat(document.getElementById("exchangeDisplay").value);
-            var peso = parseFloat(document.getElementById("pesoField").value);
-
-            if (document.getElementById("dollarField") && dollar) {
-                if (document.getElementById("pesoField") && peso) {
-                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
-                } else {
-                    total = 0;
-                    document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
-                }
-            } else {
-                if (document.getElementById("pesoField") && peso) {
-                    document.getElementById("totalField").value = peso.toFixed(2);
-                } else {
-                    document.getElementById("totalField").value = 0.00;
-                }
-            }
-
-            if (document.getElementById("pesoField") && peso) {
-                if (document.getElementById("dollarField") && dollar) {
-                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
-                } else {
-                    total = 0;
-                    document.getElementById("totalField").value = (peso + total).toFixed(2);
-                }
-            } else {
-                if (document.getElementById("dollarField") && dollar) {
-                    document.getElementById("totalField").value = (rate * dollar).toFixed(2);
-                } else {
-                    document.getElementById("totalField").value = 0.00;
-                }
-            }
-
-        }
-
-        function computePeso() {
-            var total = parseFloat(document.getElementById("totalField").value);
-            var dollar = parseFloat(document.getElementById("dollarField").value);
-            var rate = parseFloat(document.getElementById("exchangeDisplay").value);
-            var peso = parseFloat(document.getElementById("pesoField").value);
-
-            if (document.getElementById("pesoField") && peso) {
-                if (document.getElementById("dollarField") && dollar) {
-                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
-                } else {
-                    total = 0;
-                    document.getElementById("totalField").value = (peso + total).toFixed(2);
-                }
-            } else {
-                if (document.getElementById("dollarField") && dollar) {
-                    document.getElementById("totalField").value = (rate * dollar).toFixed(2);
-                } else {
-                    document.getElementById("totalField").value = 0.00;
-                }
-            }
-
-        }
-
-        $(document).ready(function () {
-            var total = parseFloat(document.getElementById("totalField").value);
-            var dollar = parseFloat(document.getElementById("dollarField").value);
-            var rate = parseFloat(document.getElementById("exchangeDisplay").value);
-            var peso = parseFloat(document.getElementById("pesoField").value);
-
-            if (document.getElementById("dollarField") && dollar) {
-                if (document.getElementById("pesoField") && peso) {
-                    document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
-                } else {
-                    total = 0;
-                    document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
-                }
-            } else {
-                if (document.getElementById("pesoField") && peso) {
-                    document.getElementById("totalField").value = peso.toFixed(2);
-                } else {
-                    document.getElementById("totalField").value = 0.00;
-                }
-            }
-
-            $("#clear").on('click', function () {
-                if (confirm("Want to clear?")) {
-                    $(this).closest('body').find("input[type=text], textarea").not("#poNumber, #prfNumber, #exchangeDisplay").val("");
-
-
-                }
-            })
-
-        });
-
-    </script>
-
+    {{!-- Custom JS for PO --}}
+    <script src="js/poJS.js"></script>
 </head>
 
-<body id="page-top" class="my-md-4">
-    <div class="row">
-            <div id="leftSide" class="border-right col-md-1 hidden-print ">
-                <div id="btnsLeft" class="btn-group btn-group-vertical offset-md-4" role="group">
-                    <button class="btn btn-primary my-md-1" type="button">
-    				    New PRF &nbsp;
-    				    <i class="fa fa-file" aria-hidden="true"></i>
-    				</button>
-    				<button class="btn btn-primary my-md-1" type="button" onclick="window.print();return false;">
-    					Print &nbsp;
-    					<i class="fa fa-print" aria-hidden="true"></i>
-    				</button>    				
-                    <button id="saveBtn" class="btn btn-success mt-md-1 mb-md-5" type="button">
-    					Save &nbsp;
-    					<i class="fa fa-save" aria-hidden="true"></i>
-    				</button>
+<div class="form-page">
 
-    				<button class="btn btn-danger" id="clear" type="button">
-    					Clear &nbsp;
-    					<i class="fa fa-eraser" aria-hidden="true"></i>
-    				</button>
-                    <div id="currencyChange" class="form-group">
-                        <small for="exchangeRate">USD to PHP: </small>
-                        <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
-                    </div>
-                </div>                
+    {{!-- Header --}}
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+        <a class="navbar-brand mr-1"><b>
+                <font color="white">Create New PO</font>
+            </b></a>
+    </nav>
+
+    <div id="wrapper" class="bg-white">
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item">
+                <button class="btn btn-primary btn-block" type="button">
+                    New PRF &nbsp;
+                    <i class="fa fa-file" aria-hidden="true"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-primary btn-block" type="button" onclick="window.print();return false;">
+                    Print &nbsp;
+                    <i class="fa fa-print" aria-hidden="true"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button id="saveBtn" class="btn btn-success btn-block" type="button">
+                    Save &nbsp;
+                    <i class="fa fa-save" aria-hidden="true"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <br>
+                <button class="btn btn-danger btn-block" id="clear" type="button">
+                    Clear &nbsp;
+                    <i class="fa fa-eraser" aria-hidden="true"></i>
+                </button>
+            </li>
+            <div id="currencyChange" class="form-group">
+                <small for="exchangeRate">USD to PHP: </small>
+                <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
             </div>
-            
-        <div id="rightSide" class="col-md-10">
+        </ul>
+
+        <!--    PO Form -->
+        <div id="content-wrapper" class="form-wrapper">
             <form>
 
-                    <div class="row">
-                        <div class="col-md-4 mb-md-2">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="background-color:white;">PRF# </span>
-                                </div>
-                                <input type="text" class="form-control" id="prfNumber" placeholder="Enter PRF#" disabled value="881234">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button">
-                                        <i class="fa fa-pen" aria-hidden="true"></i>
-                                    </button>
-                                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-md-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color:white;">PRF# </span>
                             </div>
-                        </div>
-                        <div class="col-md-4 offset-md-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="background-color:white;">PO# </span>
-                                </div>
-                                <input type="text" class="form-control" id="poNumber" placeholder="Enter PO#" disabled value="812345">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button">
-                                        <i class="fa fa-pen" aria-hidden="true"></i>
-                                    </button>
-                                </div>
+                            {{!-- PRF Number --}}
+                            <input type="text" class="form-control" id="prfNumber" name="prfNumber"
+                                placeholder="Enter PRF#" disabled value="881234">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="fa fa-pen" aria-hidden="true"></i>
+                                </button>
                             </div>
-                        </div>
-                        <div id="viewPRF">
-                            <button id="addpo" class="btn btn-primary hidden-print" href="backprf" type="submit" role="button">View PRF &nbsp;
-    					    <i class="fa fa-file" aria-hidden="true"></i>
-                            </button>
                         </div>
                     </div>
-                    
+                    <div class="col-md-4 offset-md-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background-color:white;">PO# </span>
+                            </div>
+                            {{!-- PO Number --}}
+                            <input type="text" class="form-control" id="poNumber" name="poNumber"
+                                placeholder="Enter PO#" disabled value="812345">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="fa fa-pen" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="viewPRF">
+                        {{!-- View PRF button --}}
+                        <button id="addpo" class="btn btn-primary hidden-print" href="backprf" type="submit"
+                            role="button">View PRF &nbsp;
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="buyerField">To: </label>
+                            {{!-- Buyer Field --}}
                             <input name="buyer" type="text" class="form-control" id="buyerField" placeholder="Recipient"
                                 value="{{buyer}}">
                         </div>
@@ -247,8 +102,9 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="purchaseDate">Date: </label>
+                            {{!-- Date Field --}}
                             <input name="date" type="date" class="form-control" id="purchaseDate"
-                                placeholder="Enter Date" value="{{date}}">
+                                placeholder="Enter Date" value="{{date}}" name="date">
                         </div>
                     </div>
                 </div>
@@ -257,8 +113,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="nameField">Pax Name/s: </label>
-                            <textarea class="form-control " rows="5" id="nameField"
-                                placeholder="Enter Names">{{names}}</textarea>
+                            {{!-- Name Text Area --}}
+                            <textarea class="form-control " rows="5" id="nameField" placeholder="Enter Names"
+                                name="names">{{names}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -267,8 +124,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="routeField">Route: </label>
-                            <textarea class="form-control " rows="5" id="routeField"
-                                placeholder="Specify Route">{{route}}</textarea>
+                            {{!-- Route Text Area --}}
+                            <textarea class="form-control " rows="5" id="routeField" placeholder="Specify Route"
+                                name="route">{{route}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -277,8 +135,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="docuField">Description: </label>
-                            <textarea class="form-control" rows="5" id="docuField"
-                                placeholder="Enter Description">{{description}}</textarea>
+                            {{!-- Description Text Area --}}
+                            <textarea class="form-control" rows="5" id="docuField" placeholder="Enter Description"
+                                name="description">{{description}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -287,23 +146,27 @@
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="dollarField">US$: &nbsp;</label>
+                            {{!-- Dollar field --}}
                             <input type="number" id="dollarField" onkeydown="return event.keyCode !== 69"
                                 oninput="computeDollar()" class="form-control" id="dollarField"
-                                placeholder="Enter Amount" value="{{dollar}}">
+                                placeholder="Enter Amount" value="{{dollar}}" name="dollar">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="pesoField">PHP: &nbsp;</label>
+                            {{!-- Peso field --}}
                             <input type="number" id="pesoField" onkeydown="return event.keyCode !== 69"
                                 oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount"
-                                value="{{peso}}">
+                                value="{{peso}}" name="peso">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
-                            <input type="text" id="totalField" class="form-control" id="totalField" disabled>
+                            {{!-- Total field --}}
+                            <input type="text" id="totalField" class="form-control" id="totalField" name="total"
+                                disabled>
                         </div>
                     </div>
                 </div>
@@ -312,31 +175,32 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="prepField">Prepared By:</label>
+                            {{!-- Prepared field --}}
                             <input type="text" class="form-control" id="prepField" placeholder="Enter Name"
-                                value="{{prepared}}">
+                                name="prepared" value="{{prepared}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="apprField">Approved By: </label>
+                            {{!-- Approved Field --}}
                             <input type="text" class="form-control" id="apprField" placeholder="Enter Name"
-                                value="{{approved}}">
+                                name="approved" value="{{approved}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="recField">Received By:</label>
+                            {{!-- Received Field --}}
                             <input type="text" class="form-control" id="recField" placeholder="Enter Name"
-                                value="{{received}}">
+                                name="received" value="{{received}}">
                         </div>
                     </div>
                 </div>
-
-
-
-
             </form>
         </div>
-    </div>
+        <!-- /.content-wrapper -->
 
-</body>
+    </div>
+</div>
+<!-- /#wrapper -->
