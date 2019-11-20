@@ -74,6 +74,10 @@ app.get('/dashboard', (req, res) => {
   res.render("dashboard.hbs")
 })
 
+app.get('/login', (req, res) => {
+  res.render("login.hbs")
+})
+
 app.get('/grossreport', (req, res) => {
   res.render("grossreport.hbs")
 })
@@ -82,6 +86,9 @@ app.get('/headings', (req, res) => {
   res.render("headings.hbs")
 })
 
+app.get('/passwordmanager', (req, res) => {
+  res.render("passwordmanager.hbs")
+})
 
 
 

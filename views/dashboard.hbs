@@ -32,25 +32,27 @@
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
           <a class="nav-link" href="dashboard">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
+            <i class="fas fa-fw fa-tachometer-alt"></i>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" data-toggle="modal" data-target="#accessModal">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Gross Report</span></a>
+            <span>Gross Report</span>
+	    <i class="fas fa-fw fa-table"></i></a>
         </li>
 	<li class="nav-item">
           <a class="nav-link" href="passwordmanager">
             <i class="w3-spin fa fa-refresh"></i>
-            <span>Password Manager</span></a>
+            <span>Password Manager</span>
+	    <i class="fa fa-lock"></i></a>
         </li>
 	<li class="nav-item">
           <a class="nav-link" href="headings">
-            <i class="fas fa-fw fa-file"></i>
-            <span>Headings</span></a>
+            <span>Headings</span>
+            <i class="fas fa-fw fa-file"></i></a>
         </li>
+<span style="white-space: pre-line">@Model.CommentText</span>
 	<li class="nav-item">
           <a class="nav-link" href="prf">
             <span>Create New PRF &#10010</span></a>
@@ -59,6 +61,7 @@
           <a class="nav-link" href="po">
             <span>Create New PO &#10010</span></a>
         </li>
+<span style="white-space: pre-line">@Model.CommentText</span>
 	<li class="nav-item">
           <a class="nav-link" href="">
             <span>Import</span>
@@ -69,6 +72,7 @@
             <span>Export</span>
             <i class="fa fa-plane"></i></a>
         </li>
+<span style="white-space: pre-line">@Model.CommentText</span>
 	<li class="nav-item">
           <a class="nav-link" href="login">
             <span>Logout</span>
@@ -78,14 +82,17 @@
 
       <div id="content-wrapper">
           <!-- DataTables Example -->
+	<div class="container-fluid">
           <div class="card mb-3">
 		<ol class="breadcrumb">
            		<strong><font size="5" style="font-family:verdana;">Dashboard</font></strong> 
            	</ol>
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Dates
-              <input type="date" id="datefilter">
+              From
+              <input type="date" id="datefilterfrom">
+	      To
+	      <input type="date" id="datefilterto">
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -148,7 +155,7 @@
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
-  
+  	</div>
         </div>
         <!-- /.container-fluid -->
   

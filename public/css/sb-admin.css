@@ -5167,6 +5167,44 @@ input[type="button"].btn-block {
   color: #6c757d;
 }
 
+.breadcrumbowner {
+	width: 150%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: #BDFB8F;
+  border-radius: 0.5rem;
+	
+}
+
+.breadcrumbowner-item + .breadcrumb-item {
+  padding-left: 0.5rem;
+}
+
+.breadcrumbowner-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  content: "/";
+}
+
+.breadcrumbowner-item + .breadcrumb-item:hover::before {
+  text-decoration: underline;
+}
+
+.breadcrumbowner-item + .breadcrumb-item:hover::before {
+  text-decoration: none;
+}
+
+.breadcrumbowner-item.active {
+  color: #6c757d;
+}
+
 .pagination {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10990,3 +11028,23 @@ textarea.headercss{
 	font-family: 'Gudea';
 	font-size: 22px;
 }
+
+.inlab {
+  display: block;
+  width: 50%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
