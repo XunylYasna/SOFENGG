@@ -14,18 +14,19 @@ router.get('/', (req, res) => {
 
 // Adding a post, storing the post to DB
 router.get('/co', ensureAuthenticated, (req, res) => {
-    res.render('coDashboard')
+  res.render('coDashboard')
 })
 
 // Adding a post, storing the post to DB
 router.get('/manager', ensureAuthenticated, (req, res) => {
-    res.render('managerDashboard')
+  res.render('managerDashboard')
 })
 
 // Adding a post, storing the post to DB
 router.get('/staff', ensureAuthenticated, (req, res) => {
-    res.render('staffDashboard')
+  res.render('staffDashboard')
 })
+
 
 
 module.exports = router;
