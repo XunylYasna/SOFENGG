@@ -4,32 +4,27 @@
 <script type="text/javascript" src="/js/dashboard.js"></script>
 <script type="text/javascript" src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/vendor/datatables/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<body id="page-top">
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+  
+      <a class="navbar-brand mr-1"><b><font color="white">Grand Pacific Travel & Tours Corp.</font></b></a>
 
-
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-  <a class="navbar-brand mr-1"><b>
-      <font color="white">Grand Pacific Travel & Tours Corp.</font>
-    </b></a>
-
-  {{!-- <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-      </button> --}}
-
-  <!-- Navbar Search -->
-  <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"
-        aria-describedby="basic-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="button">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-    </div>
-  </form>
-
+  
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>  
+    </nav>
   <!-- Navbar -->
 
 
@@ -60,7 +55,7 @@
         <span>Headings</span>
         <i class="fas fa-fw fa-file"></i></a>
     </li>
-    <span style="white-space: pre-line">@Model.CommentText</span>
+<br>
     <li class="nav-item">
       <a class="nav-link" href="prf">
         <span>Create New PRF &#10010</span></a>
@@ -69,7 +64,7 @@
       <a class="nav-link" href="po">
         <span>Create New PO &#10010</span></a>
     </li>
-    <span style="white-space: pre-line">@Model.CommentText</span>
+<br>
     <li class="nav-item">
       <a class="nav-link" href="">
         <span>Import</span>
@@ -80,7 +75,7 @@
         <span>Export</span>
         <i class="fa fa-plane"></i></a>
     </li>
-    <span style="white-space: pre-line">@Model.CommentText</span>
+<br>
     <li class="nav-item">
       <a class="nav-link" href="login">
         <span>Logout</span>
