@@ -95,4 +95,25 @@ $(document).ready(function () {
         }
     })
 
+    var tax = document.getElementById('taxField');
+    var fare = document.getElementById('fareField');
+    var peso = document.getElementById('pesoField');
+    var dollar = document.getElementById('dollarField');
+
+    
+    peso.onkeydown = function(e) {
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+             || (e.keyCode > 47 && e.keyCode < 58) 
+             || e.keyCode == 8 || (keyCode==110) || (keyCode==190) || (keyCode==9))) {
+            return false;
+        }
+    }
+    
+    dollar.onkeydown = function(e) {
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+             || (e.keyCode > 47 && e.keyCode < 58) 
+             || e.keyCode == 8 || (keyCode==110) || (keyCode==190) || (keyCode==9))) {
+            return false;
+        }
+    }
 });
