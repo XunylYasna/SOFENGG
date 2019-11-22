@@ -51,6 +51,10 @@ app.use(passport.session());
 const flash = require('connect-flash');
 app.use(flash())
 
+// Models
+const PRF = require('./model/PRF')
+const PO = require('./model/PO')
+
 //Global Var
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
@@ -71,7 +75,28 @@ app.use('/po', require('./routes/po'))
 
 // Redirects
 app.get('/dashboard', (req, res) => {
-  res.render("dashboard.hbs")
+
+  // const dataSet = PRF.find().lean().exec(function (err, prfs) {
+  //   return res.end(JSON.stringify(prfs));
+  // })
+
+
+  PRF.find({}, function (err, prfs) {
+    var dataSet = {};
+
+    prfs.forEach(function (prfs) {
+      dataSet[prfs._id] = prfs;
+    });
+
+    console.log(dataSet)
+
+    res.render("dashboard.hbs", {
+      dataSet
+    })
+  });
+
+
+
 })
 
 app.get('/login', (req, res) => {

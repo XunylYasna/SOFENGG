@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
     {{!-- Custom JS for PO --}}
     <script src="js/poJS.js"></script>
@@ -33,6 +34,17 @@
                     <i class="fa fa-save" aria-hidden="true"></i>
                 </button>
             </li>
+            <li class="nav-item"><br>
+		<button id="dashboard" class="btn btn-home btn-block" type="button">Dashboard
+		<i class="fas fa-fw fa-tachometer-alt"></i>
+		</button>
+
+		<script type="text/javascript">
+    			document.getElementById("dashboard").onclick = function () {
+        		location.href = "dashboard";
+		};
+		</script>
+            </li>
             <li class="nav-item">
                 <br>
                 <button class="btn btn-danger btn-block" id="clear" type="button">
@@ -61,7 +73,7 @@
                                 placeholder="Enter PRF#" disabled value="881234">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
-                                    <i class="fa fa-pen" aria-hidden="true"></i>
+                                    <i class="fas fa-pen" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
@@ -76,7 +88,7 @@
                                 placeholder="Enter PO#" disabled value="812345">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
-                                    <i class="fa fa-pen" aria-hidden="true"></i>
+                                    <i class="fas fa-pen" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>

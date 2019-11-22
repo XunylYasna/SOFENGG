@@ -1,6 +1,10 @@
 @media print {
-    .hidden-print {
-        visibility: hidden;
+    .sidebar{
+        display: none;
+    }
+
+    .btn{
+        display: none;
     }
 
     #currencyChange {
@@ -21,9 +25,21 @@
         color: transparent;
     }
 
-    body {
-        height: auto;
+    .form-page{
+        max-height: initial !important;
+        overflow: initial !important;
     }
+    
+    .form-wrapper{
+        padding: 20px;
+        margin-bottom: 10px;
+        overflow-y: initial !important;
+        max-height: initial !important;
+    }
+
+    input[type='checkbox'] {
+        display: none;
+     }
 }
 
 
@@ -63,17 +79,6 @@ input[type=checkbox] {
 .bg-white > .sidebar > .nav-item{
     padding: 10px;
 }
-.form-page{
-    max-height: 100%;
-    overflow: hidden;
-}
-
-.form-wrapper{
-    padding: 20px;
-    margin-bottom: 10px;
-    overflow-y: scroll !important;
-    max-height: 700px !important;
-}
 
 #currencyChange{
     color:white;
@@ -82,4 +87,16 @@ input[type=checkbox] {
 
 textarea{
     resize: none;
+}
+
+.form-page{
+    height: 100%;
+    overflow: hidden;
+}
+
+.form-wrapper{
+    padding: 30px;
+    margin-bottom: 10px;
+    overflow-y: scroll !important;
+    max-height: 700px !important;
 }
