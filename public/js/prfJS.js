@@ -104,9 +104,49 @@ $(document).ready(function () {
             $(this).closest('body').find("input[type=text], textarea").not("#poNumber, #prfNumber, #exchangeDisplay, #name").val("");
         }
     })
+    
+    var tax = document.getElementById('taxField');
+    var fare = document.getElementById('fareField');
+    var peso = document.getElementById('pesoField');
+    var dollar = document.getElementById('dollarField');
+
+    // Listen for input event on numInput.
+    tax.onkeydown = function(e) {
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+             || (e.keyCode > 47 && e.keyCode < 58) 
+             || e.keyCode == 8)) {
+            return false;
+        }
+    }    
+    
+    fare.onkeydown = function(e) {
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+             || (e.keyCode > 47 && e.keyCode < 58) 
+             || e.keyCode == 8)) {
+            return false;
+        }
+    }    
+    
+    peso.onkeydown = function(e) {
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+             || (e.keyCode > 47 && e.keyCode < 58) 
+             || e.keyCode == 8)) {
+            return false;
+        }
+    }    
+    
+    dollar.onkeydown = function(e) {
+        if(!((e.keyCode > 95 && e.keyCode < 106)
+             || (e.keyCode > 47 && e.keyCode < 58) 
+             || e.keyCode == 8)) {
+            return false;
+        }
+    }
 });
 
 
 function goBack() {
     window.history.back();
 }
+
+
