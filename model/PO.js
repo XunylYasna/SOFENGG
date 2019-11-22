@@ -5,7 +5,7 @@ const POSchema = new mongoose.Schema({
     poNumber: Number,
     buyer: String,
     date: Date,
-    paxName: [String],
+    paxName: String,
     route: String,
     description: String,
     usAmount: Number,

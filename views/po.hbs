@@ -29,7 +29,7 @@
                 </button>
             </li>
             <li class="nav-item">
-                <button id="saveBtn" class="btn btn-success btn-block" type="button">
+                <button id="saveBtn" class="btn btn-success btn-block" type="button" onclick="save()">
                     Save &nbsp;
                     <i class="fa fa-save" aria-hidden="true"></i>
                 </button>
@@ -54,13 +54,13 @@
             </li>
             <div id="currencyChange" class="form-group">
                 <small for="exchangeRate">USD to PHP: </small>
-                <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
+                <input id="exchangeDisplay" type="text" class="form-control" value="50.10">
             </div>
         </ul>
 
         <!--    PO Form -->
         <div id="content-wrapper" class="form-wrapper">
-            <form>
+            <form id="poForm" method="POST">
 
                 <div class="row">
                     <div class="col-md-4 mb-md-2">
@@ -70,7 +70,7 @@
                             </div>
                             {{!-- PRF Number --}}
                             <input type="text" class="form-control" id="prfNumber" name="prfNumber"
-                                placeholder="Enter PRF#" disabled value="881234">
+                                placeholder="Enter PRF#">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -85,7 +85,7 @@
                             </div>
                             {{!-- PO Number --}}
                             <input type="text" class="form-control" id="poNumber" name="poNumber"
-                                placeholder="Enter PO#" disabled value="812345">
+                                placeholder="Enter PO#">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>

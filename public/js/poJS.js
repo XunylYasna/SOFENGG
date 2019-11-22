@@ -59,6 +59,13 @@ function computePeso() {
 
 }
 
+function save() {
+    $("#poForm").attr("action", "/po/save"); //Will set it
+    $("#poForm").submit();
+}
+
+
+
 $(document).ready(function () {
     var total = parseFloat(document.getElementById("totalField").value);
     var dollar = parseFloat(document.getElementById("dollarField").value);

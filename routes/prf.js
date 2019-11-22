@@ -14,34 +14,6 @@ router.get('/', (req, res) => {
 
 
 router.post('/add', (req, res) => {
-    // var names = req.body.names,
-    // route = req.body.routeField,
-    // particulars = req.body.partField,
-    // dollar = req.body.dollarField,
-    // peso = req.body.pesoField,
-    // total = req.body.totalField,
-    // prepared = req.body.prepared,
-    // approved = req.body.approved,
-    // received = req.body.received;
-
-    // const PRFSchema = new mongoose.Schema({
-    //     prfNumber: Number,
-    //     poNumber: Number,
-    //     buyer: String,
-    //     date: Date,
-    //     paxNames: String,
-    //     route: String,
-    //     particulars: String,
-    //     airFare: Number,
-    //     travelTax: Number,
-    //     documentations: String,
-    //     usAmount: Number,
-    //     phpAmount: Number,
-    //     total: Number,
-    //     preparedBy: String,
-    //     approvedBy: String,
-    //     receivedBy: String
-    // })
 
     const { buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
 
@@ -97,32 +69,35 @@ router.post('/save', (req, res) => {
     const newPRF = new PRF({
         prfNumber,
         poNumber,
+        buyer,
+        date,
+        paxNames: names,
+        route,
+        particulars,
         airFare,
-        taxField,
-        documentation,
-        buyer: buyer,
-        date: date,
-        names: names,
-        route: route,
-        particulars: particulars,
-        dollar: dollar,
-        peso: peso,
-        total: total,
-        prepared: prepared,
-        approved: approved,
-        received: received
+        travelTax: taxField,
+        documentations: documentation,
+        usAmount: dollar,
+        phpAmount: peso,
+        total,
+        preparedBy: prepared,
+        approvedBy: approved,
+        receivedBy: received
     })
+
+    // console.log(req.body)
 
     newPRF.save()
         .then(post => {
+            console.log('PRF Successfully added' + newPRF)
             req.flash('success_msg', 'New PRF added.')
-            res.render("prf.hbs", {
-                message: "Successfully Saved PRF #" + "number"
-            })
+            res.redirect('/dashboard')
         })
         .catch(err => {
             console.log(err)
         })
+
+
 
 })
 

@@ -16,9 +16,8 @@ router.get('/', (req, res) => {
 
 router.post('/save', (req, res) => {
 
+
     const { prfNumber, poNumber, buyer, date, names, route, description, dollar, peso, total, prepared, approved, received } = req.body;
-
-
 
     const newPO = new PO({
         prfNumber,
@@ -26,22 +25,21 @@ router.post('/save', (req, res) => {
         description,
         buyer: buyer,
         date: date,
-        names: names,
+        paxName: names,
         route: route,
-        dollar: dollar,
-        peso: peso,
+        usAmount: dollar,
+        phpAmount: peso,
         total: total,
-        prepared: prepared,
-        approved: approved,
-        received: received
+        preparedBy: prepared,
+        approvedBy: approved,
+        receivedBy: received
     })
 
     newPO.save()
         .then(post => {
+            console.log("PO added sucessfully " + newPO)
             req.flash('success_msg', 'New PO added.')
-            res.render("po.hbs", {
-                message: "Successfully Saved PO #" + "number"
-            })
+            res.redirect('/dashboard')
         })
         .catch(err => {
             console.log(err)

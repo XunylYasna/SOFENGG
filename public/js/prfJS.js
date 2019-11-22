@@ -47,6 +47,16 @@ function computePeso() {
 
 }
 
+function save() {
+    $("#prfForm").attr("action", "/prf/save"); //Will set it
+    $("#prfForm").submit();
+}
+
+function addPO() {
+    $("#prfForm").attr("action", "/prf/addPO"); //Will set it
+    $("#prfForm").submit();
+}
+
 $(document).ready(function () {
     var names = [];
 

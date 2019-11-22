@@ -28,7 +28,7 @@
                 </button>
             </li>
             <li class="nav-item">
-                <button id="saveBtn" class="btn btn-success btn-block" type="button">
+                <button id="saveBtn" class="btn btn-success btn-block" type="button" onclick="save()">
                     Save &nbsp;
                     <i class="fa fa-save" aria-hidden="true"></i>
                 </button>
@@ -60,7 +60,7 @@
 
         <!--    PRF Form -->
         <div id="content-wrapper" class="form-wrapper">
-            <form class="form-horizontal" method="POST" action="/save">
+            <form class="form-horizontal" method="POST" id="prfForm">
                 <div class="row">
                     <div class="col-md-4 mb-md-2">
                         <div class="input-group">
@@ -69,7 +69,7 @@
                             </div>
                             {{!-- PRF Number Field--}}
                             <input type="text" class="form-control" id="prfNumber" name="prfNumber"
-                                placeholder="Enter PRF#" disabled value="881234">
+                                placeholder="Enter PRF#">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -84,7 +84,7 @@
                             </div>
                             {{!-- PO Number Field--}}
                             <input type="text" class="form-control" id="poNumber" name="poNumber"
-                                placeholder="Enter PO#" disabled value="812345">
+                                placeholder="Enter PO#">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -94,7 +94,7 @@
                     </div>
                     <div id="POadd">
                         {{!-- Add PO Button --}}
-                        <button id="addpo" class="btn btn-primary hidden-print btn-block" href="addpo" type="submit"
+                        <button id="addpo" class="btn btn-primary hidden-print btn-block" onclick="addPO()"
                             role="button">Add
                             PO &nbsp;
                             <i class="fa fa-archive" aria-hidden="true"></i>
@@ -231,7 +231,7 @@
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total Field --}}
                             <input type="text" id="totalField" name="total" class="form-control" id="totalField"
-                                value="0.00" disabled>
+                                value="0.00">
                         </div>
                     </div>
                 </div>
