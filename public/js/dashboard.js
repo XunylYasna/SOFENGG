@@ -1,17 +1,16 @@
-var dataArray = [];
+console.log(dataSet)
 
-// for (var i = 0; i < dataSet.length; i++) {
-//     dataArray[i] = [dataSet[i].prfNumber, dataSet[i].date, dataSet[i].Last_Name, dataSet[i].Middle_Name, dataSet[i].College, dataSet[i].Degree_Program, dataSet[i].Contact_Number, dataSet[i].Facebook_Name, dataSet[i].Email, dataSet[i].Is_Officer, dataSet[i].Is_JO, dataSet[i].Position, dataSet[i].Receipt_Number];
-//     for (var g = 0; g < dataArray[i].length; g++) {
-//         if (typeof dataArray[i][g] == 'undefined') {
-//             dataArray[i][g] = "-"
-//         }
-//     }
+const dataSetKey = Object.keys(dataSet)
+
+var dataArray = [];
+dataSetKey.forEach((key, index) => {
+    const data = dataSet[key]
+    dataArray[index] = [data.prfNumber, data.date, data.buyer, data.date, data.poNumber, key]
+})
 
 $(document).ready(function () {
     $('#dataTable').DataTable({
         data: dataArray,
-        scrollY: '50vh',
         scrollCollapse: true,
         columns: [
             { title: "PRF#" },
@@ -19,7 +18,32 @@ $(document).ready(function () {
             { title: "Recipient" },
             { title: "Paid Date" },
             { title: "PO's" },
-        ]
+            {
+                title: "Commands",
+                render: function (data, type, row, meta) {
+                    return '<form method="POST" onsubmit="return false;"> <input type="hidden" name="prfID" value="' + data + '" /> <button class="btn btn-primary" onclick="viewPRF(this)">View</button> <button class="btn btn-warning" onclick="editPRF()">Edit</button> <button class="btn btn-danger" onclick="deletePRF()">Delete</button> </form>';
+                }
+            }
+        ],
+
+
     });
 
-}); 
+});
+
+function editPRF(prf) {
+    $(prf).closest('form').attr("action", "/prf/edit");
+    $(prf).parents('form:first').submit();
+}
+
+function deletePRF() {
+    $(this).parents('form:first').attr("action", "/prf/delete");
+    $(this).parents('form:first').submit();
+}
+
+function viewPRF(button) {
+    alert('hi')
+    $(button).parents('form:first').attr("method", "GET");
+    $(button).parents('form:first').attr("action", "/prf/view");
+    $(button).parents('form:first').submit();
+}
