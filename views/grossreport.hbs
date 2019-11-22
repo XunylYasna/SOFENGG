@@ -103,54 +103,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    {{!-- <tr>
                       <td>1234567</td>
                       <td>09-18-2019</td>
                       <td>1000</td>
                       <td>1000</td>
                       <td>09-12-2019</td>
                       <td>...</td>
-                    </tr>
+                    </tr> --}}
+                    {{#each prfs}}
                     <tr>
-                      <td>1234568</td>
-                      <td>03-06-2019</td>
-                      <td>1000</td>
-                      <td>1000</td>
-                      <td>03-01-2019</td>
-                      <td>...</td>
+                      <td>{{prfNumber}}</td>
+                      <td>{{date}}</td>
+                      <td>{{total}}</td>
+                      <td>0</td>
+                      <td>{{date}}</td>
+                      <td>{{poNumber}}</td>
                     </tr>
-                    <tr>
-                      <td>1234567</td>
-                      <td>08-15-2019</td>
-                      <td>1000</td>
-                      <td>1000</td>
-                      <td>08-14-2019</td>
-                      <td>...</td>
-                    </tr>
-                    <tr>
-                      <td>1234569</td>
-                      <td>05-30-2019</td>
-                      <td>1000</td>
-                      <td>1000</td>
-                      <td>01-15-2019</td>
-                      <td>...</td>
-                    </tr>
-                    <tr>
-                      <td>1234570</td>
-                      <td>04-20-2019</td>
-                      <td>1000</td>
-                      <td>1000</td>
-                      <td>02-10-2019</td>
-                      <td>...</td>
-                    </tr>
-                    <tr>
-                      <td>1234571</td>
-                      <td>02-19-2019</td>
-                      <td>1000</td>
-                      <td>1000</td>
-                      <td>01-12-2019</td>
-                      <td>...</td>
-                    </tr>
+                    {{/each}}
                   </tbody>
                 </table>
               </div>

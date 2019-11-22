@@ -104,7 +104,24 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/grossreport', (req, res) => {
-  res.render("grossreport.hbs")
+  PRF.find({}, function (err, prfs) {
+    var dataSet = {};
+
+    prfs.forEach(function (prfs) {
+      dataSet[prfs._id] = prfs;
+    });
+
+    console.log(prfs)
+
+    if(err) {
+      throw(err)
+    }
+    else if(prfs) {
+      res.render("grossreport.hbs", {
+        prfs: prfs
+      })
+    }
+  })
 })
 
 app.get('/headings', (req, res) => {
