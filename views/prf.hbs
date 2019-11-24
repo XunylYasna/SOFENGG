@@ -16,7 +16,7 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item">
-                <button class="btn btn-primary btn-block" type="button">
+                <button class="btn btn-primary btn-block" type="button" href="/prf" onclick="window.location='/prf'">
                     New PRF &nbsp;
                     <i class="fa fa-file" aria-hidden="true"></i>
                 </button>
@@ -34,15 +34,10 @@
                 </button>
             </li>
             <li class="nav-item"><br>
-		<button id="dashboard" class="btn btn-home btn-block" type="button">Dashboard
-		<i class="fas fa-fw fa-tachometer-alt"></i>
-		</button>
-
-		<script type="text/javascript">
-    			document.getElementById("dashboard").onclick = function () {
-        		location.href = "dashboard";
-		};
-		</script>
+                <button id="dashboard" class="btn btn-home btn-block" type="button"
+                    onclick="window.location='/dashboard'">Dashboard
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                </button>
             </li>
             <li class="nav-item">
                 <br>
@@ -69,7 +64,7 @@
                             </div>
                             {{!-- PRF Number Field--}}
                             <input type="text" class="form-control" id="prfNumber" name="prfNumber"
-                                placeholder="Enter PRF#">
+                                placeholder="Enter PRF#" value={{prfNumber}}>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -84,7 +79,7 @@
                             </div>
                             {{!-- PO Number Field--}}
                             <input type="text" class="form-control" id="poNumber" name="poNumber"
-                                placeholder="Enter PO#">
+                                placeholder="Enter PO#" value={{poNumber}}>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -107,8 +102,8 @@
                         <div class="form-group">
                             <label for="buyerField">To: </label>
                             {{!-- Buyer Field --}}
-                            <input name="buyer" type="text" class="form-control" id="buyerField"
-                                placeholder="Recipient">
+                            <input name="buyer" type="text" class="form-control" id="buyerField" placeholder="Recipient"
+                                value={{buyer}}>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -116,7 +111,8 @@
                             <label for="purchaseDate">Date: </label>
                             {{!-- Date Field --}}
                             <input name="date" type="date" class="form-control" id="purchaseDate"
-                                placeholder="Enter Date">
+                                placeholder="Enter Date" value="{{date}}">
+                            {{!-- 2013-01-08 date format dapat pero hekhek wala pa --}}
                         </div>
                     </div>
                 </div>
@@ -127,7 +123,7 @@
                         {{!-- This field is stored in a hidden input name="names" created on the prfJS.js file --}}
                         <div class="form-group">
                             <label for="nameField" style="margin-bottom:1em">Pax Name/s: </label>
-                            <button id="addPax" style="margin-left:1em" class="btn btn-success btn-sm">
+                            <button id="addPax" style="margin-left:1em" class="btn btn-success btn-sm" type="button">
                                 <span class="fa fa-plus"></span> &nbsp; Add
                             </button>
                             <table class="table table-unbordered table-hover table-sm" id="nameField">
@@ -166,7 +162,7 @@
                             <label for="routeField">Route: </label>
                             {{!-- Route Field --}}
                             <textarea class="form-control " rows="5" id="routeField" name="route"
-                                placeholder="Specify Route"></textarea>
+                                placeholder="Specify Route" value={{route}}></textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -174,7 +170,7 @@
                             <label for="partField">Particulars: </label>
                             {{!-- Particulars Field --}}
                             <textarea class="form-control" rows="5" id="partField" name="particulars"
-                                placeholder="Specify Particulars"></textarea>
+                                placeholder="Specify Particulars" value={{particulars}}></textarea>
                         </div>
                     </div>
                 </div>
@@ -185,7 +181,7 @@
                             <label for="fareField">Airfare: </label>
                             {{!-- Airfare Field --}}
                             <input type="number" class="form-control" name="airFare" id="fareField"
-                                placeholder="Specify Airfare">
+                                placeholder="Specify Airfare" value={{airFare}}>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -193,7 +189,7 @@
                             <label for="taxField">Travel Tax: </label>
                             {{!-- Travel Tax Field --}}
                             <input type="number" class="form-control" name="taxField" id="taxField"
-                                placeholder="Specify Travel Tax">
+                                placeholder="Specify Travel Tax" value={{travelTax}}>
                         </div>
                     </div>
                 </div>
@@ -204,7 +200,7 @@
                             <label for="docuField">Documentation: </label>
                             {{!-- Documentation Field --}}
                             <textarea class="form-control" rows="5" id="docuField" name="documentation"
-                                placeholder="Enter Documentations"></textarea>
+                                placeholder="Enter Documentations" value={{documentations}}></textarea>
                         </div>
                     </div>
                 </div>
@@ -215,7 +211,8 @@
                             <label for="dollarField">USD: &nbsp;</label>
                             {{!-- USD Field --}}
                             <input type="number" id="dollarField" name="dollar" onkeydown="return event.keyCode !== 69"
-                                oninput="computeDollar()" class="form-control" placeholder="Enter Amount">
+                                oninput="computeDollar()" class="form-control" placeholder="Enter Amount"
+                                value={{usAmount}}>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -223,7 +220,8 @@
                             <label for="pesoField">PHP: &nbsp;</label>
                             {{!-- PHP Field --}}
                             <input type="number" id="pesoField" name="peso" onkeydown="return event.keyCode !== 69"
-                                oninput="computePeso()" class="form-control" placeholder="Enter Amount">
+                                oninput="computePeso()" class="form-control" placeholder="Enter Amount"
+                                value={{phpAmount}}>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -231,7 +229,7 @@
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total Field --}}
                             <input type="text" id="totalField" name="total" class="form-control" id="totalField"
-                                value="0.00">
+                                placeholder="Total" value={{total}}>
                         </div>
                     </div>
                 </div>
@@ -242,7 +240,7 @@
                             <label for="prepField">Prepared By:</label>
                             {{!-- Prepared by Field --}}
                             <input id="prepared" type="text" class="form-control" id="prepField" name="prepared"
-                                placeholder="Enter Name">
+                                placeholder="Enter Name" value={{preparedBy}}>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -250,7 +248,7 @@
                             <label for="apprField">Approved By: </label>
                             {{!-- Approbed by Field --}}
                             <input id="approved" type="text" class="form-control" id="apprField" name="approved"
-                                placeholder="Enter Name">
+                                placeholder="Enter Name" value={{approvedBy}}>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -258,7 +256,7 @@
                             <label for="recField">Received By:</label>
                             {{!-- Received by Field --}}
                             <input id="received" type="text" class="form-control" id="recField" name="received"
-                                placeholder="Enter Name">
+                                placeholder="Enter Name" value={{receivedBy}}>
                         </div>
                     </div>
                 </div>

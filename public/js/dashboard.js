@@ -21,7 +21,7 @@ $(document).ready(function () {
             {
                 title: "Commands",
                 render: function (data, type, row, meta) {
-                    return '<form method="POST" onsubmit="return false;"> <input type="hidden" name="prfID" value="' + data + '" /> <button class="btn btn-primary" onclick="viewPRF(this)">View</button> <button class="btn btn-warning" onclick="editPRF()">Edit</button> <button class="btn btn-danger" onclick="deletePRF()">Delete</button> </form>';
+                    return '<form method="POST"> <input type="hidden" name="prfID" value="' + data + '" /> <button type="button" class="btn btn-primary" onclick="viewPRF(this)">View</button> <button type="button" class="btn btn-danger" onclick="deletePRF(this)">Delete</button> </form>';
                 }
             }
         ],
@@ -31,18 +31,18 @@ $(document).ready(function () {
 
 });
 
-function editPRF(prf) {
-    $(prf).closest('form').attr("action", "/prf/edit");
-    $(prf).parents('form:first').submit();
-}
+// function editPRF(button) {
+//     $(button).parents('form:first').attr("method", "GET");
+//     $(button).closest('form').attr("action", "/prf/edit");
+//     $(button).parents('form:first').submit();
+// }
 
-function deletePRF() {
-    $(this).parents('form:first').attr("action", "/prf/delete");
-    $(this).parents('form:first').submit();
+function deletePRF(button) {
+    $(button).parents('form:first').attr("action", "/prf/delete");
+    $(button).parents('form:first').submit();
 }
 
 function viewPRF(button) {
-    alert('hi')
     $(button).parents('form:first').attr("method", "GET");
     $(button).parents('form:first').attr("action", "/prf/view");
     $(button).parents('form:first').submit();

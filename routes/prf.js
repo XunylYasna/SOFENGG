@@ -86,19 +86,70 @@ router.post('/save', (req, res) => {
     })
 
     // console.log(req.body)
+    PRF.find({ prfNumber: this.prfNumber }, function (err, docs) {
+        if (!docs.length) {
+            console.log('new');
+            newPRF.save()
+                .then(post => {
+                    console.log('PRF Successfully added' + newPRF)
+                    req.flash('success_msg', 'New PRF added.')
+                    res.redirect('/dashboard')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
 
-    newPRF.save()
-        .then(post => {
-            console.log('PRF Successfully added' + newPRF)
-            req.flash('success_msg', 'New PRF added.')
+        } else {
+            console.log('updating');
+            res.send('updating')
+        }
+    })
+
+
+
+
+
+})
+
+router.post('/delete', (req, res) => {
+
+    PRF.deleteOne({ _id: req.body.prfID }, function (err) {
+        if (err) {
+            console.log(err);
+        }
+        else {
             res.redirect('/dashboard')
-        })
-        .catch(err => {
-            console.log(err)
-        })
+        }
+    });
+})
 
-
-
+router.get('/view', (req, res) => {
+    PRF.findById(req.query.prfID, function (err, doc) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            const { prfNumber, poNumber, buyer, date, paxNames, route, particulars, airFare, travelTax, documentations, usAmount, phpAmount, total, preparedBy, approvedBy, receivedBy } = doc;
+            res.render('prf.hbs', {
+                prfNumber,
+                poNumber,
+                buyer,
+                date,
+                paxNames,
+                route,
+                particulars,
+                airFare,
+                travelTax,
+                documentations,
+                usAmount,
+                phpAmount,
+                total,
+                preparedBy,
+                approvedBy,
+                receivedBy
+            })
+        }
+    });
 })
 
 module.exports = router;
