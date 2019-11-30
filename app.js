@@ -160,12 +160,29 @@ app.get('/grossreport', (req, res) => {
   })
 })
 
+
+
 app.get('/headings', (req, res) => {
   res.render("headings.hbs")
 })
 
-app.get('/passwordmanager', (req, res) => {
-  res.render("passwordmanager.hbs")
+app.post('/passwordmanager', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
+
+  User.findOne({type:type}, function(err, doc) {
+    if(err) {
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
+      res.render("passwordmanager.hbs")
+    }
+    else{
+      res.redirect('dashboard')
+    }
+  })
 })
 
 
