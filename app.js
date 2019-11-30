@@ -118,7 +118,7 @@ app.get('/grossreport', (req, res) => {
     }
     else if(prfs) {
       res.render("grossreport.hbs", {
-        prfs: prfs
+        dataSet
       })
     }
   })
