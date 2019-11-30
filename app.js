@@ -119,6 +119,22 @@ app.post('/dashboard', (req, res) => {
 
 })
 
+app.get('/dashboard', (req,res) => {
+  PRF.find({}, function (err, prfs) {
+    var dataSet = {};
+
+    prfs.forEach(function (prfs) {
+      dataSet[prfs._id] = prfs;
+    });
+
+    console.log(dataSet)
+
+    res.render("dashboard.hbs", {
+      dataSet
+    })
+  });
+})
+
 app.get('/login', (req, res) => {
   res.render("login.hbs")
 })
