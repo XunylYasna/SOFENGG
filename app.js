@@ -229,6 +229,7 @@ app.post("/staffNew", (req, res) => {
   let newPassword = req.body.newstaff
   let type = 'Staff'
   let errormessage = 'Current Password Does not Match with your Input...'
+  let successmessage = 'Password Change Successful!!'
 
   User.findOne({type:type}, (err, doc) => {
     if(err){
@@ -241,7 +242,34 @@ app.post("/staffNew", (req, res) => {
         password: newPassword
       }, (err, affected, resp) => {
         console.log(resp)
-        res.render("passwordmanager.hbs")
+        res.render("passwordmanager.hbs", {errormessage:successmessage})
+      })
+    }
+    else{
+      res.render("passwordmanager.hbs", {errormessage:errormessage})
+    }
+  })
+})
+
+app.post("/ownerNew", (req, res) => {
+  let password = req.body.currentowner
+  let newPassword = req.body.newowner
+  let type = 'CO'
+  let errormessage = 'Current Password Does not Match with your Input...'
+  let successmessage = 'Password Change Successful!!'
+
+  User.findOne({type:type}, (err, doc) => {
+    if(err){
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log('testing')
+      User.updateOne({type:type}, {
+        type: type,
+        password: newPassword
+      }, (err, affected, resp) => {
+        console.log(resp)
+        res.render("passwordmanager.hbs", {errormessage:successmessage})
       })
     }
     else{
