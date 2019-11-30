@@ -30,12 +30,12 @@
           </a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#" data-toggle="modal" data-target="#accessModal">
+          <a class="nav-link" href="#">
             <span>Gross Report</span>
 	    <i class="fas fa-fw fa-table"></i></a>
         </li>
 	<li class="nav-item">
-          <a class="nav-link" href="passwordmanager">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#passwordManager">
             <span>Password Manager</span>
 	    <i class="fa fa-lock"></i></a>
         </li>
@@ -153,3 +153,34 @@
         </div>
       </div>
     </div>
+
+
+<!-- PASSWORD MANAGER MODAL -->
+<form action="passwordmanager" method="POST">
+  <div class="modal fade" id="passwordManager" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">This page requires an admin password to proceed.</div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
+              autocomplete="new-password">
+            <div class="invalid-feedback">Enter your password too!</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
