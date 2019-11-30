@@ -224,6 +224,32 @@ app.post('/headings', (req, res) => {
   })
 })
 
+app.post("/staffNew", (req, res) => {
+  let password = req.body.currentstaff
+  let newPassword = req.body.newstaff
+  let type = 'Staff'
+  let errormessage = 'Current Password Does not Match with your Input...'
+
+  User.findOne({type:type}, (err, doc) => {
+    if(err){
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log('testing')
+      User.updateOne({type:type}, {
+        type: type,
+        password: newPassword
+      }, (err, affected, resp) => {
+        console.log(resp)
+        res.render("passwordmanager.hbs")
+      })
+    }
+    else{
+      res.render("passwordmanager.hbs", {errormessage:errormessage})
+    }
+  })
+})
+
 
 
 
