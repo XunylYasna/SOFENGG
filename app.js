@@ -160,7 +160,27 @@ app.get('/grossreport', (req, res) => {
   })
 })
 
+app.post('/gross', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
 
+  User.findOne({type:type}, function(err, doc) {
+    if(err) {
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
+
+      res.redirect('grossreport')
+
+    }
+    else{
+
+      res.redirect('dashboard')
+    }
+  })
+})
 
 app.get('/headings', (req, res) => {
   res.render("headings.hbs")

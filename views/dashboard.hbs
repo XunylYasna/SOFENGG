@@ -140,59 +140,63 @@
 </div>
 
 <!-- Access Modal -->
-<div class="modal fade" id="accessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">This page requires an admin password to proceed.</div>
-      <div class="card-body">
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" required=""
-            autocomplete="new-password">
-          <div class="invalid-feedback">Enter your password too!</div>
+<form method="POST" action="gross">
+
+  <div class="modal fade" id="accessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="grossreport">Login</a>
+        <div class="modal-body">This page requires an admin password to proceed.</div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
+              autocomplete="new-password">
+            <div class="invalid-feedback">Enter your password too!</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" type="submit">Login</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+</form>
 
 <!-- PASSWORD MANAGER MODAL -->
 <form action="passwordmanager" method="POST">
   <div class="modal fade" id="passwordManager" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">This page requires an admin password to proceed.</div>
-      <div class="card-body">
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
-            autocomplete="new-password">
-          <div class="invalid-feedback">Enter your password too!</div>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <button class="btn btn-primary" type="submit">Login</button>
+        <div class="modal-body">This page requires an admin password to proceed.</div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
+              autocomplete="new-password">
+            <div class="invalid-feedback">Enter your password too!</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" type="submit">Login</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </form>
