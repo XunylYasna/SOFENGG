@@ -205,6 +205,25 @@ app.post('/passwordmanager', (req, res) => {
   })
 })
 
+app.post('/headings', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
+
+  User.findOne({type:type}, function(err, doc) {
+    if(err) {
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
+      res.redirect('headings')
+    }
+    else{
+      res.redirect('dashboard')
+    }
+  })
+})
+
 
 
 
