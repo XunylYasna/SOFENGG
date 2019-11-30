@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 const path = require('path')
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const bcrypt = require('bcryptjs')
 
 // Body Parser
 app.use(bodyParser.json()); // for parsing application/json
@@ -54,6 +55,7 @@ app.use(flash())
 // Models
 const PRF = require('./model/PRF')
 const PO = require('./model/PO')
+const User = require('./model/User')
 
 //Global Var
 app.use((req, res, next) => {
@@ -73,29 +75,47 @@ app.use('/prf', require('./routes/prf'))
 app.use('/po', require('./routes/po'))
 
 
+
 // Redirects
-app.get('/dashboard', (req, res) => {
+app.post('/dashboard', (req, res) => {
 
   // const dataSet = PRF.find().lean().exec(function (err, prfs) {
   //   return res.end(JSON.stringify(prfs));
   // })
 
+  let password = req.body.pw
 
-  PRF.find({}, function (err, prfs) {
-    var dataSet = {};
+  User.findOne({password:password}, function(err, doc) {
+    if(err) {
+      console.log(err)
+    }
 
-    prfs.forEach(function (prfs) {
-      dataSet[prfs._id] = prfs;
-    });
+    if(doc && password == doc.password) {
+      console.log(password)
+      PRF.find({}, function (err, prfs) {
+        var dataSet = {};
+    
+        prfs.forEach(function (prfs) {
+          dataSet[prfs._id] = prfs;
+        });
+    
+        console.log(dataSet)
+    
+        res.render("dashboard.hbs", {
+          dataSet
+        })
+      });
+    }
 
-    console.log(dataSet)
+    else {
+      console.log("ERROR")
+      res.render('login.hbs')
+    }
 
-    res.render("dashboard.hbs", {
-      dataSet
-    })
-  });
+  })
 
 
+  
 
 })
 
@@ -131,8 +151,6 @@ app.get('/headings', (req, res) => {
 app.get('/passwordmanager', (req, res) => {
   res.render("passwordmanager.hbs")
 })
-
-
 
 
 

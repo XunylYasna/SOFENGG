@@ -12,15 +12,15 @@
                         </div>
                         <div class="card-body">
                             <form class="form" role="form" autocomplete="off" id="formLogin" novalidate=""
-                                method="POST">
+                                method="post" action="dashboard">
 
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" class="form-control form-control-lg rounded-0" id="pwd1"
+                                    <input type="password" class="form-control form-control-lg rounded-0" name="pw" id="pwd1"
                                         required="" autocomplete="new-password" autofocus>
                                     <div class="invalid-feedback">Enter your password too!</div>
                                 </div>
-                                <a class="btn btn-primary btn-block" href="dashboard">Login</a>
+                                <button type="submit" class="btn btn-primary btn-block">Login</button>
                             </form>
                         </div>
                         <!--/card-block-->
