@@ -7,6 +7,9 @@
   src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
 
 <script>
   var dataSet = {{{ json dataSet }}}; 
@@ -82,15 +85,24 @@
           <div class="card mb-3">
 
             <div class="card-header">
-              <i class="fas fa-table"></i>
-              <span>From</span>
-              <input type="date" id="datefilterfrom">
-              <span>To</span>
-              <input type="date" id="datefilterto">
-              <button class="btn btn-primary btn-block" type="button" onclick="window.print();return false;">
-                  Print &nbsp;
-                  <i class="fa fa-print" aria-hidden="true"></i>
-              </button>
+              <div class="row">
+                <div class="col-sm">
+                  <i class="fas fa-table"></i>
+                  <span>From</span>
+                  <input type="date" id="datefilterfrom">
+                  <span>To</span>
+                  <input type="date" id="datefilterto">
+                </div>
+                <div class="col-sm-2">
+
+                </div>
+                <div class="col-sm-4">
+                  <button class="btn btn-primary btn-block" type="button" onclick="window.print();return false;">
+                      Print &nbsp;
+                      <i class="fa fa-print" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <div class="table-responsive">

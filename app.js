@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 const path = require('path')
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const moment = require('moment');
 
 // Body Parser
 app.use(bodyParser.json()); // for parsing application/json
@@ -62,7 +63,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error_msg');
   next();
 })
-
 
 
 // Routes
