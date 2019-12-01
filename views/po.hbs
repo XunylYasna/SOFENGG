@@ -34,17 +34,17 @@
                     <i class="fa fa-save" aria-hidden="true"></i>
                 </button>
             </li>
-            <li class="nav-item"><br>
-		<button id="dashboard" class="btn btn-home btn-block" type="button">Dashboard
-		<i class="fas fa-fw fa-tachometer-alt"></i>
-		</button>
-
-		<script type="text/javascript">
-    			document.getElementById("dashboard").onclick = function () {
-        		location.href = "dashboard";
-		};
-		</script>
-            </li>
+            <li class="nav-item"><br><br>
+		          <button id="dashboard" class="btn btn-home btn-block" type="button">Dashboard
+		          <i class="fas fa-fw fa-tachometer-alt"></i>
+		          </button>
+            
+		          <script type="text/javascript">
+    	           document.getElementById("dashboard").onclick = function () {
+                    		location.href = "dashboard";
+		          };
+		          </script>
+            </li><br>
             <li class="nav-item">
                 <br>
                 <button class="btn btn-danger btn-block" id="clear" type="button">
@@ -52,6 +52,18 @@
                     <i class="fa fa-eraser" aria-hidden="true"></i>
                 </button>
             </li>
+            <li class="nav-item">
+                <button id="dashboard" class="btn btn-danger btn-block" type="button"
+                    onclick="window.location='/dashboard'">Delete &nbsp;
+                    <i class="fas fa-fw fa-trash"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button id="edit" class="btn btn-success btn-block" type="button"
+                    onclick="window.location='/dashboard'">Edit &nbsp;
+                    <i class="fas fa-fw fa-edit"></i>
+                </button>
+            </li><br>
             <div id="currencyChange" class="form-group">
                 <small for="exchangeRate">USD to PHP: </small>
                 <input id="exchangeDisplay" type="text" class="form-control" value="50.10">
@@ -70,7 +82,7 @@
                             </div>
                             {{!-- PRF Number --}}
                             <input type="text" class="form-control" id="prfNumber" name="prfNumber"
-                                placeholder="Enter PRF#">
+                                placeholder="Enter PRF#" maxlength="8">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -85,7 +97,7 @@
                             </div>
                             {{!-- PO Number --}}
                             <input type="text" class="form-control" id="poNumber" name="poNumber"
-                                placeholder="Enter PO#">
+                                placeholder="Enter PO#" maxlength="8">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
