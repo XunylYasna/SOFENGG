@@ -7,7 +7,7 @@ var grosstotal;
 dataSetKey.forEach((key, index) => {
     const data = dataSet[key]
     dataArray[index] = [data.prfNumber, data.date, data.date, data.total, data.total, (data.total - data.total)]
-    grosstotal = grosstotal = (data.total - data.total)
+    grosstotal = grosstotal + (data.total - data.total)
 })
 
 $(document).ready(function () {
