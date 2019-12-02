@@ -1,22 +1,29 @@
+<link rel="stylesheet" type="text/css"
+  href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" />
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript"
+  src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+<script>
+  var dataSet = {{{ json dataSet }}}; 
+</script>
+<script type="text/javascript" src="/js/grossreport.js"></script>
+
+
 <body id="page-top">
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
   
       <a class="navbar-brand mr-1"><b><font color="white">Grand Pacific Travel & Tours Corp.</font></b></a>
 
   
-      <!-- Navbar Search -->
-      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>  
+      
     </nav>
   
     <div id="wrapper">
@@ -78,44 +85,34 @@
           <div class="card mb-3">
 
             <div class="card-header">
-              <i class="fas fa-table"></i>
-              Dates
-              <input type="date" id="datefilter">
+              <div class="row">
+                <div class="col-sm">
+                  <i class="fas fa-table"></i>
+                  <span>From</span>
+                  <input type="date" id="datefilterfrom">
+                  <span>To</span>
+                  <input type="date" id="datefilterto">
+                </div>
+                <div class="col-sm-2">
+
+                </div>
+                <div class="col-sm-4">
+                  <button class="btn btn-primary btn-block" type="button" onclick="window.print();return false;">
+                      Print &nbsp;
+                      <i class="fa fa-print" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>PRF#</th>
-                      <th>Date</th>
-                      <th>PRF Amount</th>
-                      <th>Gross</th>
-                      <th>Paid Date</th>
-                      <th>PO's</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{!-- <tr>
-                      <td>1234567</td>
-                      <td>09-18-2019</td>
-                      <td>1000</td>
-                      <td>1000</td>
-                      <td>09-12-2019</td>
-                      <td>...</td>
-                    </tr> --}}
-                    {{#each prfs}}
-                    <tr>
-                      <td>{{prfNumber}}</td>
-                      <td>{{date}}</td>
-                      <td>{{total}}</td>
-                      <td>0</td>
-                      <td>{{date}}</td>
-                      <td>{{poNumber}}</td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
+                  
                 </table>
+              </div>
+              <div class="input-group">
+                <span>Total Gross:</span>
+                <input type="text" id="totalgross" name="totalgross" disabled>
               </div>
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
