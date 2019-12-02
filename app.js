@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 const path = require('path')
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const bcrypt = require('bcryptjs')
 const moment = require('moment');
 
 // Body Parser
@@ -55,6 +56,7 @@ app.use(flash())
 // Models
 const PRF = require('./model/PRF')
 const PO = require('./model/PO')
+const User = require('./model/User')
 
 //Global Var
 app.use((req, res, next) => {
@@ -73,14 +75,51 @@ app.use('/prf', require('./routes/prf'))
 app.use('/po', require('./routes/po'))
 
 
+
 // Redirects
-app.get('/dashboard', (req, res) => {
+app.post('/dashboard', (req, res) => {
 
   // const dataSet = PRF.find().lean().exec(function (err, prfs) {
   //   return res.end(JSON.stringify(prfs));
   // })
 
+  let password = req.body.pw
 
+  User.findOne({password:password}, function(err, doc) {
+    if(err) {
+      console.log(err)
+    }
+
+    if(doc && password == doc.password) {
+      console.log(password)
+      PRF.find({}, function (err, prfs) {
+        var dataSet = {};
+    
+        prfs.forEach(function (prfs) {
+          dataSet[prfs._id] = prfs;
+        });
+    
+        console.log(dataSet)
+    
+        res.render("dashboard.hbs", {
+          dataSet
+        })
+      });
+    }
+
+    else {
+      console.log("ERROR")
+      res.render('login.hbs')
+    }
+
+  })
+
+
+  
+
+})
+
+app.get('/dashboard', (req,res) => {
   PRF.find({}, function (err, prfs) {
     var dataSet = {};
 
@@ -94,9 +133,6 @@ app.get('/dashboard', (req, res) => {
       dataSet
     })
   });
-
-
-
 })
 
 app.get('/login', (req, res) => {
@@ -124,15 +160,123 @@ app.get('/grossreport', (req, res) => {
   })
 })
 
+app.post('/gross', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
+
+  User.findOne({type:type}, function(err, doc) {
+    if(err) {
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
+
+      res.redirect('grossreport')
+
+    }
+    else{
+
+      res.redirect('dashboard')
+    }
+  })
+})
+
 app.get('/headings', (req, res) => {
   res.render("headings.hbs")
 })
 
-app.get('/passwordmanager', (req, res) => {
-  res.render("passwordmanager.hbs")
+app.post('/passwordmanager', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
+
+  User.findOne({type:type}, function(err, doc) {
+    if(err) {
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
+      res.render("passwordmanager.hbs")
+    }
+    else{
+      res.redirect('dashboard')
+    }
+  })
 })
 
+app.post('/headings', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
 
+  User.findOne({type:type}, function(err, doc) {
+    if(err) {
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
+      res.redirect('headings')
+    }
+    else{
+      res.redirect('dashboard')
+    }
+  })
+})
+
+app.post("/staffNew", (req, res) => {
+  let password = req.body.currentstaff
+  let newPassword = req.body.newstaff
+  let type = 'Staff'
+  let errormessage = 'Current Password Does not Match with your Input...'
+  let successmessage = 'Password Change Successful!!'
+
+  User.findOne({type:type}, (err, doc) => {
+    if(err){
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log('testing')
+      User.updateOne({type:type}, {
+        type: type,
+        password: newPassword
+      }, (err, affected, resp) => {
+        console.log(resp)
+        res.render("passwordmanager.hbs", {errormessage:successmessage})
+      })
+    }
+    else{
+      res.render("passwordmanager.hbs", {errormessage:errormessage})
+    }
+  })
+})
+
+app.post("/ownerNew", (req, res) => {
+  let password = req.body.currentowner
+  let newPassword = req.body.newowner
+  let type = 'CO'
+  let errormessage = 'Current Password Does not Match with your Input...'
+  let successmessage = 'Password Change Successful!!'
+
+  User.findOne({type:type}, (err, doc) => {
+    if(err){
+      console.log(err)
+    }
+    if(doc && password == doc.password) {
+      console.log('testing')
+      User.updateOne({type:type}, {
+        type: type,
+        password: newPassword
+      }, (err, affected, resp) => {
+        console.log(resp)
+        res.render("passwordmanager.hbs", {errormessage:successmessage})
+      })
+    }
+    else{
+      res.render("passwordmanager.hbs", {errormessage:errormessage})
+    }
+  })
+})
 
 
 
