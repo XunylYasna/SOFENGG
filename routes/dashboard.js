@@ -7,9 +7,9 @@ const { ensureAuthenticated } = require('../config/auth')
 
 
 
-// Displaying post on Map
+// Displays dashboard
 router.get('/', (req, res) => {
-    res.render('login')
+  res.render('login')
 })
 
 // Adding a post, storing the post to DB

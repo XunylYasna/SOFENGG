@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 const path = require('path')
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const stringify = require('csv-stringify');
 
 // Body Parser
 app.use(bodyParser.json()); // for parsing application/json
@@ -71,6 +72,8 @@ app.use('/', require('./routes/index'))
 app.use('/users', require('./routes/users'))
 app.use('/prf', require('./routes/prf'))
 app.use('/po', require('./routes/po'))
+app.use('/headings', require('./routes/headings'))
+
 
 
 // Redirects
@@ -113,10 +116,10 @@ app.get('/grossreport', (req, res) => {
 
     console.log(prfs)
 
-    if(err) {
-      throw(err)
+    if (err) {
+      throw (err)
     }
-    else if(prfs) {
+    else if (prfs) {
       res.render("grossreport.hbs", {
         dataSet
       })
@@ -124,17 +127,61 @@ app.get('/grossreport', (req, res) => {
   })
 })
 
-app.get('/headings', (req, res) => {
-  res.render("headings.hbs")
-})
+
 
 app.get('/passwordmanager', (req, res) => {
   res.render("passwordmanager.hbs")
 })
 
+app.get('/export', (req, res) => {
+
+  PO.find({}, function (err, po) {
+    var dataSet = {};
+
+    po.forEach(function (po) {
+      dataSet[po._id] = po;
+    });
+
+    if (err) {
+      res.send(err)
+    }
 
 
+    // JSON to csv
 
+    const dataSetKey = Object.keys(dataSet)
+
+    var dataArray = ["PRF Number", "PO Number", "Buyer", "Date", "PAX Name", "Route", "Description", "USD Amount", "PHP Amount", "Total", "Prepared By", "Approved By", "Received By"];
+    dataSetKey.forEach((key, index) => {
+      const data = dataSet[key]
+      dataArray[index + 1] = [data.prfNumber, data.poNumber, data.buyer, data.date, data.paxName, data.route, data.description, data.usAmount, data.phpAmount, data.total, data.preparedBy, data.approvedBy, data.receivedBy]
+    })
+
+    const poDownload = dataArray.join(",");
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename=\"' + 'PO export ' + Date.now() + '.csv\"');
+    res.send(poDownload);
+  });
+
+
+  // PRF.find({}, function (err, prfs) {    
+  //   var dataSet = {};
+
+  //   prfs.forEach(function (prfs) {
+  //     dataSet[prfs._id] = prfs;
+  //   });
+
+  //   console.log(dataSet)
+
+  //   if(err){
+  //     res.send(err)
+  //   }
+
+  //   res.render("dashboard.hbs", {
+  //     dataSet
+  //   })
+  // });
+})
 
 
 

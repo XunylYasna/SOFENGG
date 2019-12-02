@@ -7,7 +7,7 @@ const { ensureAuthenticated } = require('../config/auth')
 
 
 
-// Displaying post on Map
+// Displaying
 router.get('/', (req, res) => {
     res.render('login')
 })
