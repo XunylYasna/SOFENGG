@@ -1,7 +1,38 @@
 <head>
     {{!-- Custom JS for PRF --}}
     <script src="js/prfJS.js"></script>
+
+    <style>
+  .invisible {
+    display: none;
+    visibility: hidden;
+  }
+    </style>
+
+
+    <script>
+
+    $(document).ready(()=> {
+        $('#exchangeDisplay').prop('disabled', true)
+
+    })
+
+    function myFunc() {
+        var text = $('div#curPass').text()
+        var text1 = document.getElementById('pwd1').value
+
+        if(text1 == text) {
+        }
+        else{
+            alert('Wrong Password!')
+            document.getElementById('exchangeDisplay').disabled = false;
+        }
+
+    }
+    </script>
 </head>
+
+<div id="curPass" class="invisible">{{password}}</div>
 
 <div class="form-page">
 
@@ -50,7 +81,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" for="exchangeRate">USD to PHP: </span>
                 </div>
-                <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
+                <input id="exchangeDisplay" type="number" class="form-control" value = "50.10">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#accessModal">
                         <i class="fas fa-pen" aria-hidden="true"></i>
@@ -297,7 +328,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="#" id="editExchange" data-dismiss="modal">Proceed</a>
+        <a class="btn btn-primary" href="#" id="editExchange" data-dismiss="modal" onclick="myFunc()">Proceed</a>
       </div>
     </div>
   </div>

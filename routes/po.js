@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 const PO = require('../model/PO')
+const User = require('../model/User')
 
 
 
@@ -10,7 +11,26 @@ const PO = require('../model/PO')
 
 
 router.get('/', (req, res) => {
-    res.render('po.hbs')
+    let type = 'CO'
+    let password = 'poop'
+
+    User.find({type:type}, function(err, doc) {
+        if(err) {
+            console.log(err)
+        }
+
+        if(doc){
+            var obj = doc
+            var stringify = JSON.stringify(obj);
+            var x = JSON.parse(stringify)
+            console.log(x[0]['password'])
+            res.render('prf.hbs', {password:x[0]['password']})
+        }
+        else{
+            console.log('failed')
+            res.render('prf.hbs')
+        }
+    })
 })
 
 
