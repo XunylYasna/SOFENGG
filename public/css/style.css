@@ -39,6 +39,12 @@
         overflow: visible;
     }
     
+    #header{
+        visibility: visible !important;
+        padding: 20px;
+
+    }
+    
 }
 
 
@@ -99,4 +105,10 @@ textarea{
     margin-bottom: 10px;
     overflow-y: scroll !important;
     max-height: 700px !important;
+}
+
+#header{
+    margin-left: 45%;
+    width: 600px;
+    visibility: hidden;
 }
