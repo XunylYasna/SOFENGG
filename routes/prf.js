@@ -86,6 +86,7 @@ router.post('/save', (req, res) => {
     })
 
     // console.log(req.body)
+<<<<<<< Updated upstream
     PRF.find({ prfNumber: this.prfNumber }, function (err, docs) {
         if (!docs.length) {
             console.log('new');
@@ -150,6 +151,21 @@ router.get('/view', (req, res) => {
             })
         }
     });
+=======
+
+    newPRF.save()
+        .then(post => {
+            console.log('PRF Successfully added' + newPRF)
+            req.flash('success_msg', 'New PRF added.')
+            res.redirect('/dashboard')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+
+
+>>>>>>> Stashed changes
 })
 
 module.exports = router;

@@ -48,7 +48,10 @@ function computePeso() {
 }
 
 function save() {
+<<<<<<< Updated upstream
     alert('hi')
+=======
+>>>>>>> Stashed changes
     $("#prfForm").attr("action", "/prf/save"); //Will set it
     $("#prfForm").submit();
 }
