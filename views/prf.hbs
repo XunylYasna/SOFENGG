@@ -12,6 +12,7 @@
             </b></a>
     </nav>
 
+
     <div id="wrapper" class="bg-white">
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
@@ -22,7 +23,7 @@
                 </button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-primary btn-block" type="button" onclick="window.print();return false;">
+                <button id="print" class="btn btn-primary btn-block" type="button">
                     Print &nbsp;
                     <i class="fa fa-print" aria-hidden="true"></i>
                 </button>
@@ -63,10 +64,10 @@
                 <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
             </div>
         </ul>
-
-
+        
         <!--    PRF Form -->
         <div id="content-wrapper" class="form-wrapper">
+            <div id="header"></div>
             <form class="form-horizontal" method="POST" id="prfForm">
                 <div class="row">
                     <div class="col-md-4 mb-md-2">
