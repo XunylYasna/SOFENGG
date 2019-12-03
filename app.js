@@ -138,6 +138,24 @@ app.get('/dashboard', (req,res) => {
   });
 })
 
+app.get('/dashboard1', (req,res) => {
+  let invalid = ''
+  PRF.find({}, function (err, prfs) {
+    var dataSet = {};
+
+    prfs.forEach(function (prfs) {
+      dataSet[prfs._id] = prfs;
+    });
+
+    console.log(dataSet)
+
+    res.render("dashboard.hbs", {
+      dataSet,
+      invalid:invalid
+    })
+  });
+})
+
 app.get('/login', (req, res) => {
   res.render("login.hbs")
 })

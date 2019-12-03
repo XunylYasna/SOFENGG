@@ -114,7 +114,7 @@ router.post('/save', (req, res) => {
                 .then(post => {
                     console.log('PRF Successfully added' + newPRF)
                     req.flash('success_msg', 'New PRF added.')
-                    res.redirect('/dashboard')
+                    res.redirect('/dashboard1')
                 })
                 .catch(err => {
                     console.log(err)
@@ -140,7 +140,7 @@ router.post('/delete', (req, res) => {
             console.log(err);
         }
         else {
-            res.redirect('/dashboard')
+            res.redirect('/dashboard1')
         }
     });
 })
