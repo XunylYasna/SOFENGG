@@ -84,6 +84,7 @@ app.post('/dashboard', (req, res) => {
   // })
 
   let password = req.body.pw
+  let invalid = 'INVALID'
 
   User.findOne({password:password}, function(err, doc) {
     if(err) {
@@ -109,7 +110,7 @@ app.post('/dashboard', (req, res) => {
 
     else {
       console.log("ERROR")
-      res.render('login.hbs')
+      res.render('login.hbs', {invalid:invalid})
     }
 
   })
@@ -120,6 +121,7 @@ app.post('/dashboard', (req, res) => {
 })
 
 app.get('/dashboard', (req,res) => {
+  let invalid = 'INVALID'
   PRF.find({}, function (err, prfs) {
     var dataSet = {};
 
@@ -130,7 +132,8 @@ app.get('/dashboard', (req,res) => {
     console.log(dataSet)
 
     res.render("dashboard.hbs", {
-      dataSet
+      dataSet,
+      invalid:invalid
     })
   });
 })

@@ -8,10 +8,22 @@
 
 <script>
   var dataSet = {{{ json dataSet }}}; 
+
+  $(document).ready(()=>{
+    if($('#curStat').text() != '') {
+      alert('Invalid Credentials Found!')
+    }
+  })
 </script>
 <script type="text/javascript" src="/js/dashboard.js"></script>
+<style>
+  .invisible {
+    display: none;
+    visibility: hidden;
+  }
+</style>
 
-
+<div id="curStat" class="invisible">{{invalid}}</div>
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
   <a class="navbar-brand mr-1"><b>
