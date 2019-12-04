@@ -60,6 +60,10 @@
 
         })
 
+        $(window).bind('beforeunload', ()=>{
+            return 'Please remember to Save any Unsaved Documents...'
+        })
+
         function myFunc() {
             var text = $('div#curPass').text()
             var text1 = document.getElementById('pwd1').value
