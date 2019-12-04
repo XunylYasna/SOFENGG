@@ -119,6 +119,16 @@ $(document).ready(function () {
         }
     })
 
+    $("#editExchange").on('click', function () {
+        var editExchange = document.getElementById("exchangeDisplay").disabled
+        if (editExchange) {
+            document.getElementById("exchangeDisplay").disabled = false;
+        }
+        else {
+            document.getElementById("exchangeDisplay").disabled = true;
+        }
+    })
+
     var tax = document.getElementById('taxField');
     var fare = document.getElementById('fareField');
     var peso = document.getElementById('pesoField');

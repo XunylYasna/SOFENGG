@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 const PRF = require('../model/PRF')
+const User = require('../model/User')
 
 
 // ROUTE FOR THE MAP AND POSTS
@@ -9,7 +10,27 @@ const PRF = require('../model/PRF')
 
 
 router.get('/', (req, res) => {
-    res.render('prf.hbs')
+    //res.render('prf.hbs')
+    let type = 'CO'
+    let password = 'poop'
+
+    User.find({ type: type }, function (err, doc) {
+        if (err) {
+            console.log(err)
+        }
+
+        if (doc) {
+            var obj = doc
+            var stringify = JSON.stringify(obj);
+            var x = JSON.parse(stringify)
+            console.log(x[0]['password'])
+            res.render('prf.hbs', { password: x[0]['password'] })
+        }
+        else {
+            console.log('failed')
+            res.render('prf.hbs')
+        }
+    })
 })
 
 
@@ -86,7 +107,6 @@ router.post('/save', (req, res) => {
     })
 
     // console.log(req.body)
-<<<<<<< Updated upstream
     PRF.find({ prfNumber: this.prfNumber }, function (err, docs) {
         if (!docs.length) {
             console.log('new');
@@ -94,7 +114,7 @@ router.post('/save', (req, res) => {
                 .then(post => {
                     console.log('PRF Successfully added' + newPRF)
                     req.flash('success_msg', 'New PRF added.')
-                    res.redirect('/dashboard')
+                    res.redirect('/dashboard1')
                 })
                 .catch(err => {
                     console.log(err)
@@ -112,6 +132,7 @@ router.post('/save', (req, res) => {
 
 })
 
+
 router.post('/delete', (req, res) => {
 
     PRF.deleteOne({ _id: req.body.prfID }, function (err) {
@@ -119,7 +140,7 @@ router.post('/delete', (req, res) => {
             console.log(err);
         }
         else {
-            res.redirect('/dashboard')
+            res.redirect('/dashboard1')
         }
     });
 })
@@ -151,7 +172,6 @@ router.get('/view', (req, res) => {
             })
         }
     });
-=======
 
     newPRF.save()
         .then(post => {
@@ -165,7 +185,6 @@ router.get('/view', (req, res) => {
 
 
 
->>>>>>> Stashed changes
 })
 
 module.exports = router;

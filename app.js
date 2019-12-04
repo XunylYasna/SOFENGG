@@ -4,7 +4,8 @@ const PORT = process.env.PORT || 3000;
 const path = require('path')
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const stringify = require('csv-stringify');
+const bcrypt = require('bcryptjs')
+const moment = require('moment');
 
 // Body Parser
 app.use(bodyParser.json()); // for parsing application/json
@@ -55,6 +56,7 @@ app.use(flash())
 // Models
 const PRF = require('./model/PRF')
 const PO = require('./model/PO')
+const User = require('./model/User')
 
 //Global Var
 app.use((req, res, next) => {
@@ -63,7 +65,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error_msg');
   next();
 })
-
 
 
 // Routes
@@ -76,14 +77,53 @@ app.use('/headings', require('./routes/headings'))
 
 
 
+
 // Redirects
-app.get('/dashboard', (req, res) => {
+app.post('/dashboard', (req, res) => {
 
   // const dataSet = PRF.find().lean().exec(function (err, prfs) {
   //   return res.end(JSON.stringify(prfs));
   // })
 
+  let password = req.body.pw
+  let invalid = 'INVALID'
 
+  User.findOne({ password: password }, function (err, doc) {
+    if (err) {
+      console.log(err)
+    }
+
+    if (doc && password == doc.password) {
+      console.log(password)
+      PRF.find({}, function (err, prfs) {
+        var dataSet = {};
+
+        prfs.forEach(function (prfs) {
+          dataSet[prfs._id] = prfs;
+        });
+
+        console.log(dataSet)
+
+        res.render("dashboard.hbs", {
+          dataSet
+        })
+      });
+    }
+
+    else {
+      console.log("ERROR")
+      res.render('login.hbs', { invalid: invalid })
+    }
+
+  })
+
+
+
+
+})
+
+app.get('/dashboard', (req, res) => {
+  let invalid = 'INVALID'
   PRF.find({}, function (err, prfs) {
     var dataSet = {};
 
@@ -94,12 +134,28 @@ app.get('/dashboard', (req, res) => {
     console.log(dataSet)
 
     res.render("dashboard.hbs", {
-      dataSet
+      dataSet,
+      invalid: invalid
     })
   });
+})
 
+app.get('/dashboard1', (req, res) => {
+  let invalid = ''
+  PRF.find({}, function (err, prfs) {
+    var dataSet = {};
 
+    prfs.forEach(function (prfs) {
+      dataSet[prfs._id] = prfs;
+    });
 
+    console.log(dataSet)
+
+    res.render("dashboard.hbs", {
+      dataSet,
+      invalid: invalid
+    })
+  });
 })
 
 app.get('/login', (req, res) => {
@@ -127,10 +183,95 @@ app.get('/grossreport', (req, res) => {
   })
 })
 
+app.post('/gross', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
 
+  User.findOne({ type: type }, function (err, doc) {
+    if (err) {
+      console.log(err)
+    }
+    if (doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
 
-app.get('/passwordmanager', (req, res) => {
-  res.render("passwordmanager.hbs")
+      res.redirect('grossreport')
+
+    }
+    else {
+
+      res.redirect('dashboard')
+    }
+  })
+})
+
+app.get('/headings', (req, res) => {
+  res.render("headings.hbs")
+})
+
+app.post('/passwordmanager', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
+
+  User.findOne({ type: type }, function (err, doc) {
+    if (err) {
+      console.log(err)
+    }
+    if (doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
+      res.render("passwordmanager.hbs")
+    }
+    else {
+      res.redirect('dashboard')
+    }
+  })
+})
+
+app.post('/headings', (req, res) => {
+  let password = req.body.pw
+  let type = 'CO'
+
+  User.findOne({ type: type }, function (err, doc) {
+    if (err) {
+      console.log(err)
+    }
+    if (doc && password == doc.password) {
+      console.log(doc.password)
+      console.log(password)
+      res.redirect('headings')
+    }
+    else {
+      res.redirect('dashboard')
+    }
+  })
+})
+
+app.post("/staffNew", (req, res) => {
+  let password = req.body.currentstaff
+  let newPassword = req.body.newstaff
+  let type = 'Staff'
+  let errormessage = 'Current Password Does not Match with your Input...'
+  let successmessage = 'Password Change Successful!!'
+
+  User.findOne({ type: type }, (err, doc) => {
+    if (err) {
+      console.log(err)
+    }
+    if (doc && password == doc.password) {
+      console.log('testing')
+      User.updateOne({ type: type }, {
+        type: type,
+        password: newPassword
+      }, (err, affected, resp) => {
+        console.log(resp)
+        res.render("passwordmanager.hbs", { errormessage: successmessage })
+      })
+    }
+    else {
+      res.render("passwordmanager.hbs", { errormessage: errormessage })
+    }
+  })
 })
 
 app.get('/export', (req, res) => {
@@ -148,6 +289,32 @@ app.get('/export', (req, res) => {
 
 
     // JSON to csv
+    app.post("/ownerNew", (req, res) => {
+      let password = req.body.currentowner
+      let newPassword = req.body.newowner
+      let type = 'CO'
+      let errormessage = 'Current Password Does not Match with your Input...'
+      let successmessage = 'Password Change Successful!!'
+
+      User.findOne({ type: type }, (err, doc) => {
+        if (err) {
+          console.log(err)
+        }
+        if (doc && password == doc.password) {
+          console.log('testing')
+          User.updateOne({ type: type }, {
+            type: type,
+            password: newPassword
+          }, (err, affected, resp) => {
+            console.log(resp)
+            res.render("passwordmanager.hbs", { errormessage: successmessage })
+          })
+        }
+        else {
+          res.render("passwordmanager.hbs", { errormessage: errormessage })
+        }
+      })
+    })
 
     const dataSetKey = Object.keys(dataSet)
 

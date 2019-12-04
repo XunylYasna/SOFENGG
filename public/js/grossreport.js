@@ -3,15 +3,52 @@ console.log(dataSet)
 const dataSetKey = Object.keys(dataSet)
 
 var dataArray = [];
-var grosstotal;
+var grosstotal = 0;
 dataSetKey.forEach((key, index) => {
     const data = dataSet[key]
     dataArray[index] = [data.prfNumber, data.date, data.date, data.total, data.total, (data.total - data.total)]
-    grosstotal = grosstotal = (data.total - data.total)
+    grosstotal = grosstotal + (data.total - data.total)
 })
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, day, month].join('-');
+}
+
+$.fn.dataTableExt.afnFiltering.push(
+    function( settings, data, dataIndex ) {
+        var from = $('#datefilterfrom').val();
+        var to = $('#datefilterto').val();
+        var day = new Date(data[1]) || 0; // use data for the date column
+
+        day = formatDate(day);
+        console.log(from);
+        console.log(to);
+        console.log(day);
+ 
+        if ( ( !from && !to ) ||
+             ( !from && day <= to ) ||
+             ( from <= day && !to ) ||
+             ( from <= day && day <= to ) )
+        {
+            console.log("true");
+            return true;
+        }
+        console.log("false")
+        return false;
+    }
+);
+
 $(document).ready(function () {
-    $.fn.dataTable.moment('MMMM Do, YYYY');
 
     $.fn.dataTable.moment = function ( format, locale ) {
         var types = $.fn.dataTable.ext.type;
@@ -34,8 +71,16 @@ $(document).ready(function () {
         scrollCollapse: true,
         columns: [
             { title: "PRF#" },
-            { title: "Date" },
-            { title: "Paid Date" },
+            { title: "Date",
+                render: function(data, type, full) {
+                    return moment(data).format('DD/MM/YYYY HH:mm:ss'); 
+                }
+            },
+            { title: "Paid Date",
+                render: function(data, type, full) {
+                    return moment(data).format('DD/MM/YYYY HH:mm:ss'); 
+                }
+            },
             { title: "PRF Amount" },
             { title: "PO Amount" },
             { title: "Gross"}
@@ -46,4 +91,10 @@ $(document).ready(function () {
 
     $('#totalgross').val(grosstotal);
 
+    var table = $('#dataTable').DataTable();
+
+    $('#datefilterfrom, #datefilterto').on('change', function() {
+        table.draw();
+    } );
+    
 });

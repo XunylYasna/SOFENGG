@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 
+const PRF = require('../model/PRF')
+
 
 // ROUTE FOR THE MAP AND POSTS
 

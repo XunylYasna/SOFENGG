@@ -21,11 +21,7 @@ $(document).ready(function () {
             {
                 title: "Commands",
                 render: function (data, type, row, meta) {
-<<<<<<< Updated upstream
-                    return '<form method="POST"> <input type="hidden" name="prfID" value="' + data + '" /> <button type="button" class="btn btn-primary" onclick="viewPRF(this)">View</button> <button type="button" class="btn btn-danger" onclick="deletePRF(this)">Delete</button> </form>';
-=======
                     return '<form method="POST" onsubmit="return false;"> <input type="hidden" name="prfID" value="' + data + '" /> <button class="btn btn-primary" onclick="viewPRF(this)">View</button> <button class="btn btn-warning" onclick="editPRF()">Edit</button> <button class="btn btn-danger" onclick="deletePRF()">Delete</button> </form>';
->>>>>>> Stashed changes
                 }
             }
         ],
@@ -35,20 +31,6 @@ $(document).ready(function () {
 
 });
 
-<<<<<<< Updated upstream
-// function editPRF(button) {
-//     $(button).parents('form:first').attr("method", "GET");
-//     $(button).closest('form').attr("action", "/prf/edit");
-//     $(button).parents('form:first').submit();
-// }
-
-function deletePRF(button) {
-    $(button).parents('form:first').attr("action", "/prf/delete");
-    $(button).parents('form:first').submit();
-}
-
-function viewPRF(button) {
-=======
 function editPRF(prf) {
     $(prf).closest('form').attr("action", "/prf/edit");
     $(prf).parents('form:first').submit();
@@ -61,7 +43,6 @@ function deletePRF() {
 
 function viewPRF(button) {
     alert('hi')
->>>>>>> Stashed changes
     $(button).parents('form:first').attr("method", "GET");
     $(button).parents('form:first').attr("action", "/prf/view");
     $(button).parents('form:first').submit();

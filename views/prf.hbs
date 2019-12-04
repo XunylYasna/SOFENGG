@@ -1,7 +1,116 @@
 <head>
     {{!-- Custom JS for PRF --}}
     <script src="js/prfJS.js"></script>
+
+    <style>
+        .invisible {
+            display: none;
+            visibility: hidden;
+        }
+    </style>
+
+
+    <script>
+
+        $(document).ready(() => {
+            $('#exchangeDisplay').prop('disabled', true)
+            $('#totalField').prop('disabled', true)
+
+
+            $("#prfNumber").keydown(function () {
+                // Save old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                    $(this).data("old", $(this).val());
+            });
+
+            $("#prfNumber").keyup(function () {
+                // Check correct, else revert back to old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                    ;
+                else
+                    $(this).val($(this).data("old"));
+            });
+
+            $("#poNumber").keydown(function () {
+                // Save old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                    $(this).data("old", $(this).val());
+            });
+
+            $("#poNumber").keyup(function () {
+                // Check correct, else revert back to old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                    ;
+                else
+                    $(this).val($(this).data("old"));
+            });
+
+
+            document.querySelector('#prfNumber').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#poNumber').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#fareField').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#taxField').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#dollarField').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#pesoField').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#exchangeDisplay').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+        })
+
+        $(window).bind('beforeunload', () => {
+            return 'Please remember to Save any Unsaved Documents...'
+        })
+
+        function myFunc() {
+            var text = $('div#curPass').text()
+            var text1 = document.getElementById('pwd1').value
+
+            if (text1 == text) {
+            }
+            else {
+                alert('Wrong Password!')
+                document.getElementById('exchangeDisplay').disabled = false;
+                $('#pwd1').val('')
+            }
+
+        }
+    </script>
 </head>
+
+<div id="curPass" class="invisible">{{password}}</div>
 
 <div class="form-page">
 
@@ -36,7 +145,7 @@
             </li>
             <li class="nav-item"><br><br>
                 <button id="dashboard" class="btn btn-home btn-block" type="button"
-                    onclick="window.location='/dashboard'">Dashboard
+                    onclick="window.location='/dashboard1'">Dashboard
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 </button>
             </li>
@@ -47,30 +156,22 @@
                     <i class="fa fa-eraser" aria-hidden="true"></i>
                 </button>
             </li>
-            <li class="nav-item">
-                <button id="dashboard" class="btn btn-danger btn-block" type="button"
-                    onclick="window.location='/dashboard'">Delete &nbsp;
-                    <i class="fas fa-fw fa-trash"></i>
-                </button>
-            </li>
-            <li class="nav-item">
-                <button id="edit" class="btn btn-success btn-block" type="button"
-                    onclick="window.location='/dashboard'">Edit &nbsp;
-                    <i class="fas fa-fw fa-edit"></i>
-                </button>
-            </li><br>
-            <div id="currencyChange" class="form-group">
-                <small for="exchangeRate">USD to PHP: </small>
-                <input id="exchangeDisplay" type="text" class="form-control" disabled value="50.10">
+            <div id="currencyChange" class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" for="exchangeRate">USD to PHP: </span>
+                </div>
+                <input id="exchangeDisplay" type="number" class="form-control" value="50.10">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                        data-target="#accessModal">
+                        <i class="fas fa-pen" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
         </ul>
-        
+
         <!--    PRF Form -->
         <div id="content-wrapper" class="form-wrapper">
-<<<<<<< Updated upstream
-            <div id="header"></div>
-=======
->>>>>>> Stashed changes
             <form class="form-horizontal" method="POST" id="prfForm">
                 <div class="row">
                     <div class="col-md-4 mb-md-2">
@@ -79,12 +180,8 @@
                                 <span class="input-group-text" style="background-color:white;">PRF# </span>
                             </div>
                             {{!-- PRF Number Field--}}
-                            <input type="text" class="form-control" id="prfNumber" name="prfNumber"
-<<<<<<< Updated upstream
-                                placeholder="Enter PRF#" maxlength="8" value={{prfNumber}}>
-=======
-                                placeholder="Enter PRF#">
->>>>>>> Stashed changes
+                            <input type="number" min='1' step="1" class="form-control" id="prfNumber" name="prfNumber"
+                                placeholder="Enter PRF#" value={{prfNumber}} min="0" max="6">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -98,12 +195,8 @@
                                 <span class="input-group-text" style="background-color:white;">PO# </span>
                             </div>
                             {{!-- PO Number Field--}}
-                            <input type="text" class="form-control" id="poNumber" name="poNumber"
-<<<<<<< Updated upstream
-                                placeholder="Enter PO#" maxlength="8" value={{poNumber}}>
-=======
-                                placeholder="Enter PO#">
->>>>>>> Stashed changes
+                            <input type="number" class="form-control" id="poNumber" name="poNumber"
+                                placeholder="Enter PO#" value={{poNumber}}>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -166,7 +259,7 @@
                                                 <large>Empty Text</large>
                                             </div>
                                         </td>
-<!--                                        <td>
+                                        <!--                                        <td>
                                             <div class="checkbox">
                                                 <input type="checkbox" value="">
                                             </div>
@@ -253,11 +346,7 @@
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total Field --}}
                             <input type="text" id="totalField" name="total" class="form-control" id="totalField"
-<<<<<<< Updated upstream
-                                placeholder="Total" value={{total}}>
-=======
                                 value="0.00">
->>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
@@ -295,3 +384,32 @@
     </div>
 </div>
 <!-- /#wrapper -->
+
+<!-- Access Modal -->
+<div class="modal fade" id="accessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">This page requires an admin password to proceed.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" required=""
+                        autocomplete="new-password">
+                    <div class="invalid-feedback">Enter your password too!</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="#" id="editExchange" data-dismiss="modal"
+                    onclick="myFunc()">Proceed</a>
+            </div>
+        </div>
+    </div>
+</div>
