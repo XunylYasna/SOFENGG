@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
-    function save() {
-        $("#prfForm").attr("action", "/prf/save"); //Will set it
-        $("#prfForm").submit();
+    function saveHeading() {
+        $("#headerform").attr("action", "/headings/saveheading"); //Will set it
+        $("#headerform").submit();
     }  
 
 
@@ -75,7 +75,7 @@
         <div class="container-fluid">
 	<div class="breadcrumb">
 	<div class="breadcrumbheader">
-	    <form id="headerform" action="saveheading" method="post">
+	    <form id="headerform">
 	    	<textarea type="text" class="headercss" name="changeheader" cols="93" rows="10"></textarea>
 	    
     
@@ -83,7 +83,7 @@
             <button class="btn btn-cancel my-md-1" type="button" style="float: right;">
 	        	Cancel&nbsp;&#10060
 	        </button>
-            <button class="btn btn-save my-md-1" type="submit" style="float: right;">
+            <button class="btn btn-save my-md-1" type="submit" style="float: right;" onclick="saveHeading()">
 	        	    Save&nbsp;
 	        	    <i class="fa fa-save" aria-hidden="true"></i>
             </button>
