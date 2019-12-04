@@ -2,43 +2,86 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 var fs = require("fs");
-const file = "config\\headings.txt"
+const file = "config\\settings.json"
 
 
 router.get('/', (req, res) => {
-    fs.readFile(file, "utf-8", (err, data) => {
-        if (err) { console.log(err) }
-        res.render("headings.hbs",
-            {
-                heading: data
-            })
-    })
+    // Reading JSON
+    let jsonData = JSON.parse(fs.readFileSync(file))
+    let heading = jsonData.heading
+    let poNumber = jsonData.poNumber
+    let prfNumber = jsonData.poNumber
+
+    res.render("headings.hbs",
+        {
+            heading,
+            poNumber,
+            prfNumber
+        })
 })
 
 
-router.post('/save', (req, res) => {
-    fs.writeFile(file, req.body.changeheader, function (err) {
+router.post('/saveheading', (req, res) => {
+    // Reading JSON
+    let jsonData = JSON.parse(fs.readFileSync(file))
+    let newHeading = req.body.changeheader
+    jsonData.heading = newHeading;
+    let poNumber = jsonData.poNumber
+    let prfNumber = jsonData.poNumber
+    // Writing JSON
+    fs.writeFileSync(file, jsonData);
 
-        if (err) {
-            console.log(err);
-        }
+    res.render("headings.hbs",
+        {
+            heading: newHeading,
+            poNumber,
+            prfNumber
 
-        console.log("The file was saved!");
-        res.render("headings.hbs",
-            {
-                heading: data
-            })
-    })
+        })
+});
+
+router.post('/savepo', (req, res) => {
+    // Reading JSON
+    let jsonData = JSON.parse(fs.readFileSync(file))
+    let heading = jsonData.heading
+    let newPONum = req.body.poNumber;
+    jsonData.poNumber = newPONum;
+    let prfNumber = jsonData.prfNumber
+
+    // Writing JSON
+    fs.writeFileSync(file, jsonData);
+
+    res.render("headings.hbs",
+        {
+            heading,
+            poNumber: newPONum,
+            prfNumber
+        })
+});
+
+router.post('/saveprf', (req, res) => {
+    // Reading JSON
+    // Reading JSON
+    let jsonData = JSON.parse(fs.readFileSync(file))
+    let heading = jsonData.heading
+    let poNumber = jsonData.poNumber
+    let newPRFNum = req.body.prfNumber;
+    jsonData.prfNumber = newPRFNum
+
+
+    // Writing JSON
+    fs.writeFileSync(file, jsonData);
+
+    res.render("headings.hbs",
+        {
+            heading,
+            poNumber,
+            prfNumber: newPRFNum
+        })
 });
 
 router.get('/cancel', (req, res) => {
-    fs.readFile(file, "utf-8", (err, data) => {
-        if (err) { console.log(err) }
-        res.render("headings.hbs",
-            {
-                heading: data
-            })
-    })
+    res.redirect("/");
 })
 
 
