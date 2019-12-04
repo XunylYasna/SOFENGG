@@ -29,15 +29,9 @@ router.post('/saveheading', (req, res) => {
     let poNumber = jsonData.poNumber
     let prfNumber = jsonData.poNumber
     // Writing JSON
-    fs.writeFileSync(file, jsonData);
+    fs.writeFileSync(file, JSON.stringify(jsonData));
 
-    res.render("headings.hbs",
-        {
-            heading: newHeading,
-            poNumber,
-            prfNumber
-
-        })
+    res.redirect("/headings");
 });
 
 router.post('/savepo', (req, res) => {
@@ -49,14 +43,9 @@ router.post('/savepo', (req, res) => {
     let prfNumber = jsonData.prfNumber
 
     // Writing JSON
-    fs.writeFileSync(file, jsonData);
+    fs.writeFileSync(file, JSON.stringify(jsonData));
 
-    res.render("headings.hbs",
-        {
-            heading,
-            poNumber: newPONum,
-            prfNumber
-        })
+    res.redirect("/headings");
 });
 
 router.post('/saveprf', (req, res) => {
@@ -70,18 +59,13 @@ router.post('/saveprf', (req, res) => {
 
 
     // Writing JSON
-    fs.writeFileSync(file, jsonData);
+    fs.writeFileSync(file, JSON.stringify(jsonData));
 
-    res.render("headings.hbs",
-        {
-            heading,
-            poNumber,
-            prfNumber: newPRFNum
-        })
+    res.redirect("/headings");
 });
 
 router.get('/cancel', (req, res) => {
-    res.redirect("/");
+    res.redirect("/headings");
 })
 
 
