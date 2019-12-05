@@ -48,12 +48,13 @@ function computePeso() {
 }
 
 function save() {
+    alert('SAVED')
     $("#prfForm").attr("action", "/prf/save"); //Will set it
     $("#prfForm").submit();
 }
 
 function addPO() {
-    $("#prfForm").attr("action", "/prf/addPO"); //Will set it
+    $("#prfForm").attr("action", "/prf/add"); //Will set it
     $("#prfForm").submit();
 }
 

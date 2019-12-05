@@ -14,19 +14,19 @@ router.get('/', (req, res) => {
     let type = 'CO'
     let password = 'poop'
 
-    User.find({type:type}, function(err, doc) {
-        if(err) {
+    User.find({ type: type }, function (err, doc) {
+        if (err) {
             console.log(err)
         }
 
-        if(doc){
+        if (doc) {
             var obj = doc
             var stringify = JSON.stringify(obj);
             var x = JSON.parse(stringify)
             console.log(x[0]['password'])
-            res.render('prf.hbs', {password:x[0]['password']})
+            res.render('prf.hbs', { password: x[0]['password'] })
         }
-        else{
+        else {
             console.log('failed')
             res.render('prf.hbs')
         }
@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
 
-    const { buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
+    const {prfNumber,poNumber, buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
 
     // console.log(buyer);
 
@@ -66,19 +66,21 @@ router.post('/add', (req, res) => {
         .catch(err => console.log(err))
 
 
-    // res.render("po.hbs", {
-    //     buyer,
-    //     date,
-    //     names: names.replace("|", "\n"),
-    //     route,
-    //     particulars,
-    //     dollar,
-    //     peso,
-    //     total,
-    //     prepared,
-    //     approved,
-    //     received
-    // })
+    res.render("po.hbs", {
+        prfNumber,
+        poNumber,
+        buyer,
+        date,
+        names,
+        route,
+        particulars,
+        dollar,
+        peso,
+        total,
+        prepared,
+        approved,
+        received
+    })
 })
 
 router.post('/save', (req, res) => {
@@ -114,7 +116,7 @@ router.post('/save', (req, res) => {
                 .then(post => {
                     console.log('PRF Successfully added' + newPRF)
                     req.flash('success_msg', 'New PRF added.')
-                    res.redirect('/dashboard1')
+                    res.redirect('back')
                 })
                 .catch(err => {
                     console.log(err)
