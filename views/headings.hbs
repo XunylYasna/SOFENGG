@@ -1,15 +1,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script>
-    function saveHeading() {
-        $("#headerform").attr("action", "/headings/saveheading"); //Will set it
-        $("#headerform").submit();
-    }  
-
-
-
-</script>
 <body id="page-top">
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
   
@@ -75,15 +66,15 @@
         <div class="container-fluid">
 	<div class="breadcrumb">
 	<div class="breadcrumbheader">
-	    <form id="headerform">
-	    	<textarea type="text" class="headercss" name="changeheader" cols="93" rows="10"></textarea>
+	    <form id="headerform" method="post" action="/headings/saveheading">
+	    	<textarea type="text" class="headercss" name="heading" cols="93" rows="10"></textarea>
 	    
     
         <div class="divider"/>
             <button class="btn btn-cancel my-md-1" type="button" style="float: right;">
 	        	Cancel&nbsp;&#10060
 	        </button>
-            <button class="btn btn-save my-md-1" type="submit" style="float: right;" onclick="saveHeading()">
+            <button class="btn btn-save my-md-1" type="submit" style="float: right;">
 	        	    Save&nbsp;
 	        	    <i class="fa fa-save" aria-hidden="true"></i>
             </button>
