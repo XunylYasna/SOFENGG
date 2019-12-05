@@ -6,6 +6,14 @@
   function saveHeading() {
     $("#headerform").attr("action", "/headings/saveheading"); //Will set it
     $("#headerform").submit();
+  }  
+function savePrf() {
+    $("#prfform").attr("action", "/headings/saveprf"); //Will set it
+    $("#prfform").submit();
+  }  
+function savePo() {
+    $("#poform").attr("action", "/headings/savepo"); //Will set it
+    $("#poform").submit();
   }
 
 
@@ -80,20 +88,42 @@
         <div class="breadcrumb">
           <div class="breadcrumbheader">
             <form id="headerform" method="POST" action="saveheading">
-              <textarea type="text" class="headercss" name="changeheader" cols="93" rows="10">{{heading}}</textarea>
+              <textarea type="text" class="headercss sm-textarea" name="changeheader" cols="93" rows="10">{{heading}}</textarea>
 
 
               <div class="divider" />
-              <button class="btn btn-cancel my-md-1" type="button" style="float: right;">
-                Cancel&nbsp;&#10060
-              </button>
               <button class="btn btn-save my-md-1" type="submit" style="float: right;" onclick="saveHeading()">
                 Save&nbsp;
                 <i class="fa fa-save" aria-hidden="true"></i>
               </button>
+            </form><br><br>
+            <form id="prfform" class="form-inline" method="post" action="saveprf">
+              <div class="form-group">
+                <input type="number" class="form-control" id="prfFormat" name="prfNumber" placeholder="PRF Number Format">
+              </div>
+              <button type="submit" class="btn btn-save md-mb-2" onclick="savePrf()">Save
+              <i class="fa fa-save" aria-hidden="true"></i></button>
             </form>
+            
+            <form id="poform" class="form-inline" method="post" action="savepo">
+              <div class="form-group">
+                <input type="number" class="form-control" id="poFormat" name="poNumber" placeholder="PO Number Format">
+              </div>
+              <button type="submit" class="btn btn-save md-mb-2" onclick="savePo()">Save
+              <i class="fa fa-save" aria-hidden="true"></i></button>
+            </form>
+            
+            
+            
+            
+            
+            
+            
+            
+            
           </div>
         </div>
+        
         <!-- /#wrapper -->
 
         <!-- Scroll to Top Button-->
