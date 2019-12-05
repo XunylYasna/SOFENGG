@@ -48,7 +48,6 @@ function computePeso() {
 }
 
 function save() {
-    alert('hi')
     $("#prfForm").attr("action", "/prf/save"); //Will set it
     $("#prfForm").submit();
 }
