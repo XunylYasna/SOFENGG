@@ -36,14 +36,14 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
 
-    const { buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
+    const {prfNumber,poNumber, buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
 
     // console.log(buyer);
 
 
     const newPRF = new PRF({
-        prfNumber: 1,
-        poNumber: 1,
+        prfNumber,
+        poNumber,
         buyer: buyer,
         date: date,
         paxNames: names,
@@ -61,24 +61,25 @@ router.post('/add', (req, res) => {
         .then(newPRF => {
             req.flash('success_msg', 'Added PRF#' + newPRF.prfNumber);
             console.log('Added PRF#' + newPRF.prfNumber);
-            res.redirect('/')
         })
         .catch(err => console.log(err))
 
 
-    // res.render("po.hbs", {
-    //     buyer,
-    //     date,
-    //     names: names.replace("|", "\n"),
-    //     route,
-    //     particulars,
-    //     dollar,
-    //     peso,
-    //     total,
-    //     prepared,
-    //     approved,
-    //     received
-    // })
+    res.render("po.hbs", {
+        prfNumber,
+        poNumber,
+        buyer,
+        date,
+        names,
+        route,
+        particulars,
+        dollar,
+        peso,
+        total,
+        prepared,
+        approved,
+        received
+    })
 })
 
 router.post('/save', (req, res) => {
@@ -114,7 +115,7 @@ router.post('/save', (req, res) => {
                 .then(post => {
                     console.log('PRF Successfully added' + newPRF)
                     req.flash('success_msg', 'New PRF added.')
-                    res.redirect('/dashboard1')
+                    res.redirect('back')
                 })
                 .catch(err => {
                     console.log(err)
