@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
 
     res.render("headings.hbs",
         {
+            layout: 'dashboardLayout',
             heading,
             poNumber,
             prfNumber
