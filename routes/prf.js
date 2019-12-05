@@ -42,8 +42,8 @@ router.post('/add', (req, res) => {
 
 
     const newPRF = new PRF({
-        prfNumber: 1,
-        poNumber: 1,
+        prfNumber,
+        poNumber,
         buyer: buyer,
         date: date,
         paxNames: names,
@@ -61,7 +61,6 @@ router.post('/add', (req, res) => {
         .then(newPRF => {
             req.flash('success_msg', 'Added PRF#' + newPRF.prfNumber);
             console.log('Added PRF#' + newPRF.prfNumber);
-            res.redirect('/')
         })
         .catch(err => console.log(err))
 
