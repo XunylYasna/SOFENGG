@@ -10,10 +10,10 @@
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
 <script>
-  var dataSet = {{{ json dataSet }}}; 
+  var dataSet = {{{ json dataSet }}};
 
-  $(document).ready(()=>{
-    if($('#curStat').text() != '') {
+  $(document).ready(() => {
+    if ($('#curStat').text() != '') {
       alert('Invalid Credentials Found!')
     }
   })
@@ -85,7 +85,7 @@
         <i class="fa fa-truck"></i></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" data-toggle="modal" data-target="#export">
         <span>Export</span>
         <i class="fa fa-plane"></i></a>
     </li>
@@ -245,3 +245,28 @@
     </div>
   </div>
 </form>
+
+{{!-- EXPORT MODAL --}}
+
+<div class="modal fade" id="export" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Export to Excel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center">
+          <div class="col-sm d-flex justify-content-center">
+            <button class="btn btn-primary btn-lg" href="/export/po">Export PO</button>
+          </div>
+          <div class="col-sm d-flex justify-content-center">
+            <button class="btn btn-primary btn-lg" href="/export/po">Export PRF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
