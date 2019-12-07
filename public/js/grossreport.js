@@ -31,19 +31,14 @@ $.fn.dataTableExt.afnFiltering.push(
         var day = new Date(data[1]) || 0; // use data for the date column
 
         day = formatDate(day);
-        console.log(from);
-        console.log(to);
-        console.log(day);
  
         if ( ( !from && !to ) ||
              ( !from && day <= to ) ||
              ( from <= day && !to ) ||
              ( from <= day && day <= to ) )
         {
-            console.log("true");
             return true;
         }
-        console.log("false")
         return false;
     }
 );
