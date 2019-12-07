@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const exphbs = require('express-handlebars');
 app.engine('hbs', exphbs({
   extname: '.hbs',
-  defaultLayout: 'main',
   helpers: {
     json: function (content) { return JSON.stringify(content); },
     ifEquals: function (arg1, arg2, options) { return (arg1 == arg2) ? options.fn(this) : options.inverse(this); }
@@ -73,6 +72,7 @@ app.use('/', require('./routes/index'))
 app.use('/users', require('./routes/users'))
 app.use('/prf', require('./routes/prf'))
 app.use('/po', require('./routes/po'))
+app.use('/export', require('./routes/export'))
 app.use('/headings', require('./routes/headings'))
 
 
@@ -105,6 +105,7 @@ app.post('/dashboard', (req, res) => {
         console.log(dataSet)
 
         res.render("dashboard.hbs", {
+          title: 'my other page', layout: 'dashboardLayout',
           dataSet
         })
       });
@@ -134,6 +135,7 @@ app.get('/dashboard', (req, res) => {
     console.log(dataSet)
 
     res.render("dashboard.hbs", {
+      title: 'my other page', layout: 'dashboardLayout',
       dataSet,
       invalid: invalid
     })
@@ -152,6 +154,7 @@ app.get('/dashboard1', (req, res) => {
     console.log(dataSet)
 
     res.render("dashboard.hbs", {
+      layout: 'dashboardLayout',
       dataSet,
       invalid: invalid
     })
@@ -177,6 +180,7 @@ app.get('/grossreport', (req, res) => {
     }
     else if (prfs) {
       res.render("grossreport.hbs", {
+        layout: 'dashboardLayout',
         dataSet
       })
     }
@@ -220,7 +224,7 @@ app.post('/passwordmanager', (req, res) => {
     if (doc && password == doc.password) {
       console.log(doc.password)
       console.log(password)
-      res.render("passwordmanager.hbs")
+      res.render("passwordmanager.hbs", { layout: 'dashboardLayout' })
     }
     else {
       res.redirect('dashboard')
@@ -265,91 +269,43 @@ app.post("/staffNew", (req, res) => {
         password: newPassword
       }, (err, affected, resp) => {
         console.log(resp)
-        res.render("passwordmanager.hbs", { errormessage: successmessage })
+        res.render("passwordmanager.hbs", { layout: 'dashboardLayout', errormessage: successmessage })
       })
     }
     else {
-      res.render("passwordmanager.hbs", { errormessage: errormessage })
+      res.render("passwordmanager.hbs", { layout: 'dashboardLayout', errormessage: errormessage })
     }
   })
 })
 
-app.get('/export', (req, res) => {
 
-  PO.find({}, function (err, po) {
-    var dataSet = {};
 
-    po.forEach(function (po) {
-      dataSet[po._id] = po;
-    });
+app.post("/ownerNew", (req, res) => {
+  let password = req.body.currentowner
+  let newPassword = req.body.newowner
+  let type = 'CO'
+  let errormessage = 'Current Password Does not Match with your Input...'
+  let successmessage = 'Password Change Successful!!'
 
+  User.findOne({ type: type }, (err, doc) => {
     if (err) {
-      res.send(err)
+      console.log(err)
     }
-
-
-    // JSON to csv
-    app.post("/ownerNew", (req, res) => {
-      let password = req.body.currentowner
-      let newPassword = req.body.newowner
-      let type = 'CO'
-      let errormessage = 'Current Password Does not Match with your Input...'
-      let successmessage = 'Password Change Successful!!'
-
-      User.findOne({ type: type }, (err, doc) => {
-        if (err) {
-          console.log(err)
-        }
-        if (doc && password == doc.password) {
-          console.log('testing')
-          User.updateOne({ type: type }, {
-            type: type,
-            password: newPassword
-          }, (err, affected, resp) => {
-            console.log(resp)
-            res.render("passwordmanager.hbs", { errormessage: successmessage })
-          })
-        }
-        else {
-          res.render("passwordmanager.hbs", { errormessage: errormessage })
-        }
+    if (doc && password == doc.password) {
+      console.log('testing')
+      User.updateOne({ type: type }, {
+        type: type,
+        password: newPassword
+      }, (err, affected, resp) => {
+        console.log(resp)
+        res.render("passwordmanager.hbs", { layout: 'dashboardLayout', errormessage: successmessage })
       })
-    })
-
-    const dataSetKey = Object.keys(dataSet)
-
-    var dataArray = ["PRF Number", "PO Number", "Buyer", "Date", "PAX Name", "Route", "Description", "USD Amount", "PHP Amount", "Total", "Prepared By", "Approved By", "Received By"];
-    dataSetKey.forEach((key, index) => {
-      const data = dataSet[key]
-      dataArray[index + 1] = [data.prfNumber, data.poNumber, data.buyer, data.date, data.paxName, data.route, data.description, data.usAmount, data.phpAmount, data.total, data.preparedBy, data.approvedBy, data.receivedBy]
-    })
-
-    const poDownload = dataArray.join(",");
-    res.setHeader('Content-Type', 'text/csv');
-    res.setHeader('Content-Disposition', 'attachment; filename=\"' + 'PO export ' + Date.now() + '.csv\"');
-    res.send(poDownload);
-  });
-
-
-  // PRF.find({}, function (err, prfs) {    
-  //   var dataSet = {};
-
-  //   prfs.forEach(function (prfs) {
-  //     dataSet[prfs._id] = prfs;
-  //   });
-
-  //   console.log(dataSet)
-
-  //   if(err){
-  //     res.send(err)
-  //   }
-
-  //   res.render("dashboard.hbs", {
-  //     dataSet
-  //   })
-  // });
+    }
+    else {
+      res.render("passwordmanager.hbs", { layout: 'dashboardLayout', errormessage: errormessage })
+    }
+  })
 })
-
 
 
 

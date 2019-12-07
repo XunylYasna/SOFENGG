@@ -1,244 +1,30 @@
-<link rel="stylesheet" type="text/css"
-  href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" />
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript"
-  src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
-
 <script>
-  var dataSet = {{{ json dataSet }}}; 
-
-  $(document).ready(()=>{
-    if($('#curStat').text() != '') {
-      alert('Invalid Credentials Found!')
-    }
-  })
+  var dataSet = {{{ json dataSet }}};
 </script>
 <script type="text/javascript" src="/js/dashboard.js"></script>
-<style>
-  .invisible {
-    display: none;
-    visibility: hidden;
-  }
-</style>
-
-<div id="curStat" class="invisible">{{invalid}}</div>
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-  <a class="navbar-brand mr-1"><b>
-      <font color="white">Grand Pacific Travel & Tours Corp.</font>
-    </b></a>
-
-  {{!-- <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-      </button> --}}
 
 
+<div id="content-wrapper">
+  <div class="container-fluid">
+    <div class="card mb-3">
 
-  <!-- Navbar -->
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        From
+        <input type="date" id="datefilterfrom">
+        To
+        <input type="date" id="datefilterto">
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
 
+          {{!-- Data Table --}}
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-</nav>
-
-<div id="wrapper">
-
-  <!-- Sidebar -->
-  <ul class="sidebar navbar-nav">
-    <li class="nav-item active">
-      <a class="nav-link" href="/dashboard1">
-        <span>Dashboard</span>
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" data-toggle="modal" data-target="#accessModal">
-        <span>Gross Report</span>
-        <i class="fas fa-fw fa-table"></i></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" data-toggle="modal" data-target="#passwordManager">
-        <span>Password Manager</span>
-        <i class="fa fa-lock"></i></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" data-toggle="modal" data-target="#headings">
-        <span>Headings</span>
-        <i class="fas fa-fw fa-file"></i></a>
-    </li>
-    <br>
-    <li class="nav-item">
-      <a class="nav-link" href="/prf">
-        <span>Create New PRF &#10010</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/po">
-        <span>Create New PO &#10010</span></a>
-    </li>
-    <br>
-    <li class="nav-item">
-      <a class="nav-link" href="">
-        <span>Import</span>
-        <i class="fa fa-truck"></i></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="">
-        <span>Export</span>
-        <i class="fa fa-plane"></i></a>
-    </li>
-    <br>
-    <li class="nav-item">
-      <a class="nav-link" href="/login">
-        <span>Logout</span>
-        <i class="fa fa-sign-out"></i></a>
-    </li>
-  </ul>
-
-  <div id="content-wrapper">
-    <div class="container-fluid">
-      <div class="card mb-3">
-
-        <div class="card-header">
-          <i class="fas fa-table"></i>
-          From
-          <input type="date" id="datefilterfrom">
-          To
-          <input type="date" id="datefilterto">
+          </table>
         </div>
-        <div class="card-body">
-          <div class="table-responsive">
-
-            {{!-- Data Table --}}
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-            </table>
-          </div>
-        </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
-    </div>
-  </div>
-  <!-- /.container-fluid -->
-
-</div>
-<!-- /.content-wrapper -->
-
-</div>
-<!-- /#wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="login.html">Logout</a>
-      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>
   </div>
 </div>
-
-<!-- Access Modal -->
-<form method="POST" action="gross">
-
-  <div class="modal fade" id="accessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">This page requires an admin password to proceed.</div>
-        <div class="card-body">
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
-              autocomplete="new-password">
-            <div class="invalid-feedback">Enter your password too!</div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-primary" type="submit">Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</form>
-
-<!-- PASSWORD MANAGER MODAL -->
-<form action="passwordmanager" method="POST">
-  <div class="modal fade" id="passwordManager" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">This page requires an admin password to proceed.</div>
-        <div class="card-body">
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
-              autocomplete="new-password">
-            <div class="invalid-feedback">Enter your password too!</div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-primary" type="submit">Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
-
-<!-- HEADINGS MODAL -->
-<form action="headings" method="POST">
-  <div class="modal fade" id="headings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">This page requires an admin password to proceed.</div>
-        <div class="card-body">
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
-              autocomplete="new-password">
-            <div class="invalid-feedback">Enter your password too!</div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-primary" type="submit">Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>

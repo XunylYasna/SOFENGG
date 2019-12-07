@@ -74,7 +74,12 @@ input[type=checkbox] {
     margin-left: 13;
 }
 
+/* General */
 
+.invisible {
+    display: none;
+    visibility: hidden;
+}
 
 /* PO and PRF */
 .bg-white {

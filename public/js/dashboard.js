@@ -8,15 +8,61 @@ dataSetKey.forEach((key, index) => {
     dataArray[index] = [data.prfNumber, data.date, data.buyer, data.date, data.poNumber, key]
 })
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, day, month].join('-');
+}
+
+$.fn.dataTableExt.afnFiltering.push(
+    function( settings, data, dataIndex ) {
+        var from = $('#datefilterfrom').val();
+        var to = $('#datefilterto').val();
+        var day = new Date(data[1]) || 0; // use data for the date column
+
+        day = formatDate(day);
+        console.log(from);
+        console.log(to);
+        console.log(day);
+ 
+        if ( ( !from && !to ) ||
+             ( !from && day <= to ) ||
+             ( from <= day && !to ) ||
+             ( from <= day && day <= to ) )
+        {
+            console.log("true");
+            return true;
+        }
+        console.log("false")
+        return false;
+    }
+);
+
 $(document).ready(function () {
     $('#dataTable').DataTable({
         data: dataArray,
         scrollCollapse: true,
         columns: [
             { title: "PRF#" },
-            { title: "Date" },
+            { title: "Date" ,
+                render: function(data, type, full) {
+                    return moment(data).format('DD/MM/YYYY HH:mm:ss'); 
+                }
+            },
             { title: "Recipient" },
-            { title: "Paid Date" },
+            { title: "Paid Date" ,
+                render: function(data, type, full) {
+                    return moment(data).format('DD/MM/YYYY HH:mm:ss'); 
+                }
+            },
             { title: "PO's" },
             {
                 title: "Commands",
@@ -29,6 +75,12 @@ $(document).ready(function () {
 
     });
 
+    var table = $('#dataTable').DataTable();
+
+    $('#datefilterfrom, #datefilterto').on('change', function() {
+        table.draw();
+    } );
+    
 });
 
 function editPRF(prf) {
