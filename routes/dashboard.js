@@ -27,7 +27,4 @@ router.get('/staff', ensureAuthenticated, (req, res) => {
   res.render('staffDashboard')
 })
 
-
-
-
 module.exports = router;

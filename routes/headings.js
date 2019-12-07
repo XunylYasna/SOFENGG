@@ -27,7 +27,7 @@ router.post('/saveheading', (req, res) => {
     let newHeading = req.body.changeheader
     jsonData.heading = newHeading;
     let poNumber = jsonData.poNumber
-    let prfNumber = jsonData.poNumber
+    let prfNumber = jsonData.prfNumber
     // Writing JSON
     fs.writeFileSync(file, JSON.stringify(jsonData));
 

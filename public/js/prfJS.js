@@ -48,16 +48,20 @@ function computePeso() {
 }
 
 function save() {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     alert('hi')
 =======
 >>>>>>> Stashed changes
+=======
+    alert('SAVED')
+>>>>>>> origin/devhead
     $("#prfForm").attr("action", "/prf/save"); //Will set it
     $("#prfForm").submit();
 }
 
 function addPO() {
-    $("#prfForm").attr("action", "/prf/addPO"); //Will set it
+    $("#prfForm").attr("action", "/prf/add"); //Will set it
     $("#prfForm").submit();
 }
 

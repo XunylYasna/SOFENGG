@@ -19,84 +19,94 @@
             $('#totalField').prop('disabled', true)
 
             $("#prfNumber").keydown(function () {
-                // Save old value.
-                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
-                    $(this).data("old", $(this).val());
-            });
-
-            $("#prfNumber").keyup(function () {
-                // Check correct, else revert back to old value.
-                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
-                    ;
-                else
-                    $(this).val($(this).data("old"));
-            });
-
-            $("#poNumber").keydown(function () {
-                // Save old value.
-                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
-                    $(this).data("old", $(this).val());
-            });
-
-            $("#poNumber").keyup(function () {
-                // Check correct, else revert back to old value.
-                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
-                    ;
-                else
-                    $(this).val($(this).data("old"));
-            });
-
-            document.querySelector('#prfNumber').addEventListener("keypress", function (evt) {
-                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                    evt.preventDefault()
+                window.onbeforeunload = () => {
+                    return 'You have unsaved Changes... Do you want to leave?'
                 }
+
+                $("#prfNumber").keydown(function () {
+                    // Save old value.
+                    if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                        $(this).data("old", $(this).val());
+                });
+
+                $("#prfNumber").keyup(function () {
+                    // Check correct, else revert back to old value.
+                    if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                        ;
+                    else
+                        $(this).val($(this).data("old"));
+                });
+
+                $("#poNumber").keydown(function () {
+                    // Save old value.
+                    if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                        $(this).data("old", $(this).val());
+                });
+
+                $("#poNumber").keyup(function () {
+                    // Check correct, else revert back to old value.
+                    if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                        ;
+                    else
+                        $(this).val($(this).data("old"));
+                });
+
+                document.querySelector('#prfNumber').addEventListener("keypress", function (evt) {
+                    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                        evt.preventDefault()
+                    }
+                })
+
+                document.querySelector('#poNumber').addEventListener("keypress", function (evt) {
+                    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                        evt.preventDefault()
+                    }
+                })
+
+                document.querySelector('#dollarField').addEventListener("keypress", function (evt) {
+                    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                        evt.preventDefault()
+                    }
+                })
+
+                document.querySelector('#pesoField').addEventListener("keypress", function (evt) {
+                    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                        evt.preventDefault()
+                    }
+                })
+
+                document.querySelector('#exchangeDisplay').addEventListener("keypress", function (evt) {
+                    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                        evt.preventDefault()
+                    }
+                })
+
             })
 
-            document.querySelector('#poNumber').addEventListener("keypress", function (evt) {
-                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                    evt.preventDefault()
-                }
+            $(window).bind('beforeunload', () => {
+                return 'Please remember to Save any Unsaved Documents...'
             })
 
-            document.querySelector('#dollarField').addEventListener("keypress", function (evt) {
-                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                    evt.preventDefault()
-                }
-            })
-
-            document.querySelector('#pesoField').addEventListener("keypress", function (evt) {
-                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                    evt.preventDefault()
-                }
-            })
-
-            document.querySelector('#exchangeDisplay').addEventListener("keypress", function (evt) {
-                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                    evt.preventDefault()
-                }
-            })
-
-        })
-
-        $(window).bind('beforeunload', () => {
-            return 'Please remember to Save any Unsaved Documents...'
-        })
-
-        function myFunc() {
-            var text = $('div#curPass').text()
-            var text1 = document.getElementById('pwd1').value
-
-            if (text1 == text) {
-                document.getElementById('exchangeDisplay').disabled = false
-            }
-            else {
-                alert('Wrong Password!')
-                alert(text + " lmao " + text1)
-                document.getElementById('exchangeDisplay').disabled = true;
-                $('#pwd1').val('')
+            function disableBind() {
+                //$(window).unbind('beforeunload')
+                window.onbeforeunload = null;
             }
 
-        }
+            function myFunc() {
+                var text = $('div#curPass').text()
+                var text1 = document.getElementById('pwd1').value
+
+                if (text1 == text) {
+                    document.getElementById('exchangeDisplay').disabled = false
+                }
+                else {
+                    alert('Wrong Password!')
+                    alert(text + " lmao " + text1)
+                    document.getElementById('exchangeDisplay').disabled = true;
+                    $('#pwd1').val('')
+                }
+
+            }
     </script>
 </head>
 
@@ -127,7 +137,7 @@
                 </button>
             </li>
             <li class="nav-item">
-                <button id="saveBtn" class="btn btn-success btn-block" type="button" onclick="save()">
+                <button id="saveBtn" class="btn btn-success btn-block" type="button" onclick="disableBind();save()">
                     Save &nbsp;
                     <i class="fa fa-save" aria-hidden="true"></i>
                 </button>
@@ -138,9 +148,13 @@
                 </button>
 
                 <script type="text/javascript">
-                    document.getElementById("dashboard").onclick = function () {
-                        location.href = "dashboard1";
-                    };
+            document.getElementById("dashboard").onclick = function () {
+                location.href = "dashboard1";
+            };
+                </script>
+                <button id="dashboard" class="btn btn-home btn-block" type="button">Dashboard
+                    <i class="fas fa-fw fa-tachometer-alt" onclick="window.location = '/dashboard1'"></i>
+                </button>
                 </script>
             </li>
             <li class="nav-item">
