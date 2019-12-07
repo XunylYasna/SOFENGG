@@ -48,21 +48,29 @@ function computePeso() {
 }
 
 function save() {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    alert('hi')
-=======
->>>>>>> Stashed changes
-=======
-    alert('SAVED')
->>>>>>> origin/devhead
     $("#prfForm").attr("action", "/prf/save"); //Will set it
-    $("#prfForm").submit();
+
+    if (document.getElementById('prfForm').checkValidity()) {
+        document.getElementById('prfForm').add('was-validated');
+        alert('Current PRF will be saved')
+        $("#prfForm").submit();
+    }
+    else {
+        alert("Please fill out all the fields")
+    }
+
 }
 
 function addPO() {
     $("#prfForm").attr("action", "/prf/add"); //Will set it
-    $("#prfForm").submit();
+    if (document.getElementById('prfForm').checkValidity()) {
+        document.getElementById('prfForm').add('was-validated');
+        alert('Current PRF will be saved')
+        $("#prfForm").submit();
+    }
+    else {
+        alert("Please fill out all the fields")
+    }
 }
 
 $(document).ready(function () {
@@ -170,9 +178,9 @@ $(document).ready(function () {
             return false;
         }
     }
-    
-    $('#print').on('click', function(){
-        
+
+    $('#print').on('click', function () {
+
         $("#header").text('Grand Pacfic Travel & Tours')
         window.print();
         $("#header").empty();

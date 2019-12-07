@@ -16,7 +16,7 @@
             $('#exchangeDisplay').prop('disabled', true)
             $('#totalField').prop('disabled', true)
 
-            window.onbeforeunload = ()=>{
+            window.onbeforeunload = () => {
                 return 'You have unsaved Changes... Do you want to leave?'
             }
 
@@ -111,6 +111,10 @@
             }
 
         }
+
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
     </script>
 </head>
 
@@ -176,7 +180,7 @@
 
         <!--    PRF Form -->
         <div id="content-wrapper" class="form-wrapper">
-            <form class="form-horizontal" method="POST" id="prfForm">
+            <form class="form-horizontal needs-validation" method="POST" id="prfForm">
                 <div class="row">
                     <div class="col-md-4 mb-md-2">
                         <div class="input-group">
@@ -184,10 +188,11 @@
                                 <span class="input-group-text" style="background-color:white;">PRF# </span>
                             </div>
                             {{!-- PRF Number Field--}}
-                            <input type="number" min='1' step="1" class="form-control" id="prfNumber" name="prfNumber"
-                                placeholder="Enter PRF#" value={{prfNumber}} min="0" max="6">
+                            <input type="number" readonly min='1' step="1" class="form-control" id="prfNumber"
+                                name="prfNumber" placeholder="Enter PRF#" value={{prfNumber}} min="0" max="6">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">
+                                <button class="btn btn-outline-secondary" type="button" data-toggle="popover"
+                                    data-content="PRF and PO Number can be manually edited in the settings area">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -199,10 +204,11 @@
                                 <span class="input-group-text" style="background-color:white;">PO# </span>
                             </div>
                             {{!-- PO Number Field--}}
-                            <input type="number" class="form-control" id="poNumber" name="poNumber"
+                            <input type="number" readonly class="form-control" id="poNumber" name="poNumber"
                                 placeholder="Enter PO#" value={{poNumber}}>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">
+                                <button class="btn btn-outline-secondary" type="button" data-toggle="popover"
+                                    data-content="PRF and PO Number can be manually edited in the settings area">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -224,7 +230,7 @@
                             <label for="buyerField">To: </label>
                             {{!-- Buyer Field --}}
                             <input name="buyer" type="text" class="form-control" id="buyerField" placeholder="Recipient"
-                                value={{buyer}}>
+                                value="{{buyer}}" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -232,7 +238,7 @@
                             <label for="purchaseDate">Date: </label>
                             {{!-- Date Field --}}
                             <input name="date" type="date" class="form-control" id="purchaseDate"
-                                placeholder="Enter Date" value="{{date}}">
+                                placeholder="Enter Date" value="{{date}}" required>
                             {{!-- 2013-01-08 date format dapat pero hekhek wala pa --}}
                         </div>
                     </div>
@@ -256,7 +262,7 @@
                                     <tr>
                                         <td>
                                             <input id="name" type="text" class="form-control" size="80"
-                                                placeholder="Enter Passenger's Name">
+                                                placeholder="Enter Passenger's Name" required>
                                         </td>
                                         <td>
                                             <div class="text-danger invisible">
@@ -283,7 +289,7 @@
                             <label for="routeField">Route: </label>
                             {{!-- Route Field --}}
                             <textarea class="form-control " rows="5" id="routeField" name="route"
-                                placeholder="Specify Route" value={{route}}></textarea>
+                                placeholder="Specify Route" value={{route}} required></textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -291,7 +297,7 @@
                             <label for="partField">Particulars: </label>
                             {{!-- Particulars Field --}}
                             <textarea class="form-control" rows="5" id="partField" name="particulars"
-                                placeholder="Specify Particulars" value={{particulars}}></textarea>
+                                placeholder="Specify Particulars" value={{particulars}} required></textarea>
                         </div>
                     </div>
                 </div>
@@ -302,7 +308,7 @@
                             <label for="fareField">Airfare: </label>
                             {{!-- Airfare Field --}}
                             <input type="number" class="form-control" name="airFare" id="fareField"
-                                placeholder="Specify Airfare" value={{airFare}}>
+                                placeholder="Specify Airfare" value={{airFare}} required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -310,7 +316,7 @@
                             <label for="taxField">Travel Tax: </label>
                             {{!-- Travel Tax Field --}}
                             <input type="number" class="form-control" name="taxField" id="taxField"
-                                placeholder="Specify Travel Tax" value={{travelTax}}>
+                                placeholder="Specify Travel Tax" value={{travelTax}} required>
                         </div>
                     </div>
                 </div>
@@ -321,7 +327,7 @@
                             <label for="docuField">Documentation: </label>
                             {{!-- Documentation Field --}}
                             <textarea class="form-control" rows="5" id="docuField" name="documentation"
-                                placeholder="Enter Documentations" value={{documentations}}></textarea>
+                                placeholder="Enter Documentations" value={{documentations}} required></textarea>
                         </div>
                     </div>
                 </div>
@@ -333,7 +339,7 @@
                             {{!-- USD Field --}}
                             <input type="number" id="dollarField" name="dollar" onkeydown="return event.keyCode !== 69"
                                 oninput="computeDollar()" class="form-control" placeholder="Enter Amount"
-                                value={{usAmount}}>
+                                value={{usAmount}} required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -342,7 +348,7 @@
                             {{!-- PHP Field --}}
                             <input type="number" id="pesoField" name="peso" onkeydown="return event.keyCode !== 69"
                                 oninput="computePeso()" class="form-control" placeholder="Enter Amount"
-                                value={{phpAmount}}>
+                                value={{phpAmount}} required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -350,7 +356,7 @@
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total Field --}}
                             <input type="text" id="totalField" name="total" class="form-control" id="totalField"
-                                value="0.00">
+                                value="0.00" required>
                         </div>
                     </div>
                 </div>
@@ -361,7 +367,7 @@
                             <label for="prepField">Prepared By:</label>
                             {{!-- Prepared by Field --}}
                             <input id="prepared" type="text" class="form-control" id="prepField" name="prepared"
-                                placeholder="Enter Name" value={{preparedBy}}>
+                                placeholder="Enter Name" value="{{preparedBy}}" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -369,7 +375,7 @@
                             <label for="apprField">Approved By: </label>
                             {{!-- Approbed by Field --}}
                             <input id="approved" type="text" class="form-control" id="apprField" name="approved"
-                                placeholder="Enter Name" value={{approvedBy}}>
+                                placeholder="Enter Name" value="{{approvedBy}}" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -377,7 +383,7 @@
                             <label for="recField">Received By:</label>
                             {{!-- Received by Field --}}
                             <input id="received" type="text" class="form-control" id="recField" name="received"
-                                placeholder="Enter Name" value={{receivedBy}}>
+                                placeholder="Enter Name" value="{{receivedBy}}" required>
                         </div>
                     </div>
                 </div>

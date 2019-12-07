@@ -3,6 +3,9 @@ const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 const PRF = require('../model/PRF')
 const User = require('../model/User')
+const file = "config\\settings.json"
+const fs = require("fs");
+
 
 
 // ROUTE FOR THE MAP AND POSTS
@@ -14,8 +17,8 @@ router.get('/', (req, res) => {
     let type = 'CO'
     let password = 'poop'
     let jsonData = JSON.parse(fs.readFileSync(file))
-    
-    const {prfNumber,poNumber} = req.body;
+
+    const { prfNumber, poNumber } = req.body;
 
     User.find({ type: type }, function (err, doc) {
         if (err) {
@@ -27,13 +30,15 @@ router.get('/', (req, res) => {
             var stringify = JSON.stringify(obj);
             var x = JSON.parse(stringify)
             console.log(x[0]['password'])
-            res.render('prf.hbs', { password: x[0]['password'],
-                        prfNumber: jsonData.prfNumber,
-                        poNumber: jsonData.poNumber})
+            res.render('prf.hbs', {
+                password: x[0]['password'],
+                prfNumber: jsonData.prfNumber,
+                poNumber: jsonData.poNumber
+            })
         }
         else {
             console.log('failed')
-            res.render('prf.hbs',{
+            res.render('prf.hbs', {
                 prfNumber: jsonData.prfNumber,
                 poNumber: jsonData.poNumber
             })
@@ -44,11 +49,11 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
 
-    const {prfNumber,poNumber, buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
+    const { prfNumber, poNumber, buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
 
     // console.log(buyer);
-    
-    
+
+
     const newPRF = new PRF({
         prfNumber,
         poNumber,
@@ -68,6 +73,11 @@ router.post('/add', (req, res) => {
     newPRF.save()
         .then(newPRF => {
             req.flash('success_msg', 'Added PRF#' + newPRF.prfNumber);
+
+            let jsonData = JSON.parse(fs.readFileSync(file))
+            jsonDate.prfNumber += 1;
+            fs.writeFileSync(file, JSON.stringify(jsonData));
+
             console.log('Added PRF#' + newPRF.prfNumber);
         })
         .catch(err => console.log(err))
@@ -122,6 +132,11 @@ router.post('/save', (req, res) => {
             newPRF.save()
                 .then(post => {
                     console.log('PRF Successfully added' + newPRF)
+
+                    let jsonData = JSON.parse(fs.readFileSync(file))
+                    jsonDate.prfNumber += 1;
+                    fs.writeFileSync(file, JSON.stringify(jsonData));
+
                     req.flash('success_msg', 'New PRF added.')
                     res.redirect('back')
                 })

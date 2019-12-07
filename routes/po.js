@@ -3,6 +3,10 @@ const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 const PO = require('../model/PO')
 const User = require('../model/User')
+const file = "config\\settings.json"
+const fs = require("fs");
+
+
 
 
 
@@ -14,19 +18,19 @@ router.get('/', (req, res) => {
     let type = 'CO'
     let password = 'poop'
 
-    User.find({type:type}, function(err, doc) {
-        if(err) {
+    User.find({ type: type }, function (err, doc) {
+        if (err) {
             console.log(err)
         }
 
-        if(doc){
+        if (doc) {
             var obj = doc
             var stringify = JSON.stringify(obj);
             var x = JSON.parse(stringify)
             console.log(x[0]['password'])
-            res.render('prf.hbs', {password:x[0]['password']})
+            res.render('prf.hbs', { password: x[0]['password'] })
         }
-        else{
+        else {
             console.log('failed')
             res.render('prf.hbs')
         }
@@ -55,10 +59,19 @@ router.post('/save', (req, res) => {
         receivedBy: received
     })
 
+
+
+
+
     newPO.save()
         .then(post => {
             console.log("PO added sucessfully " + newPO)
             req.flash('success_msg', 'New PO added.')
+
+            let jsonData = JSON.parse(fs.readFileSync(file))
+            jsonDate.poNumber += 1;
+            fs.writeFileSync(file, JSON.stringify(jsonData));
+
             res.redirect('/dashboard')
         })
         .catch(err => {
