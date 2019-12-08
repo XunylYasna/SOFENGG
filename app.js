@@ -170,10 +170,25 @@ app.get('/grossreport', (req, res) => {
     var dataSet = {};
 
     prfs.forEach(function (prfs) {
-      dataSet[prfs._id] = prfs;
+      
+      PO.find({prfNumber: prfs.prfNumber}, function(err, pos) {
+        if(err) {}
+        else if(pos) {
+          console.log(pos)
+          prfs.poTotal = pos.total
+          dataSet[prfs._id] = prfs;
+          console.log(prfs)
+        }
+        else {
+          dataSet[prfs._id] = prfs;
+        }
+      })
+      
     });
 
-    console.log(prfs)
+    
+
+    console.log(dataSet)
 
     if (err) {
       throw (err)

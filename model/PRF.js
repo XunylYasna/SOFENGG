@@ -16,7 +16,8 @@ const PRFSchema = new mongoose.Schema({
     total: Number,
     preparedBy: String,
     approvedBy: String,
-    receivedBy: String
+    receivedBy: String,
+    poTotal: {type: Number, default: 0}
 })
 
 const PRF = mongoose.model('PRF', PRFSchema)
