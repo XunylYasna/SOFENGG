@@ -170,23 +170,23 @@ app.get('/grossreport', (req, res) => {
     var dataSet = {};
 
     prfs.forEach(function (prfs) {
-      
-      PO.find({prfNumber: prfs.prfNumber}, function(err, pos) {
-        if(err) {}
-        else if(pos) {
-          console.log(pos)
-          prfs.poTotal = pos.total
-          dataSet[prfs._id] = prfs;
-          console.log(prfs)
+
+      dataSet[prfs._id] = prfs;
+      PO.find({ prfNumber: prfs.prfNumber }, function (err, pos) {
+        if (err) {
+          res.send(err)
         }
         else {
-          dataSet[prfs._id] = prfs;
+          pos.forEach((po, index, pos) => {
+            prfs.poTotal = pos.total
+            dataSet[prfs._id] = prfs;
+          })
         }
       })
-      
+
     });
 
-    
+
 
     console.log(dataSet)
 
