@@ -6,8 +6,8 @@ var dataArray = [];
 var grosstotal = 0;
 dataSetKey.forEach((key, index) => {
     const data = dataSet[key]
-    dataArray[index] = [data.prfNumber, data.date, data.date, data.total, data.total, (data.total - data.total)]
-    grosstotal = grosstotal + (data.total - data.total)
+    dataArray[index] = [data.prfNumber, data.date, data.date, data.total, data.poTotal, (data.total - data.poTotal)]
+    grosstotal = grosstotal + (data.total - data.poTotal)
 })
 
 function formatDate(date) {
