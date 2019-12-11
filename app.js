@@ -85,9 +85,9 @@ app.post('/dashboard', (req, res) => {
   //   return res.end(JSON.stringify(prfs));
   // })
 
-  let password = req.body.pw
   let invalid = 'INVALID'
 
+  let password = req.body.pw
   User.findOne({ password: password }, function (err, doc) {
     if (err) {
       console.log(err)
@@ -123,7 +123,7 @@ app.post('/dashboard', (req, res) => {
 
 })
 
-app.get('/dashboard', (req, res) => {
+app.post('/dashboard3', (req, res) => {
   let invalid = 'INVALID'
   PRF.find({}, function (err, prfs) {
     var dataSet = {};
@@ -142,7 +142,7 @@ app.get('/dashboard', (req, res) => {
   });
 })
 
-app.get('/dashboard1', (req, res) => {
+app.post('/dashboard1', (req, res) => {
   let invalid = ''
   PRF.find({}, function (err, prfs) {
     var dataSet = {};
@@ -165,28 +165,6 @@ app.get('/login', (req, res) => {
   res.render("login.hbs")
 })
 
-app.get('/grossreport', (req, res) => {
-  PRF.find({}, function (err, prfs) {
-    var dataSet = {};
-
-    prfs.forEach(function (prfs) {
-      dataSet[prfs._id] = prfs;
-    });
-
-    console.log(prfs)
-
-    if (err) {
-      throw (err)
-    }
-    else if (prfs) {
-      res.render("grossreport.hbs", {
-        layout: 'dashboardLayout',
-        dataSet
-      })
-    }
-  })
-})
-
 app.post('/gross', (req, res) => {
   let password = req.body.pw
   let type = 'CO'
@@ -199,19 +177,34 @@ app.post('/gross', (req, res) => {
       console.log(doc.password)
       console.log(password)
 
-      res.redirect('grossreport')
+      PRF.find({}, function (err, prfs) {
+        var dataSet = {};
+
+        prfs.forEach(function (prfs) {
+          dataSet[prfs._id] = prfs;
+        });
+
+        console.log(prfs)
+
+        if (err) {
+          throw (err)
+        }
+        else if (prfs) {
+          res.render("grossreport.hbs", {
+            layout: 'dashboardLayout',
+            dataSet
+          })
+        }
+      })
 
     }
     else {
 
-      res.redirect('dashboard')
+      res.redirect(307, '/dashboard3')
     }
   })
 })
 
-app.get('/headings', (req, res) => {
-  res.render("headings.hbs")
-})
 
 app.post('/passwordmanager', (req, res) => {
   let password = req.body.pw
@@ -227,7 +220,7 @@ app.post('/passwordmanager', (req, res) => {
       res.render("passwordmanager.hbs", { layout: 'dashboardLayout' })
     }
     else {
-      res.redirect('dashboard')
+      res.redirect(307, '/dashboard3')
     }
   })
 })
@@ -243,10 +236,10 @@ app.post('/headings', (req, res) => {
     if (doc && password == doc.password) {
       console.log(doc.password)
       console.log(password)
-      res.redirect('headings')
+      res.render("headings.hbs")
     }
     else {
-      res.redirect('dashboard')
+      res.redirect(307, 'dashboard3')
     }
   })
 })
