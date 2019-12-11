@@ -14,16 +14,16 @@ function formatDate(date) {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) 
+    if (month.length < 2)
         month = '0' + month;
-    if (day.length < 2) 
+    if (day.length < 2)
         day = '0' + day;
 
     return [year, day, month].join('-');
 }
 
 $.fn.dataTableExt.afnFiltering.push(
-    function( settings, data, dataIndex ) {
+    function (settings, data, dataIndex) {
         var from = $('#datefilterfrom').val();
         var to = $('#datefilterto').val();
         var day = new Date(data[1]) || 0; // use data for the date column
@@ -47,22 +47,24 @@ $(document).ready(function () {
         scrollCollapse: true,
         columns: [
             { title: "PRF#" },
-            { title: "Date" ,
-                render: function(data, type, full) {
-                    return moment(data).format('DD/MM/YYYY HH:mm:ss'); 
+            {
+                title: "Date",
+                render: function (data, type, full) {
+                    return moment(data).format('DD/MM/YYYY HH:mm:ss');
                 }
             },
             { title: "Recipient" },
-            { title: "Paid Date" ,
-                render: function(data, type, full) {
-                    return moment(data).format('DD/MM/YYYY HH:mm:ss'); 
+            {
+                title: "Paid Date",
+                render: function (data, type, full) {
+                    return moment(data).format('DD/MM/YYYY HH:mm:ss');
                 }
             },
             { title: "PO's" },
             {
                 title: "Commands",
                 render: function (data, type, row, meta) {
-                    return '<form method="POST" onsubmit="return false;"> <input type="hidden" name="prfID" value="' + data + '" /> <button class="btn btn-primary" onclick="viewPRF(this)">View</button> <button class="btn btn-warning" onclick="editPRF()">Edit</button> <button class="btn btn-danger" onclick="deletePRF()">Delete</button> </form>';
+                    return '<form method="POST"> <input type="hidden" name="prfID" value="' + data + '" /> <button type="button" class="btn btn-primary" onclick="viewPRF(this)">View</button> <button type="button" class="btn btn-danger" onclick="showModal(this)">Delete</button> </form>';
                 }
             }
         ],
@@ -72,10 +74,10 @@ $(document).ready(function () {
 
     var table = $('#dataTable').DataTable();
 
-    $('#datefilterfrom, #datefilterto').on('change', function() {
+    $('#datefilterfrom, #datefilterto').on('change', function () {
         table.draw();
-    } );
-    
+    });
+
 });
 
 function editPRF(prf) {
@@ -83,9 +85,9 @@ function editPRF(prf) {
     $(prf).parents('form:first').submit();
 }
 
-function deletePRF() {
-    $(this).parents('form:first').attr("action", "/prf/delete");
-    $(this).parents('form:first').submit();
+function deletePRF(button) {
+    $(button).parents('form:first').attr("action", "/prf/delete");
+    $(button).parents('form:first').submit();
 }
 
 function viewPRF(button) {
@@ -93,4 +95,16 @@ function viewPRF(button) {
     $(button).parents('form:first').attr("method", "GET");
     $(button).parents('form:first').attr("action", "/prf/view");
     $(button).parents('form:first').submit();
+}
+
+function showModal(button) {
+    $('#deleteThis').modal('show');
+
+    $('#btnDelete').click(() => {
+        let val = $('#pwd4').val()
+        $(button).parents('form:first').attr("action", "/prf/delete");
+        $(button).parents('form:first').append('<input type="hidden" name="pw" value=\'' + val + '\'/>')
+        $(button).parents('form:first').submit();
+
+    })
 }

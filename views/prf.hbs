@@ -91,6 +91,10 @@
                 }
             })
 
+            $('#dashboard').click(()=>{
+                $('#myDash').submit()
+            })
+
         })
 
         function disableBind() {
@@ -153,7 +157,7 @@
             </li>
             <li class="nav-item"><br><br>
                 <button id="dashboard" class="btn btn-home btn-block" type="button"
-                    onclick="window.location='/dashboard1'">Dashboard
+                    href='#'>Dashboard
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 </button>
             </li>
@@ -399,3 +403,9 @@
         </div>
     </div>
 </div>
+
+{{!-- AUTHENTICATED DASHBOARD --}}
+
+<form action="dashboard1" method="POST" id="myDash">
+    <input type="hidden" name="dash" id="dashB" value="dashbo">
+</form>
