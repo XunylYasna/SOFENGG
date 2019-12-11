@@ -156,17 +156,80 @@ router.post('/save', (req, res) => {
 
 })
 
+router.post('/dashboard3', (req, res) => {
+    let invalid = 'INVALID'
+    PRF.find({}, function (err, prfs) {
+        var dataSet = {};
+
+        prfs.forEach(function (prfs) {
+            dataSet[prfs._id] = prfs;
+        });
+
+        console.log(dataSet)
+
+        res.render("dashboard.hbs", {
+            title: 'my other page', layout: 'dashboardLayout',
+            dataSet,
+            invalid: invalid
+        })
+    });
+})
+
+router.post('/dashboard1', (req, res) => {
+    let invalid = ''
+    PRF.find({}, function (err, prfs) {
+        var dataSet = {};
+
+        prfs.forEach(function (prfs) {
+            dataSet[prfs._id] = prfs;
+        });
+
+        console.log(dataSet)
+
+        res.render("dashboard.hbs", {
+            layout: 'dashboardLayout',
+            dataSet,
+            invalid: invalid
+        })
+    });
+})
+
 
 router.post('/delete', (req, res) => {
 
-    PRF.deleteOne({ _id: req.body.prfID }, function (err) {
+    //PRF.deleteOne({ _id: req.body.prfID }, function (err) {
+    //    if (err) {
+    //        console.log(err);
+    //   }
+    //   else {
+    //       res.redirect(307, '/dashboard1')
+    //  }
+    //});
+
+    let password = req.body.pw
+    let type = 'CO'
+
+    User.findOne({ type: type }, function (err, doc) {
         if (err) {
-            console.log(err);
+            console.log(err)
+        }
+        if (doc && password == doc.password) {
+            console.log(doc.password)
+            console.log(password)
+
+            PRF.deleteOne({ _id: req.body.prfID }, function (err) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.redirect(307, '/dashboard1')
+                }
+            })
         }
         else {
-            res.redirect(307,'/dashboard1')
+            res.redirect(307, '/dashboard3')
         }
-    });
+    })
 })
 
 router.get('/view', (req, res) => {
