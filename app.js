@@ -166,29 +166,39 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/grossreport', (req, res) => {
+  var dataSet = {};
   PRF.find({}, function (err, prfs) {
-    var dataSet = {};
+    
 
     prfs.forEach(function (prfs) {
 
       dataSet[prfs._id] = prfs;
+
       PO.find({ prfNumber: prfs.prfNumber }, function (err, pos) {
         if (err) {
           res.send(err)
         }
-        else {
-          pos.forEach((po, index, pos) => {
-            prfs.poTotal = pos.total
-            dataSet[prfs._id] = prfs;
+        else if (pos) {
+          var temp;
+          pos.forEach(function(po, index, pos) {
+            var tl = po.total;
+            prfs.poTotal = po.total || tl;            
+            
+            temp = prfs;
+            
+            
           })
+          dataSet[prfs._id] = temp;
+          
         }
+        console.log(dataSet);
       })
-
+      //console.log(dataSet);
     });
 
 
 
-    console.log(dataSet)
+    //console.log(dataSet)
 
     if (err) {
       throw (err)
