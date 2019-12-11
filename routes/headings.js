@@ -5,7 +5,7 @@ var fs = require("fs");
 const file = "config\\settings.json"
 
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
     // Reading JSON
     let jsonData = JSON.parse(fs.readFileSync(file))
     let heading = jsonData.heading
