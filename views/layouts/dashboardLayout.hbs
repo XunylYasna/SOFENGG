@@ -266,6 +266,35 @@
         </div>
     </form>
 
+    <!-- VIEW MODAL -->
+
+    <div class="modal fade" id="viewThis" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">This page requires an admin password to proceed.</div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd3"
+                                required="" autocomplete="new-password">
+                            <div class="invalid-feedback">Enter your password too!</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" id="btnView" type="button">Enter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- DELETE MODAL -->
     
         <div class="modal fade" id="deleteThis" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
