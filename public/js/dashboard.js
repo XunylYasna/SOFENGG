@@ -91,10 +91,14 @@ function deletePRF(button) {
 }
 
 function viewPRF(button) {
-    alert('hi')
-    $(button).parents('form:first').attr("method", "GET");
-    $(button).parents('form:first').attr("action", "/prf/view");
-    $(button).parents('form:first').submit();
+    $('#viewThis').modal('show');
+
+    $('#btnView').click(() => {
+        let val = $('#pwd3').val()
+        $(button).parents('form:first').attr("method", "GET");
+        $(button).parents('form:first').attr("action", "/prf/view");
+        $(button).parents('form:first').submit();
+    })
 }
 
 function addPO(button) {

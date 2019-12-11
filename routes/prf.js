@@ -289,37 +289,15 @@ router.get('/view', (req, res) => {
         }
     });
 
-    
-    const newPRF = new PRF({
-        prfNumber,
-        poNumber,
-        buyer,
-        date,
-        paxNames: names,
-        route,
-        particulars,
-        airFare,
-        travelTax: taxField,
-        documentations: documentation,
-        usAmount: dollar,
-        phpAmount: peso,
-        total,
-        preparedBy: prepared,
-        approvedBy: approved,
-        receivedBy: received
-    })
-
-    newPRF.save()
-        .then(post => {
-            console.log('PRF Successfully added' + newPRF)
-            req.flash('success_msg', 'New PRF added.')
-            res.redirect('/dashboard')
-        })
-        .catch(err => {
-            console.log(err)
-        })
-
-
+    // newPRF.save()
+    //     .then(post => {
+    //         console.log('PRF Successfully added' + newPRF)
+    //         req.flash('success_msg', 'New PRF added.')
+    //         res.redirect('/dashboard')
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
 
 })
 
