@@ -81,6 +81,10 @@
                     }
                 })
 
+                $('#dashboard').click(() => {
+                    $('#myDash').submit()
+                })
+
             })
 
             $(window).bind('beforeunload', () => {
@@ -166,13 +170,8 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 </button>
 
-                <script type="text/javascript">
-            document.getElementById("dashboard").onclick = function () {
-                location.href = "dashboard1";
-            };
-                </script>
                 <button id="dashboard" class="btn btn-home btn-block" type="button">Dashboard
-                    <i class="fas fa-fw fa-tachometer-alt" onclick="window.location = '/dashboard1'"></i>
+                    <i class="fas fa-fw fa-tachometer-alt" href='#'></i>
                 </button>
                 </script>
             </li>
@@ -386,3 +385,7 @@
         </div>
     </div>
 </div>
+
+<form action="dashboard1" method="POST" id="myDash">
+    <input type="hidden" name="dash" id="dashB" value="dashbo">
+</form>
