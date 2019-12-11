@@ -164,7 +164,7 @@ router.post('/delete', (req, res) => {
             console.log(err);
         }
         else {
-            res.redirect('/dashboard1')
+            res.redirect(307,'/dashboard1')
         }
     });
 })

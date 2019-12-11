@@ -67,7 +67,7 @@ $(document).ready(function () {
             {
                 title: "Commands",
                 render: function (data, type, row, meta) {
-                    return '<form method="POST" onsubmit="return false;"> <input type="hidden" name="prfID" value="' + data + '" /> <button class="btn btn-primary" onclick="viewPRF(this)">View</button> <button class="btn btn-warning" onclick="editPRF()">Edit</button> <button class="btn btn-danger" onclick="deletePRF()">Delete</button> </form>';
+                    return '<form method="POST"> <input type="hidden" name="prfID" value="' + data + '" /> <button type="button" class="btn btn-primary" onclick="viewPRF(this)">View</button> <button type="button" class="btn btn-danger" onclick="deletePRF(this)">Delete</button> </form>';
                 }
             }
         ],
@@ -88,9 +88,9 @@ function editPRF(prf) {
     $(prf).parents('form:first').submit();
 }
 
-function deletePRF() {
-    $(this).parents('form:first').attr("action", "/prf/delete");
-    $(this).parents('form:first').submit();
+function deletePRF(button) {
+    $(button).parents('form:first').attr("action", "/prf/delete");
+    $(button).parents('form:first').submit();
 }
 
 function viewPRF(button) {
