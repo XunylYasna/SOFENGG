@@ -47,13 +47,42 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/add', (req, res) => {
+router.get('/add', (req, res) => {
+    
+    let jsonData = JSON.parse(fs.readFileSync(file))
 
-    const { prfNumber, poNumber, buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
+    // const { prfNumber, poNumber, buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
 
     // console.log(buyer);
 
+    PRF.findById(req.query.prfID, function (err, doc) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            const { prfNumber, buyer, date, paxNames, route, particulars, airFare, travelTax, documentations, usAmount, phpAmount, total, preparedBy, approvedBy, receivedBy } = doc;
+            res.render('po.hbs', {
+                prfNumber,
+                poNumber:jsonData.poNumber,
+                buyer,
+                date,
+                paxNames,
+                route,
+                particulars,
+                airFare,
+                travelTax,
+                documentations,
+                usAmount,
+                phpAmount,
+                total,
+                preparedBy,
+                approvedBy,
+                receivedBy
+            })
+        }
+    });
 
+/*
     const newPRF = new PRF({
         prfNumber,
         poNumber,
@@ -80,10 +109,10 @@ router.post('/add', (req, res) => {
 
             console.log('Added PRF#' + newPRF.prfNumber);
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err))*/
 
 
-    res.render("po.hbs", {
+/*    res.render("po.hbs", {
         prfNumber,
         poNumber,
         buyer,
@@ -97,7 +126,7 @@ router.post('/add', (req, res) => {
         prepared,
         approved,
         received
-    })
+    })*/
 })
 
 router.post('/save', (req, res) => {
@@ -259,6 +288,26 @@ router.get('/view', (req, res) => {
             })
         }
     });
+
+    
+    const newPRF = new PRF({
+        prfNumber,
+        poNumber,
+        buyer,
+        date,
+        paxNames: names,
+        route,
+        particulars,
+        airFare,
+        travelTax: taxField,
+        documentations: documentation,
+        usAmount: dollar,
+        phpAmount: peso,
+        total,
+        preparedBy: prepared,
+        approvedBy: approved,
+        receivedBy: received
+    })
 
     newPRF.save()
         .then(post => {

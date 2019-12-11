@@ -60,8 +60,10 @@ function computePeso() {
 }
 
 function save() {
-    $("#poForm").attr("action", "/po/save"); //Will set it
-    $("#poForm").submit();
+
+    alert("Hello");
+    
+    /*    $("#poForm").attr("action", "/po/save"); //Will set it
 
     if (document.getElementById('pOForm').checkValidity()) {
         document.getElementById('pOForm').add('was-validated');
@@ -70,7 +72,7 @@ function save() {
     }
     else {
         alert("Please fill out all the fields")
-    }
+    }*/
 }
 
 

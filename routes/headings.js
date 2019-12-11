@@ -32,7 +32,7 @@ router.post('/saveheading', (req, res) => {
     // Writing JSON
     fs.writeFileSync(file, JSON.stringify(jsonData));
 
-    res.redirect("/headings");
+    res.redirect();
 });
 
 router.post('/savepo', (req, res) => {
