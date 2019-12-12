@@ -116,7 +116,7 @@ $(document).ready(function () {
 
     $("#clear").on('click', function () {
         if (confirm("Want to clear?")) {
-            $(this).closest('body').find("input[type=text], textarea").not("#poNumber, #prfNumber, #exchangeDisplay, #name").val("");
+            $(this).closest('body').find("input[type=text], textarea, input[type=number]").not("#poNumber, #prfNumber, #exchangeDisplay, #name").val("");
         }
     })
 
