@@ -92,6 +92,7 @@
             })
 
             $('#dashboard').click(()=>{
+                alert('reaches here')
                 $('#myDash').submit()
             })
 
@@ -100,6 +101,10 @@
         function disableBind() {
             //$(window).unbind('beforeunload')
             window.onbeforeunload = null;
+        }
+
+        function dashBoar() {
+            $('#myDash').submit()
         }
 
         function myFunc() {
@@ -157,7 +162,7 @@
             </li>
             <li class="nav-item"><br><br>
                 <button id="dashboard" class="btn btn-home btn-block" type="button"
-                    href='#'>Dashboard
+                    href='#' onclick="dashBoar()">Dashboard
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 </button>
             </li>
