@@ -61,10 +61,6 @@
             $('#dash1').click(()=>{
                 $('#myDash').submit()
             })
-
-            $('#viewPOs').click(()=>{
-                $('#myPO').submit()
-            })
         })
     </script>
 
@@ -104,11 +100,10 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 </a>
             </li>
-            <br>
             <li id="viewPOs" class="nav-item active">
                 <a class="nav-link" href="#">
                     <span>Purchase Order Forms</span>
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
                 </a>
             </li>
             <li class="nav-item">
@@ -116,7 +111,6 @@
                     <span>Gross Report</span>
                     <i class="fas fa-fw fa-table"></i></a>
             </li>
-            <br>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#passwordManager">
                     <span>Password Manager</span>
@@ -374,8 +368,5 @@
     <input type="hidden" name="dash" id="dashB" value="dashbo">
 </form>
 
-<form action="purchaseorder" method="POST" id="myPO">
-    <input type="hidden" name="poForm" value="poFo" id='purchO'>
-</form>
 
 </html>
