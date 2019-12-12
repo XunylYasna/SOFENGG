@@ -226,15 +226,6 @@ router.post('/dashboard1', (req, res) => {
 
 router.post('/delete', (req, res) => {
 
-    //PRF.deleteOne({ _id: req.body.prfID }, function (err) {
-    //    if (err) {
-    //        console.log(err);
-    //   }
-    //   else {
-    //       res.redirect(307, '/dashboard1')
-    //  }
-    //});
-
     let password = req.body.pw
     let type = 'CO'
 
