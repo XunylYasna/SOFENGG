@@ -116,7 +116,7 @@ router.get('/view', (req, res) => {
             console.log(err);
         }
         else {
-            const { prfNumber, poNumber, buyer, date, paxNames, route, documentations, usAmount, phpAmount, total, preparedBy, approvedBy, receivedBy } = doc;
+            const { prfNumber, poNumber, buyer, date, paxNames, route, description, usAmount, phpAmount, total, preparedBy, approvedBy, receivedBy } = doc;
             res.render('po.hbs', {
                 prfNumber,
                 poNumber,
@@ -124,7 +124,7 @@ router.get('/view', (req, res) => {
                 date,
                 paxNames,
                 route,
-                documentations,
+                description,
                 usAmount,
                 phpAmount,
                 total,

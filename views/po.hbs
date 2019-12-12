@@ -244,7 +244,7 @@
                             <label for="buyerField">To: </label>
                             {{!-- Buyer Field --}}
                             <input required name="buyer" type="text" class="form-control" id="buyerField"
-                                placeholder="Recipient" value="{{buyer}}">
+                                placeholder="Recipient" value={{buyer}}>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -252,7 +252,7 @@
                             <label for="purchaseDate">Date: </label>
                             {{!-- Date Field --}}
                             <input required name="date" type="date" class="form-control" id="purchaseDate"
-                                placeholder="Enter Date" value="{{date}}" name="date">
+                                placeholder="Enter Date" value={{date}} name="date">
                         </div>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
                             <label for="nameField">Pax Name/s: </label>
                             {{!-- Name Text Area --}}
                             <textarea required class="form-control " rows="5" id="nameField" placeholder="Enter Names"
-                                name="names">{{names}}</textarea>
+                                name="names">{{paxNames}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -297,7 +297,7 @@
                             {{!-- Dollar field --}}
                             <input required type="number" id="dollarField" onkeydown="return event.keyCode !== 69"
                                 oninput="computeDollar()" class="form-control" id="dollarField"
-                                placeholder="Enter Amount" value="{{dollar}}" name="dollar">
+                                placeholder="Enter Amount" value={{usAmount}} name="dollar">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -306,7 +306,7 @@
                             {{!-- Peso field --}}
                             <input required type="number" id="pesoField" onkeydown="return event.keyCode !== 69"
                                 oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount"
-                                value="{{peso}}" name="peso">
+                                value={{phpAmount}} name="peso">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -325,7 +325,7 @@
                             <label for="prepField">Prepared By:</label>
                             {{!-- Prepared field --}}
                             <input required type="text" class="form-control" id="prepField" placeholder="Enter Name"
-                                name="prepared" value="{{prepared}}">
+                                name="prepared" value={{preparedBy}}>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -341,7 +341,7 @@
                             <label for="recField">Received By:</label>
                             {{!-- Received Field --}}
                             <input required type="text" class="form-control" id="recField" placeholder="Enter Name"
-                                name="received" value="{{received}}">
+                                name="received" value={{receivedBy}}>
                         </div>
                     </div>
                 </div>
