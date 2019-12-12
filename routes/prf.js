@@ -268,7 +268,7 @@ router.get('/view', (req, res) => {
         }
         else {
             const { prfNumber, poNumber, buyer, date, paxNames, route, particulars, airFare, travelTax, documentations, usAmount, phpAmount, total, preparedBy, approvedBy, receivedBy } = doc;
-            res.render('prf.hbs', {
+            res.render('viewPrf.hbs', {
                 prfNumber,
                 poNumber,
                 buyer,
