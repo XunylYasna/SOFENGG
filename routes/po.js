@@ -55,12 +55,12 @@ router.post('/delete', (req, res) => {
                     console.log(err);
                 }
                 else {
-                    res.redirect(307, '/dashboard1')
+                    res.redirect(307, '/purchaseorder')
                 }
             })
         }
         else {
-            res.redirect(307, '/dashboard3')
+            res.redirect(307, '/purchaseorder')
         }
     })
 })
