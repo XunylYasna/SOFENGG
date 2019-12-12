@@ -300,6 +300,24 @@ app.post("/ownerNew", (req, res) => {
   })
 })
 
+app.post('/purchaseorder', (req, res) => {
+  let invalid = ''
+  PO.find({}, function (err, pos) {
+    var dataSet = {};
+
+    pos.forEach(function (pos) {
+      dataSet[pos._id] = pos;
+    });
+
+    console.log(dataSet)
+
+    res.render("dashPO.hbs", {
+      layout: 'viewPOS',
+      dataSet,
+      invalid: invalid
+    })
+  });
+})
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
