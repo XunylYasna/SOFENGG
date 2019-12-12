@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const exphbs = require('express-handlebars');
 app.engine('hbs', exphbs({
   extname: '.hbs',
-  defaultLayout: 'main',
   helpers: {
     json: function (content) { return JSON.stringify(content); },
     ifEquals: function (arg1, arg2, options) { return (arg1 == arg2) ? options.fn(this) : options.inverse(this); }
@@ -73,6 +72,9 @@ app.use('/', require('./routes/index'))
 app.use('/users', require('./routes/users'))
 app.use('/prf', require('./routes/prf'))
 app.use('/po', require('./routes/po'))
+app.use('/export', require('./routes/export'))
+app.use('/headings', require('./routes/headings'))
+
 
 
 
@@ -83,25 +85,27 @@ app.post('/dashboard', (req, res) => {
   //   return res.end(JSON.stringify(prfs));
   // })
 
-  let password = req.body.pw
+  let invalid = 'INVALID'
 
-  User.findOne({password:password}, function(err, doc) {
-    if(err) {
+  let password = req.body.pw
+  User.findOne({ password: password }, function (err, doc) {
+    if (err) {
       console.log(err)
     }
 
-    if(doc && password == doc.password) {
+    if (doc && password == doc.password) {
       console.log(password)
       PRF.find({}, function (err, prfs) {
         var dataSet = {};
-    
+
         prfs.forEach(function (prfs) {
           dataSet[prfs._id] = prfs;
         });
-    
+
         console.log(dataSet)
-    
+
         res.render("dashboard.hbs", {
+          title: 'my other page', layout: 'dashboardLayout',
           dataSet
         })
       });
@@ -109,17 +113,18 @@ app.post('/dashboard', (req, res) => {
 
     else {
       console.log("ERROR")
-      res.render('login.hbs')
+      res.render('login.hbs', { invalid: invalid })
     }
 
   })
 
 
-  
+
 
 })
 
-app.get('/dashboard', (req,res) => {
+app.post('/dashboard3', (req, res) => {
+  let invalid = 'INVALID'
   PRF.find({}, function (err, prfs) {
     var dataSet = {};
 
@@ -130,7 +135,28 @@ app.get('/dashboard', (req,res) => {
     console.log(dataSet)
 
     res.render("dashboard.hbs", {
-      dataSet
+      title: 'my other page', layout: 'dashboardLayout',
+      dataSet,
+      invalid: invalid
+    })
+  });
+})
+
+app.post('/dashboard1', (req, res) => {
+  let invalid = ''
+  PRF.find({}, function (err, prfs) {
+    var dataSet = {};
+
+    prfs.forEach(function (prfs) {
+      dataSet[prfs._id] = prfs;
+    });
+
+    console.log(dataSet)
+
+    res.render("dashboard.hbs", {
+      layout: 'dashboardLayout',
+      dataSet,
+      invalid: invalid
     })
   });
 })
@@ -139,68 +165,62 @@ app.get('/login', (req, res) => {
   res.render("login.hbs")
 })
 
-app.get('/grossreport', (req, res) => {
-  PRF.find({}, function (err, prfs) {
-    var dataSet = {};
-
-    prfs.forEach(function (prfs) {
-      dataSet[prfs._id] = prfs;
-    });
-
-    console.log(prfs)
-
-    if(err) {
-      throw(err)
-    }
-    else if(prfs) {
-      res.render("grossreport.hbs", {
-        dataSet
-      })
-    }
-  })
-})
-
 app.post('/gross', (req, res) => {
   let password = req.body.pw
   let type = 'CO'
 
-  User.findOne({type:type}, function(err, doc) {
-    if(err) {
+  User.findOne({ type: type }, function (err, doc) {
+    if (err) {
       console.log(err)
     }
-    if(doc && password == doc.password) {
+    if (doc && password == doc.password) {
       console.log(doc.password)
       console.log(password)
 
-      res.redirect('grossreport')
+      PRF.find({}, function (err, prfs) {
+        var dataSet = {};
+
+        prfs.forEach(function (prfs) {
+          dataSet[prfs._id] = prfs;
+        });
+
+        console.log(prfs)
+
+        if (err) {
+          throw (err)
+        }
+        else if (prfs) {
+          res.render("grossreport.hbs", {
+            layout: 'dashboardLayout',
+            dataSet
+          })
+        }
+      })
 
     }
-    else{
+    else {
 
-      res.redirect('dashboard')
+      res.redirect(307, '/dashboard3')
     }
   })
 })
 
-app.get('/headings', (req, res) => {
-  res.render("headings.hbs")
-})
 
 app.post('/passwordmanager', (req, res) => {
   let password = req.body.pw
   let type = 'CO'
 
-  User.findOne({type:type}, function(err, doc) {
-    if(err) {
+  User.findOne({ type: type }, function (err, doc) {
+    if (err) {
       console.log(err)
     }
-    if(doc && password == doc.password) {
+    if (doc && password == doc.password) {
       console.log(doc.password)
       console.log(password)
-      res.render("passwordmanager.hbs")
+      res.render("passwordmanager.hbs", { layout: 'dashboardLayout' })
     }
-    else{
-      res.redirect('dashboard')
+    else {
+      res.redirect(307, '/dashboard3')
     }
   })
 })
@@ -209,17 +229,17 @@ app.post('/headings', (req, res) => {
   let password = req.body.pw
   let type = 'CO'
 
-  User.findOne({type:type}, function(err, doc) {
-    if(err) {
+  User.findOne({ type: type }, function (err, doc) {
+    if (err) {
       console.log(err)
     }
-    if(doc && password == doc.password) {
+    if (doc && password == doc.password) {
       console.log(doc.password)
       console.log(password)
-      res.redirect('headings')
+      res.render("headings.hbs")
     }
-    else{
-      res.redirect('dashboard')
+    else {
+      res.redirect(307, 'dashboard3')
     }
   })
 })
@@ -231,25 +251,27 @@ app.post("/staffNew", (req, res) => {
   let errormessage = 'Current Password Does not Match with your Input...'
   let successmessage = 'Password Change Successful!!'
 
-  User.findOne({type:type}, (err, doc) => {
-    if(err){
+  User.findOne({ type: type }, (err, doc) => {
+    if (err) {
       console.log(err)
     }
-    if(doc && password == doc.password) {
+    if (doc && password == doc.password) {
       console.log('testing')
-      User.updateOne({type:type}, {
+      User.updateOne({ type: type }, {
         type: type,
         password: newPassword
       }, (err, affected, resp) => {
         console.log(resp)
-        res.render("passwordmanager.hbs", {errormessage:successmessage})
+        res.render("passwordmanager.hbs", { layout: 'dashboardLayout', errormessage: successmessage })
       })
     }
-    else{
-      res.render("passwordmanager.hbs", {errormessage:errormessage})
+    else {
+      res.render("passwordmanager.hbs", { layout: 'dashboardLayout', errormessage: errormessage })
     }
   })
 })
+
+
 
 app.post("/ownerNew", (req, res) => {
   let password = req.body.currentowner
@@ -258,29 +280,44 @@ app.post("/ownerNew", (req, res) => {
   let errormessage = 'Current Password Does not Match with your Input...'
   let successmessage = 'Password Change Successful!!'
 
-  User.findOne({type:type}, (err, doc) => {
-    if(err){
+  User.findOne({ type: type }, (err, doc) => {
+    if (err) {
       console.log(err)
     }
-    if(doc && password == doc.password) {
+    if (doc && password == doc.password) {
       console.log('testing')
-      User.updateOne({type:type}, {
+      User.updateOne({ type: type }, {
         type: type,
         password: newPassword
       }, (err, affected, resp) => {
         console.log(resp)
-        res.render("passwordmanager.hbs", {errormessage:successmessage})
+        res.render("passwordmanager.hbs", { layout: 'dashboardLayout', errormessage: successmessage })
       })
     }
-    else{
-      res.render("passwordmanager.hbs", {errormessage:errormessage})
+    else {
+      res.render("passwordmanager.hbs", { layout: 'dashboardLayout', errormessage: errormessage })
     }
   })
 })
 
+app.post('/purchaseorder', (req, res) => {
+  let invalid = ''
+  PO.find({}, function (err, pos) {
+    var dataSet = {};
 
+    pos.forEach(function (pos) {
+      dataSet[pos._id] = pos;
+    });
 
+    console.log(dataSet)
 
+    res.render("dashPO.hbs", {
+      layout: 'viewPOS',
+      dataSet,
+      invalid: invalid
+    })
+  });
+})
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))

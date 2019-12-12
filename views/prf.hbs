@@ -3,32 +3,128 @@
     <script src="js/prfJS.js"></script>
 
     <style>
-  .invisible {
-    display: none;
-    visibility: hidden;
-  }
+        .invisible {
+            display: none;
+            visibility: hidden;
+        }
     </style>
 
 
     <script>
 
-    $(document).ready(()=> {
-        $('#exchangeDisplay').prop('disabled', true)
+        $(document).ready(() => {
+            $('#exchangeDisplay').prop('disabled', true)
+            $('#totalField').prop('disabled', true)
 
-    })
+            window.onbeforeunload = () => {
+                return 'You have unsaved Changes... Do you want to leave?'
+            }
 
-    function myFunc() {
-        var text = $('div#curPass').text()
-        var text1 = document.getElementById('pwd1').value
+            $("#prfNumber").keydown(function () {
+                // Save old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                    $(this).data("old", $(this).val());
+            });
 
-        if(text1 == text) {
+            $("#prfNumber").keyup(function () {
+                // Check correct, else revert back to old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                    ;
+                else
+                    $(this).val($(this).data("old"));
+            });
+            /*
+                        $("#poNumber").keydown(function () {
+                            // Save old value.
+                            if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                                $(this).data("old", $(this).val());
+                        });
+            
+                        $("#poNumber").keyup(function () {
+                            // Check correct, else revert back to old value.
+                            if (!$(this).val() || (parseInt($(this).val()) <= 1111111 && parseInt($(this).val()) >= 0))
+                                ;
+                            else
+                                $(this).val($(this).data("old"));
+                        });
+                        */
+
+
+            document.querySelector('#prfNumber').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            /* document.querySelector('#poNumber').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#fareField').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#taxField').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#dollarField').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#pesoField').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })
+
+            document.querySelector('#exchangeDisplay').addEventListener("keypress", function (evt) {
+                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                    evt.preventDefault()
+                }
+            })*/
+
+            $('#dashboard').click(() => {
+                alert('reaches here')
+                $('#myDash').submit()
+            })
+
+        })
+
+        function disableBind() {
+            //$(window).unbind('beforeunload')
+            window.onbeforeunload = null;
         }
-        else{
-            alert('Wrong Password!')
-            document.getElementById('exchangeDisplay').disabled = false;
+
+        function dashBoar() {
+            $('#myDash').submit()
         }
 
-    }
+        function myFunc() {
+            var text = $('div#curPass').text()
+            var text1 = document.getElementById('pwd1').value
+
+            if (text1 == text) {
+            }
+            else {
+                alert('Wrong Password!')
+                document.getElementById('exchangeDisplay').disabled = false;
+                $('#pwd1').val('')
+            }
+
+        }
+
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
     </script>
 </head>
 
@@ -43,6 +139,7 @@
             </b></a>
     </nav>
 
+
     <div id="wrapper" class="bg-white">
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
@@ -53,25 +150,25 @@
                 </button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-primary btn-block" type="button" onclick="window.print();return false;">
+                <button id="print" class="btn btn-primary btn-block" type="button">
                     Print &nbsp;
                     <i class="fa fa-print" aria-hidden="true"></i>
                 </button>
             </li>
             <li class="nav-item">
-                <button id="saveBtn" class="btn btn-success btn-block" type="button" onclick="save()">
+                <button id="saveBtn" class="btn btn-success btn-block" type="button" onclick="disableBind();save()">
                     Save &nbsp;
                     <i class="fa fa-save" aria-hidden="true"></i>
                 </button>
             </li>
-            <li class="nav-item"><br>
-                <button id="dashboard" class="btn btn-home btn-block" type="button"
-                    onclick="window.location='/dashboard'">Dashboard
+            <li class="nav-item"><br><br>
+                <button id="dashboard" class="btn btn-home btn-block" type="button" href='#'
+                    onclick="dashBoar()">Dashboard
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 </button>
             </li>
             <li class="nav-item">
-                <br>
+                <br><br>
                 <button class="btn btn-danger btn-block" id="clear" type="button">
                     Clear &nbsp;
                     <i class="fa fa-eraser" aria-hidden="true"></i>
@@ -81,19 +178,19 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" for="exchangeRate">USD to PHP: </span>
                 </div>
-                <input id="exchangeDisplay" type="number" class="form-control" value = "50.10">
+                <input id="exchangeDisplay" type="number" class="form-control" value="50.10">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#accessModal">
+                    <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                        data-target="#accessModal">
                         <i class="fas fa-pen" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
         </ul>
 
-
         <!--    PRF Form -->
         <div id="content-wrapper" class="form-wrapper">
-            <form class="form-horizontal" method="POST" id="prfForm">
+            <form class="form-horizontal needs-validation" method="POST" id="prfForm">
                 <div class="row">
                     <div class="col-md-4 mb-md-2">
                         <div class="input-group">
@@ -101,37 +198,15 @@
                                 <span class="input-group-text" style="background-color:white;">PRF# </span>
                             </div>
                             {{!-- PRF Number Field--}}
-                            <input type="text" class="form-control" id="prfNumber" name="prfNumber"
-                                placeholder="Enter PRF#" value={{prfNumber}}>
+                            <input type="number" readonly min='1' step="1" class="form-control" id="prfNumber"
+                                name="prfNumber" placeholder="Enter PRF#" value={{prfNumber}} min="0" max="6">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">
+                                <button class="btn btn-outline-secondary" type="button" data-toggle="popover"
+                                    data-content="PRF and PO Number can be manually edited in the settings area">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 offset-md-1">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="background-color:white;">PO# </span>
-                            </div>
-                            {{!-- PO Number Field--}}
-                            <input type="text" class="form-control" id="poNumber" name="poNumber"
-                                placeholder="Enter PO#" value={{poNumber}}>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">
-                                    <i class="fas fa-pen" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="POadd">
-                        {{!-- Add PO Button --}}
-                        <button id="addpo" class="btn btn-primary hidden-print btn-block" onclick="addPO()"
-                            role="button">Add
-                            PO &nbsp;
-                            <i class="fa fa-archive" aria-hidden="true"></i>
-                        </button>
                     </div>
                 </div>
 
@@ -141,7 +216,7 @@
                             <label for="buyerField">To: </label>
                             {{!-- Buyer Field --}}
                             <input name="buyer" type="text" class="form-control" id="buyerField" placeholder="Recipient"
-                                value={{buyer}}>
+                               value={{buyer}} required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -149,8 +224,7 @@
                             <label for="purchaseDate">Date: </label>
                             {{!-- Date Field --}}
                             <input name="date" type="date" class="form-control" id="purchaseDate"
-                                placeholder="Enter Date" value="{{date}}">
-                            {{!-- 2013-01-08 date format dapat pero hekhek wala pa --}}
+                                placeholder="Enter Date" value={{date}}required>
                         </div>
                     </div>
                 </div>
@@ -173,18 +247,18 @@
                                     <tr>
                                         <td>
                                             <input id="name" type="text" class="form-control" size="80"
-                                                placeholder="Enter Passenger's Name">
+                                                placeholder="Enter Passenger's Name" value={{paxNames}}>
                                         </td>
                                         <td>
                                             <div class="text-danger invisible">
                                                 <large>Empty Text</large>
                                             </div>
                                         </td>
-                                        <td>
+                                        <!--                                        <td>
                                             <div class="checkbox">
                                                 <input type="checkbox" value="">
                                             </div>
-                                        </td>
+                                        </td>-->
                                         <td><button id="remove" class="btn btn-danger delete"
                                                 disabled="true">Remove</button></td>
                                     </tr>
@@ -200,7 +274,7 @@
                             <label for="routeField">Route: </label>
                             {{!-- Route Field --}}
                             <textarea class="form-control " rows="5" id="routeField" name="route"
-                                placeholder="Specify Route" value={{route}}></textarea>
+                                placeholder="Specify Route" required>{{route}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -208,7 +282,7 @@
                             <label for="partField">Particulars: </label>
                             {{!-- Particulars Field --}}
                             <textarea class="form-control" rows="5" id="partField" name="particulars"
-                                placeholder="Specify Particulars" value={{particulars}}></textarea>
+                                placeholder="Specify Particulars"required>{{particulars}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -218,16 +292,16 @@
                         <div class="form-group">
                             <label for="fareField">Airfare: </label>
                             {{!-- Airfare Field --}}
-                            <input type="number" class="form-control" name="airFare" id="fareField"
-                                placeholder="Specify Airfare" value={{airFare}}>
+                            <input type="number" min="0" step=".01" class="form-control" name="airFare" id="fareField"
+                                placeholder="Specify Airfare" value={{airFare}} required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="taxField">Travel Tax: </label>
                             {{!-- Travel Tax Field --}}
-                            <input type="number" class="form-control" name="taxField" id="taxField"
-                                placeholder="Specify Travel Tax" value={{travelTax}}>
+                            <input type="number" min="0" step=".01" class="form-control" name="taxField" id="taxField"
+                                placeholder="Specify Travel Tax" value={{travelTax}} required>
                         </div>
                     </div>
                 </div>
@@ -238,7 +312,7 @@
                             <label for="docuField">Documentation: </label>
                             {{!-- Documentation Field --}}
                             <textarea class="form-control" rows="5" id="docuField" name="documentation"
-                                placeholder="Enter Documentations" value={{documentations}}></textarea>
+                                placeholder="Enter Documentations" required>{{documentations}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -248,26 +322,26 @@
                         <div class="form-group form-inline">
                             <label for="dollarField">USD: &nbsp;</label>
                             {{!-- USD Field --}}
-                            <input type="number" id="dollarField" name="dollar" onkeydown="return event.keyCode !== 69"
-                                oninput="computeDollar()" class="form-control" placeholder="Enter Amount"
-                                value={{usAmount}}>
+                            <input type="number" min="0" step=".01" id="dollarField" name="dollar"
+                                onkeydown="return event.keyCode !== 69" oninput="computeDollar()" class="form-control"
+                                placeholder="Enter Amount" value={{usAmount}}>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="pesoField">PHP: &nbsp;</label>
                             {{!-- PHP Field --}}
-                            <input type="number" id="pesoField" name="peso" onkeydown="return event.keyCode !== 69"
-                                oninput="computePeso()" class="form-control" placeholder="Enter Amount"
-                                value={{phpAmount}}>
+                            <input type="number" min="0" step=".01" id="pesoField" name="peso"
+                                onkeydown="return event.keyCode !== 69" oninput="computePeso()" class="form-control"
+                                placeholder="Enter Amount" value={{phpAmount}}>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total Field --}}
-                            <input type="text" id="totalField" name="total" class="form-control" id="totalField"
-                                placeholder="Total" value={{total}}>
+                            <input type="text" min="0" value="0" step=".01" id="totalField" name="total"
+                                class="form-control" id="totalField" value={{total}} required>
                         </div>
                     </div>
                 </div>
@@ -278,7 +352,7 @@
                             <label for="prepField">Prepared By:</label>
                             {{!-- Prepared by Field --}}
                             <input id="prepared" type="text" class="form-control" id="prepField" name="prepared"
-                                placeholder="Enter Name" value={{preparedBy}}>
+                                placeholder="Enter Name" value={{preparedBy}} required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -286,7 +360,7 @@
                             <label for="apprField">Approved By: </label>
                             {{!-- Approbed by Field --}}
                             <input id="approved" type="text" class="form-control" id="apprField" name="approved"
-                                placeholder="Enter Name" value={{approvedBy}}>
+                                placeholder="Enter Name" value={{approvedBy}} required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -294,7 +368,7 @@
                             <label for="recField">Received By:</label>
                             {{!-- Received by Field --}}
                             <input id="received" type="text" class="form-control" id="recField" name="received"
-                                placeholder="Enter Name" value={{receivedBy}}>
+                                placeholder="Enter Name" value={{receivedBy}} required>
                         </div>
                     </div>
                 </div>
@@ -308,28 +382,35 @@
 
 <!-- Access Modal -->
 <div class="modal fade" id="accessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">This page requires an admin password to proceed.</div>
-      <div class="card-body">
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" required=""
-            autocomplete="new-password">
-          <div class="invalid-feedback">Enter your password too!</div>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">This page requires an admin password to proceed.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" required=""
+                        autocomplete="new-password">
+                    <div class="invalid-feedback">Enter your password too!</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="#" id="editExchange" data-dismiss="modal"
+                    onclick="myFunc()">Proceed</a>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="#" id="editExchange" data-dismiss="modal" onclick="myFunc()">Proceed</a>
-      </div>
     </div>
-  </div>
 </div>
+
+{{!-- AUTHENTICATED DASHBOARD --}}
+
+<form action="dashboard1" method="POST" id="myDash">
+    <input type="hidden" name="dash" id="dashB" value="dashbo">
+</form>

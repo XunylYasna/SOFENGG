@@ -60,8 +60,19 @@ function computePeso() {
 }
 
 function save() {
-    $("#poForm").attr("action", "/po/save"); //Will set it
-    $("#poForm").submit();
+
+    alert("Hello");
+    
+    /*    $("#poForm").attr("action", "/po/save"); //Will set it
+
+    if (document.getElementById('pOForm').checkValidity()) {
+        document.getElementById('pOForm').add('was-validated');
+        alert('Current PO will be saved')
+        $("#poForm").submit();
+    }
+    else {
+        alert("Please fill out all the fields")
+    }*/
 }
 
 
@@ -100,19 +111,19 @@ $(document).ready(function () {
     var peso = document.getElementById('pesoField');
     var dollar = document.getElementById('dollarField');
 
-    
-    peso.onkeydown = function(e) {
-        if(!((e.keyCode > 95 && e.keyCode < 106)
-             || (e.keyCode > 47 && e.keyCode < 58) 
-             || e.keyCode == 8 || (keyCode==110) || (keyCode==190) || (keyCode==9))) {
+
+    peso.onkeydown = function (e) {
+        if (!((e.keyCode > 95 && e.keyCode < 106)
+            || (e.keyCode > 47 && e.keyCode < 58)
+            || e.keyCode == 8 || (keyCode == 110) || (keyCode == 190) || (keyCode == 9))) {
             return false;
         }
     }
-    
-    dollar.onkeydown = function(e) {
-        if(!((e.keyCode > 95 && e.keyCode < 106)
-             || (e.keyCode > 47 && e.keyCode < 58) 
-             || e.keyCode == 8 || (keyCode==110) || (keyCode==190) || (keyCode==9))) {
+
+    dollar.onkeydown = function (e) {
+        if (!((e.keyCode > 95 && e.keyCode < 106)
+            || (e.keyCode > 47 && e.keyCode < 58)
+            || e.keyCode == 8 || (keyCode == 110) || (keyCode == 190) || (keyCode == 9))) {
             return false;
         }
     }

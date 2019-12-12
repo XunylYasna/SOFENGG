@@ -48,15 +48,19 @@ function computePeso() {
 }
 
 function save() {
-    alert('hi')
     $("#prfForm").attr("action", "/prf/save"); //Will set it
-    $("#prfForm").submit();
+
+    document.getElementById('prfForm').classList.add('was-validated');
+    if (document.getElementById('prfForm').checkValidity()) {
+        alert('Current PRF will be saved')
+        $("#prfForm").submit();
+    }
+    else {
+        alert("Please fill out all the fields")
+    }
+
 }
 
-function addPO() {
-    $("#prfForm").attr("action", "/prf/addPO"); //Will set it
-    $("#prfForm").submit();
-}
 
 $(document).ready(function () {
     var names = [];
@@ -112,7 +116,7 @@ $(document).ready(function () {
 
     $("#clear").on('click', function () {
         if (confirm("Want to clear?")) {
-            $(this).closest('body').find("input[type=text], textarea").not("#poNumber, #prfNumber, #exchangeDisplay, #name").val("");
+            $(this).closest('body').find("input[type=text], textarea, input[type=number]").not("#poNumber, #prfNumber, #exchangeDisplay, #name").val("");
         }
     })
 
@@ -135,7 +139,7 @@ $(document).ready(function () {
     tax.onkeydown = function (e) {
         if (!((e.keyCode > 95 && e.keyCode < 106)
             || (e.keyCode > 47 && e.keyCode < 58)
-            || e.keyCode == 8 || (keyCode == 110) || (keyCode == 190) || (keyCode == 9))) {
+            || e.keyCode == 8 || (e.keyCode == 110) || (e.keyCode == 190) || (e.keyCode == 9))) {
             return false;
         }
     }
@@ -143,7 +147,7 @@ $(document).ready(function () {
     fare.onkeydown = function (e) {
         if (!((e.keyCode > 95 && e.keyCode < 106)
             || (e.keyCode > 47 && e.keyCode < 58)
-            || e.keyCode == 8 || (keyCode == 110) || (keyCode == 190) || (keyCode == 9))) {
+            || e.keyCode == 8 || (e.keyCode == 110) || (e.keyCode == 190) || (e.keyCode == 9))) {
             return false;
         }
     }
@@ -151,7 +155,7 @@ $(document).ready(function () {
     peso.onkeydown = function (e) {
         if (!((e.keyCode > 95 && e.keyCode < 106)
             || (e.keyCode > 47 && e.keyCode < 58)
-            || e.keyCode == 8 || (keyCode == 110) || (keyCode == 190) || (keyCode == 9))) {
+            || e.keyCode == 8 || (e.keyCode == 110) || (e.keyCode == 190) || (e.keyCode == 9))) {
             return false;
         }
     }
@@ -159,15 +163,24 @@ $(document).ready(function () {
     dollar.onkeydown = function (e) {
         if (!((e.keyCode > 95 && e.keyCode < 106)
             || (e.keyCode > 47 && e.keyCode < 58)
-            || e.keyCode == 8 || (keyCode == 110) || (keyCode == 190) || (keyCode == 9))) {
+            || e.keyCode == 8 || (e.keyCode == 110) || (e.keyCode == 190) || (e.keyCode == 9))) {
             return false;
         }
     }
+
+    $('#print').on('click', function () {
+
+        $("#header").text('Grand Pacfic Travel & Tours')
+        window.print();
+        $("#header").empty();
+    });
 });
 
 
 function goBack() {
     window.history.back();
 }
+
+
 
 

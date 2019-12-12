@@ -1,167 +1,55 @@
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<body id="page-top">
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-  
-      <a class="navbar-brand mr-1"><b><font color="white">Grand Pacific Travel & Tours Corp.</font></b></a>
+<script>
+  function saveHeading() {
+    $("#headerform").attr("action", "/headings/saveheading"); //Will set it
+    $("#headerform").submit();
+  }
+  function savePrf() {
+    $("#prfform").attr("action", "/headings/saveprf"); //Will set it
+    $("#prfform").submit();
+  }
+  function savePo() {
+    $("#poform").attr("action", "/headings/savepo"); //Will set it
+    $("#poform").submit();
+  }
+</script>
 
-    </nav>
-      <!-- Navbar -->    
-    <div id="wrapper">
-  
-      <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="dashboard">
-            <span>Dashboard</span>
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-toggle="modal" data-target="#accessModal">
-            <span>Gross Report</span>
-	    <i class="fas fa-fw fa-table"></i></a>
-        </li>
-	<li class="nav-item">
-         <a class="nav-link" href="#" data-toggle="modal" data-target="#passwordManager">
-            <span>Password Manager</span>
-	    <i class="fa fa-lock"></i></a>
-        </li>
-	<li class="nav-item active">
-          <a class="nav-link" href="headings">
-            <span>Headings</span>
-            <i class="fas fa-fw fa-file"></i></a>
-        </li>
-<br>
-	<li class="nav-item">
-          <a class="nav-link" href="prf">
-            <span>Create New PRF &#10010</span></a>
-        </li>
-	<li class="nav-item">
-          <a class="nav-link" href="po">
-            <span>Create New PO &#10010</span></a>
-        </li>
-<br>
-	<li class="nav-item">
-          <a class="nav-link" href="">
-            <span>Import</span>
-            <i class="fa fa-truck"></i></a>
-        </li>
-	<li class="nav-item">
-          <a class="nav-link" href="">
-            <span>Export</span>
-            <i class="fa fa-plane"></i></a>
-        </li>
-<br>
-	<li class="nav-item">
-          <a class="nav-link" href="login">
-            <span>Logout</span>
-            <i class="fa fa-sign-out"></i></a>
-        </li>
-      </ul>
 
-      <div id="content-wrapper">
 
-        <div class="container-fluid">
-	<div class="breadcrumb">
-	<div class="breadcrumbheader">
-	<form id="headerform">
-		<textarea type="text" class="headercss" name="changeheader" cols="93" rows="10"></textarea>
-	</form>
-	<button class="btn btn-cancel my-md-1" type="button" style="float: right;">
-		Cancel&nbsp;&#10060
-	</button>
-<div class="divider"/>
-        <button class="btn btn-save my-md-1" type="button" style="float: right;">
-		Save&nbsp;
-		<i class="fa fa-save" aria-hidden="true"></i>
-	</button>
-		</div>
-	</div>
-    <!-- /#wrapper -->
-  
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-  
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
+<div id="content-wrapper">
 
-    <!-- Access Modal -->
-<form method="POST" action="gross">
+  <div class="container-fluid">
+    <div class="breadcrumb">
+      <div class="breadcrumbheader">
+        <form id="headerform" method="POST" action="saveheading">
+          <textarea type="text" class="headercss sm-textarea" name="changeheader" cols="93"
+            rows="10">{{heading}}</textarea>
 
-  <div class="modal fade" id="accessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
+
+          <div class="divider" />
+          <button class="btn btn-save my-md-1" type="submit" style="float: right;" onclick="saveHeading()">
+            Save&nbsp;
+            <i class="fa fa-save" aria-hidden="true"></i>
           </button>
-        </div>
-        <div class="modal-body">This page requires an admin password to proceed.</div>
-        <div class="card-body">
+        </form><br><br>
+        <form id="prfform" class="form-inline" method="post" action="saveprf">
           <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
-              autocomplete="new-password">
-            <div class="invalid-feedback">Enter your password too!</div>
+            <input type="number" class="form-control" id="prfFormat" value={{prfNumber}} name="prfNumber"
+              placeholder="PRF Number Format">
           </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-primary" type="submit">Login</button>
-        </div>
+          <button type="submit" class="btn btn-save md-mb-2" onclick="savePrf()">Save
+            <i class="fa fa-save" aria-hidden="true"></i></button>
+        </form>
+
+        <form id="poform" class="form-inline" method="post" action="savepo">
+          <div class="form-group">
+            <input type="number" class="form-control" id="poFormat" name="poNumber" value={{poNumber}}
+              placeholder="PO Number Format">
+          </div>
+          <button type="submit" class="btn btn-save md-mb-2" onclick="savePo()">Save
+            <i class="fa fa-save" aria-hidden="true"></i></button>
+        </form>
       </div>
     </div>
   </div>
 
-</form>
-
-<!-- PASSWORD MANAGER MODAL -->
-<form action="passwordmanager" method="POST">
-  <div class="modal fade" id="passwordManager" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">This page requires an admin password to proceed.</div>
-        <div class="card-body">
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd1" required=""
-              autocomplete="new-password">
-            <div class="invalid-feedback">Enter your password too!</div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-primary" type="submit">Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
+  <!-- /#wrapper -->

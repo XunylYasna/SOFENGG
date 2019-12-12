@@ -1,4 +1,4 @@
-console.log(dataSet)
+//console.log(dataSet)
 
 const dataSetKey = Object.keys(dataSet)
 
@@ -6,8 +6,8 @@ var dataArray = [];
 var grosstotal = 0;
 dataSetKey.forEach((key, index) => {
     const data = dataSet[key]
-    dataArray[index] = [data.prfNumber, data.date, data.date, data.total, data.total, (data.total - data.total)]
-    grosstotal = grosstotal + (data.total - data.total)
+    dataArray[index] = [data.prfNumber, data.date, data.date, data.total, data.poTotal, (data.total - data.poTotal)]
+    grosstotal = grosstotal + (data.total - data.poTotal)
 })
 
 function formatDate(date) {
@@ -31,19 +31,14 @@ $.fn.dataTableExt.afnFiltering.push(
         var day = new Date(data[1]) || 0; // use data for the date column
 
         day = formatDate(day);
-        console.log(from);
-        console.log(to);
-        console.log(day);
  
         if ( ( !from && !to ) ||
              ( !from && day <= to ) ||
              ( from <= day && !to ) ||
              ( from <= day && day <= to ) )
         {
-            console.log("true");
             return true;
         }
-        console.log("false")
         return false;
     }
 );

@@ -9,7 +9,7 @@ const PRF = require('../model/PRF')
 
 
 
-// Displaying post on Map
+// Displaying
 router.get('/', (req, res) => {
     res.render('login')
 })

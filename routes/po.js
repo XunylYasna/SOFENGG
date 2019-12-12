@@ -3,6 +3,10 @@ const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 const PO = require('../model/PO')
 const User = require('../model/User')
+const file = "config\\settings.json"
+const fs = require("fs");
+
+
 
 
 
@@ -14,21 +18,49 @@ router.get('/', (req, res) => {
     let type = 'CO'
     let password = 'poop'
 
-    User.find({type:type}, function(err, doc) {
-        if(err) {
+    User.find({ type: type }, function (err, doc) {
+        if (err) {
             console.log(err)
         }
 
-        if(doc){
+        if (doc) {
             var obj = doc
             var stringify = JSON.stringify(obj);
             var x = JSON.parse(stringify)
             console.log(x[0]['password'])
-            res.render('prf.hbs', {password:x[0]['password']})
+            res.render('po.hbs', { password: x[0]['password'] })
         }
-        else{
+        else {
             console.log('failed')
-            res.render('prf.hbs')
+            res.render('po.hbs')
+        }
+    })
+})
+
+router.post('/delete', (req, res) => {
+
+    let password = req.body.pw
+    let type = 'CO'
+
+    User.findOne({ type: type }, function (err, doc) {
+        if (err) {
+            console.log(err)
+        }
+        if (doc && password == doc.password) {
+            console.log(doc.password)
+            console.log(password)
+
+            PO.deleteOne({ _id: req.body.poID }, function (err) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.redirect(307, '/purchaseorder')
+                }
+            })
+        }
+        else {
+            res.redirect(307, '/purchaseorder')
         }
     })
 })
@@ -55,10 +87,19 @@ router.post('/save', (req, res) => {
         receivedBy: received
     })
 
+
+
+
+
     newPO.save()
         .then(post => {
             console.log("PO added sucessfully " + newPO)
             req.flash('success_msg', 'New PO added.')
+
+            let jsonData = JSON.parse(fs.readFileSync(file))
+            jsonDate.poNumber += 1;
+            fs.writeFileSync(file, JSON.stringify(jsonData));
+
             res.redirect('/dashboard')
         })
         .catch(err => {
@@ -68,5 +109,31 @@ router.post('/save', (req, res) => {
 
 })
 
+
+router.get('/view', (req, res) => {
+    PO.findById(req.query.poID, function (err, doc) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            const { prfNumber, poNumber, buyer, date, paxNames, route, description, usAmount, phpAmount, total, preparedBy, approvedBy, receivedBy } = doc;
+            res.render('po.hbs', {
+                prfNumber,
+                poNumber,
+                buyer,
+                date,
+                paxNames,
+                route,
+                description,
+                usAmount,
+                phpAmount,
+                total,
+                preparedBy,
+                approvedBy,
+                receivedBy
+            })
+        }
+    });
+})
 
 module.exports = router;

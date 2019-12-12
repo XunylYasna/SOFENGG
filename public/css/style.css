@@ -25,21 +25,26 @@
         color: transparent;
     }
 
-    .form-page{
-        max-height: initial !important;
-        overflow: initial !important;
-    }
-    
-    .form-wrapper{
-        padding: 20px;
-        margin-bottom: 10px;
-        overflow-y: initial !important;
-        max-height: initial !important;
-    }
 
     input[type='checkbox'] {
         display: none;
      }
+    
+    
+    body{
+
+        display: block;
+        width: auto;
+        height: auto;
+        overflow: visible;
+    }
+    
+    #header{
+        visibility: visible !important;
+        padding: 20px;
+
+    }
+    
 }
 
 
@@ -69,7 +74,12 @@ input[type=checkbox] {
     margin-left: 13;
 }
 
+/* General */
 
+.invisible {
+    display: none;
+    visibility: hidden;
+}
 
 /* PO and PRF */
 .bg-white {
@@ -79,6 +89,7 @@ input[type=checkbox] {
 .bg-white > .sidebar > .nav-item{
     padding: 10px;
 }
+
 
 #currencyChange{
     color:white;
@@ -99,4 +110,10 @@ textarea{
     margin-bottom: 10px;
     overflow-y: scroll !important;
     max-height: 700px !important;
+}
+
+#header{
+    margin-left: 45%;
+    width: 600px;
+    visibility: hidden;
 }
