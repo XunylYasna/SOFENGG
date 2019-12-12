@@ -28,11 +28,39 @@ router.get('/', (req, res) => {
             var stringify = JSON.stringify(obj);
             var x = JSON.parse(stringify)
             console.log(x[0]['password'])
-            res.render('prf.hbs', { password: x[0]['password'] })
+            res.render('po.hbs', { password: x[0]['password'] })
         }
         else {
             console.log('failed')
-            res.render('prf.hbs')
+            res.render('po.hbs')
+        }
+    })
+})
+
+router.post('/delete', (req, res) => {
+
+    let password = req.body.pw
+    let type = 'CO'
+
+    User.findOne({ type: type }, function (err, doc) {
+        if (err) {
+            console.log(err)
+        }
+        if (doc && password == doc.password) {
+            console.log(doc.password)
+            console.log(password)
+
+            PO.deleteOne({ _id: req.body.poID }, function (err) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.redirect(307, '/purchaseorder')
+                }
+            })
+        }
+        else {
+            res.redirect(307, '/purchaseorder')
         }
     })
 })
@@ -81,5 +109,31 @@ router.post('/save', (req, res) => {
 
 })
 
+
+router.get('/view', (req, res) => {
+    PO.findById(req.query.poID, function (err, doc) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            const { prfNumber, poNumber, buyer, date, paxNames, route, documentations, usAmount, phpAmount, total, preparedBy, approvedBy, receivedBy } = doc;
+            res.render('po.hbs', {
+                prfNumber,
+                poNumber,
+                buyer,
+                date,
+                paxNames,
+                route,
+                documentations,
+                usAmount,
+                phpAmount,
+                total,
+                preparedBy,
+                approvedBy,
+                receivedBy
+            })
+        }
+    });
+})
 
 module.exports = router;
