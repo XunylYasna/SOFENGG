@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     let password = 'poop'
     let jsonData = JSON.parse(fs.readFileSync(file))
 
-    const { prfNumber, poNumber } = req.body;
+    const { prfNumber, poNumber, header } = req.body;
 
     User.find({ type: type }, function (err, doc) {
         if (err) {
@@ -32,14 +32,16 @@ router.get('/', (req, res) => {
             res.render('prf.hbs', {
                 password: x[0]['password'],
                 prfNumber: jsonData.prfNumber,
-                poNumber: jsonData.poNumber
+                poNumber: jsonData.poNumber,
+                header: jsonData.heading
             })
         }
         else {
             console.log('failed')
             res.render('prf.hbs', {
                 prfNumber: jsonData.prfNumber,
-                poNumber: jsonData.poNumber
+                poNumber: jsonData.poNumber,
+                header: jsonData.heading
             })
         }
     })
