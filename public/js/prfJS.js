@@ -49,7 +49,7 @@ function computePeso() {
 
 function save() {
     $("#prfForm").attr("action", "/prf/save"); //Will set it
-
+    $('#totalField').prop('disabled', false)
     document.getElementById('prfForm').classList.add('was-validated');
     if (document.getElementById('prfForm').checkValidity()) {
         alert('Current PRF will be saved')
@@ -60,7 +60,6 @@ function save() {
     }
 
 }
-
 
 $(document).ready(function () {
     var names = [];
