@@ -99,7 +99,7 @@ router.post('/save', (req, res) => {
             req.flash('success_msg', 'New PO added.')
 
             let jsonData = JSON.parse(fs.readFileSync(file))
-            jsonDate.poNumber += 1;
+            jsonData.poNumber = parseInt(jsonData.poNumber) + 1;
             fs.writeFileSync(file, JSON.stringify(jsonData));
 
             res.redirect('/dashboard')

@@ -164,7 +164,7 @@ router.post('/save', (req, res) => {
                     console.log('PRF Successfully added' + newPRF)
 
                     let jsonData = JSON.parse(fs.readFileSync(file))
-                    jsonData.prfNumber += 1;
+                    jsonData.prfNumber = parseInt(jsonData.prfNumber) + 1;
                     fs.writeFileSync(file, JSON.stringify(jsonData));
 
                     req.flash('success_msg', 'New PRF added.')
