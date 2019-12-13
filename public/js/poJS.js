@@ -97,7 +97,7 @@ $(document).ready(function () {
     peso.onkeydown = function (e) {
         if (!((e.keyCode > 95 && e.keyCode < 106)
             || (e.keyCode > 47 && e.keyCode < 58)
-            || e.keyCode == 8 || (keyCode == 110) || (keyCode == 190) || (keyCode == 9))) {
+            || e.keyCode == 8 || (e.keyCode == 110) || (e.keyCode == 190) || (e.keyCode == 9))) {
             return false;
         }
     }
@@ -105,7 +105,7 @@ $(document).ready(function () {
     dollar.onkeydown = function (e) {
         if (!((e.keyCode > 95 && e.keyCode < 106)
             || (e.keyCode > 47 && e.keyCode < 58)
-            || e.keyCode == 8 || (keyCode == 110) || (keyCode == 190) || (keyCode == 9))) {
+            || e.keyCode == 8 || (e.keyCode == 110) || (e.keyCode == 190) || (keyCode == 9))) {
             return false;
         }
     }
