@@ -14,7 +14,7 @@
 
         $(document).ready(() => {
             $('#exchangeDisplay').prop('disabled', true)
-            $('#totalField').prop('disabled', false)
+            $('#totalField').prop('disabled', true)
 
             window.onbeforeunload = () => {
                 return 'You have unsaved Changes... Do you want to leave?'
@@ -341,8 +341,8 @@
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total Field --}}
-                            <input type="text" min="0" value="0" step=".01" id="totalField" name="total"
-                                class="form-control" id="totalField" value={{total}} required>
+                            <input type="text" min="0" step=".01" id="totalField" name="total"
+                                class="form-control" id="totalField" value={{total}} disabled>
                         </div>
                     </div>
                 </div>
