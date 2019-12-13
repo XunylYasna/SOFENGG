@@ -16,7 +16,6 @@
 
         $(document).ready(() => {
             $('#exchangeDisplay').prop('disabled', true)
-            $('#totalField').prop('disabled', true)
 
 
 
@@ -258,7 +257,7 @@
                             {{!-- Dollar field --}}
                             <input required type="number" id="dollarField" onkeydown="return event.keyCode !== 69"
                                 oninput="computeDollar()" class="form-control" id="dollarField" value="{{usAmount}}"
-                                placeholder="Enter Amount"  name="dollar">
+                                placeholder="Enter Amount" name="dollar">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -266,15 +265,16 @@
                             <label for="pesoField">PHP: &nbsp;</label>
                             {{!-- Peso field --}}
                             <input required type="number" id="pesoField" onkeydown="return event.keyCode !== 69"
-                                oninput="computePeso()" class="form-control" value="{{phpAmount}}" placeholder="Enter Amount"
-                                name="peso">
+                                oninput="computePeso()" class="form-control" value="{{phpAmount}}"
+                                placeholder="Enter Amount" name="peso">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total field --}}
-                            <input required type="text" id="totalField" class="form-control" name="total" value="0" disabled>
+                            <input required type="text" readonly id="totalField" class="form-control" name="total"
+                                value="{{total}}">
                         </div>
                     </div>
                 </div>

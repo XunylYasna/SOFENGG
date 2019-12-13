@@ -7,10 +7,10 @@ function computeDollar() {
 
     if (document.getElementById("dollarField") && dollar) {
         if (document.getElementById("pesoField") && peso) {
-            document.getElementById("totalField").value = parseFloat(dollar * rate + peso).toFixed(2);
+            document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
         } else {
             total = 0;
-            document.getElementById("totalField").value = parseFloat(dollar * rate + total).toFixed(2);
+            document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
         }
     } else {
         if (document.getElementById("pesoField") && peso) {
