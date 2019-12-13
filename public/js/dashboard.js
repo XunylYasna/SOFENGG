@@ -29,12 +29,11 @@ $.fn.dataTableExt.afnFiltering.push(
         var day = new Date(data[1]) || 0; // use data for the date column
 
         day = formatDate(day);
- 
-        if ( ( !from && !to ) ||
-             ( !from && day <= to ) ||
-             ( from <= day && !to ) ||
-             ( from <= day && day <= to ) )
-        {
+
+        if ((!from && !to) ||
+            (!from && day <= to) ||
+            (from <= day && !to) ||
+            (from <= day && day <= to)) {
             return true;
         }
         return false;
@@ -101,7 +100,6 @@ function viewPRF(button) {
 }
 
 function addPO(button) {
-    alert('hi')
     $(button).parents('form:first').attr("method", "GET");
     $(button).parents('form:first').attr("action", "/prf/add");
     $(button).parents('form:first').submit();

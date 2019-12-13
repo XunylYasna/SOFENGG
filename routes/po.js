@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 const PO = require('../model/PO')
+const PRF = require('../model/PRF')
 const User = require('../model/User')
 const file = "config\\settings.json"
 const fs = require("fs");
+const dateFormat = require('dateformat');
+
 
 
 
@@ -29,12 +32,14 @@ router.get('/', (req, res) => {
             var stringify = JSON.stringify(obj);
             var x = JSON.parse(stringify)
             console.log(x[0]['password'])
-            res.render('po.hbs', { password: x[0]['password'],
-                                   header: jsonData.heading})
+            res.render('po.hbs', {
+                password: x[0]['password'],
+                header: jsonData.heading
+            })
         }
         else {
             console.log('failed')
-            res.render('po.hbs', {header: jsonData.heading})
+            res.render('po.hbs', { header: jsonData.heading })
         }
     })
 })
@@ -51,6 +56,7 @@ router.post('/delete', (req, res) => {
         if (doc && password == doc.password) {
             console.log(doc.password)
             console.log(password)
+
 
             PO.deleteOne({ _id: req.body.poID }, function (err) {
                 if (err) {
@@ -92,6 +98,10 @@ router.post('/save', (req, res) => {
     console.log(newPO)
 
 
+    PRF.updateOne(
+        { prfNumber: prfNumber },
+        { $inc: { poTotal: total } })
+
 
     newPO.save()
         .then(post => {
@@ -103,7 +113,8 @@ router.post('/save', (req, res) => {
             fs.writeFileSync(file, JSON.stringify(jsonData));
 
             req.flash('success_msg', 'New PRF added.')
-            res.redirect('back')
+            res.redirect(307, '/purchaseorder')
+
         })
         .catch(err => {
             console.log(err)

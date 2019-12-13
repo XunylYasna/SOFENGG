@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 const PRF = require('../model/PRF')
+const PO = require('../model/PO')
+
 const User = require('../model/User')
 const file = "config\\settings.json"
 const fs = require("fs");
-
+const dateFormat = require('dateformat');
 
 
 // ROUTE FOR THE MAP AND POSTS
@@ -54,7 +56,7 @@ router.get('/add', (req, res) => {
 
     // const { prfNumber, poNumber, buyer, date, names, route, particulars, dollar, peso, total, prepared, approved, received } = req.body;
 
-    // console.log(buyer);
+
 
     PRF.findById(req.query.prfID, function (err, doc) {
         if (err) {
@@ -66,7 +68,7 @@ router.get('/add', (req, res) => {
                 prfNumber,
                 poNumber: jsonData.poNumber,
                 buyer,
-                date,
+                date: dateFormat(date, "yyyy-mm-dd"),
                 paxNames,
                 route,
                 description: documentations,
@@ -79,52 +81,6 @@ router.get('/add', (req, res) => {
             })
         }
     });
-
-    /*
-        const newPRF = new PRF({
-            prfNumber,
-            poNumber,
-            buyer: buyer,
-            date: date,
-            paxNames: names,
-            route: route,
-            particulars,
-            dollar,
-            peso,
-            total,
-            prepared,
-            approved,
-            received
-        })
-    
-        newPRF.save()
-            .then(newPRF => {
-                req.flash('success_msg', 'Added PRF#' + newPRF.prfNumber);
-    
-                let jsonData = JSON.parse(fs.readFileSync(file))
-                jsonDate.prfNumber += 1;
-                fs.writeFileSync(file, JSON.stringify(jsonData));
-    
-                console.log('Added PRF#' + newPRF.prfNumber);
-            })
-            .catch(err => console.log(err))*/
-
-
-    /*    res.render("po.hbs", {
-            prfNumber,
-            poNumber,
-            buyer,
-            date,
-            names,
-            route,
-            particulars,
-            dollar,
-            peso,
-            total,
-            prepared,
-            approved,
-            received
-        })*/
 })
 
 router.post('/save', (req, res) => {
@@ -137,7 +93,7 @@ router.post('/save', (req, res) => {
         prfNumber,
         poNumber,
         buyer,
-        date,
+        date: dateFormat(date, "yyyy-mm-dd"),
         paxNames: names,
         route,
         particulars,
@@ -215,6 +171,8 @@ router.post('/delete', (req, res) => {
             console.log(doc.password)
             console.log(password)
 
+
+
             PRF.deleteOne({ _id: req.body.prfID }, function (err) {
                 if (err) {
                     console.log(err);
@@ -242,7 +200,7 @@ router.get('/view', (req, res) => {
                 prfNumber,
                 poNumber,
                 buyer,
-                date,
+                date: dateFormat(date, "yyyy-mm-dd"),
                 paxNames,
                 route,
                 particulars,
@@ -258,16 +216,6 @@ router.get('/view', (req, res) => {
             })
         }
     });
-
-    // newPRF.save()
-    //     .then(post => {
-    //         console.log('PRF Successfully added' + newPRF)
-    //         req.flash('success_msg', 'New PRF added.')
-    //         res.redirect('/dashboard')
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
 
 })
 

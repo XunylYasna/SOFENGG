@@ -103,7 +103,7 @@ app.post('/dashboard', (req, res) => {
           dataSet[prfs._id] = prfs;
         });
 
-        console.log(dataSet)
+        // console.log(dataSet)
 
         res.render("dashboard.hbs", {
           title: 'my other page', layout: 'dashboardLayout',
@@ -133,7 +133,7 @@ app.post('/dashboard3', (req, res) => {
       dataSet[prfs._id] = prfs;
     });
 
-    console.log(dataSet)
+    // console.log(dataSet)
 
     res.render("dashboard.hbs", {
       title: 'my other page', layout: 'dashboardLayout',
@@ -152,7 +152,7 @@ app.post('/dashboard1', (req, res) => {
       dataSet[prfs._id] = prfs;
     });
 
-    console.log(dataSet)
+    // console.log(dataSet)
 
     res.render("dashboard.hbs", {
       layout: 'dashboardLayout',
@@ -237,7 +237,7 @@ app.post('/heading', (req, res) => {
   res.render("headings.hbs",
     {
       layout: 'dashboardLayout',
-      heading:heading,
+      heading: heading,
       poNumber,
       prfNumber
     })
