@@ -5,7 +5,7 @@ const dataSetKey = Object.keys(dataSet)
 var dataArray = [];
 dataSetKey.forEach((key, index) => {
     const data = dataSet[key]
-    dataArray[index] = [data.prfNumber, data.date, data.buyer, data.date, data.poNumber, key]
+    dataArray[index] = [data.prfNumber, data.date, data.buyer, data.date, key]
 })
 
 function formatDate(date) {
@@ -60,7 +60,6 @@ $(document).ready(function () {
                     return moment(data).format('DD/MM/YYYY HH:mm:ss');
                 }
             },
-            { title: "PO's" },
             {
                 title: "Commands",
                 render: function (data, type, row, meta) {
