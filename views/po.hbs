@@ -2,7 +2,7 @@
 
 <head>
     {{!-- Custom JS for PO --}}
-    <script src="js/poJS.js"></script>
+    <script src="/js/poJS.js"></script>
 
     <style>
         .invisible {
@@ -257,8 +257,8 @@
                             <label for="dollarField">US$: &nbsp;</label>
                             {{!-- Dollar field --}}
                             <input required type="number" id="dollarField" onkeydown="return event.keyCode !== 69"
-                                oninput="computeDollar()" class="form-control" id="dollarField"
-                                placeholder="Enter Amount" value={{usAmount}} name="dollar">
+                                oninput="computeDollar()" class="form-control" id="dollarField" value="{{usAmount}}"
+                                placeholder="Enter Amount"  name="dollar">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -266,16 +266,15 @@
                             <label for="pesoField">PHP: &nbsp;</label>
                             {{!-- Peso field --}}
                             <input required type="number" id="pesoField" onkeydown="return event.keyCode !== 69"
-                                oninput="computePeso()" class="form-control" id="pesoField" placeholder="Enter Amount"
-                                value={{phpAmount}} name="peso">
+                                oninput="computePeso()" class="form-control" value="{{phpAmount}}" placeholder="Enter Amount"
+                                name="peso">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total field --}}
-                            <input required type="text" id="totalField" class="form-control" id="totalField"
-                                name="total" value="{{total}} " disabled>
+                            <input required type="text" id="totalField" class="form-control" name="total" value="0" disabled>
                         </div>
                     </div>
                 </div>

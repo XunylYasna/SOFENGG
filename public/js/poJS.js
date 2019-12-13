@@ -1,3 +1,4 @@
+
 function computeDollar() {
     var total = parseFloat(document.getElementById("totalField").value);
     var dollar = parseFloat(document.getElementById("dollarField").value);
@@ -19,20 +20,7 @@ function computeDollar() {
         }
     }
 
-    if (document.getElementById("pesoField") && peso) {
-        if (document.getElementById("dollarField") && dollar) {
-            document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
-        } else {
-            total = 0;
-            document.getElementById("totalField").value = (peso + total).toFixed(2);
-        }
-    } else {
-        if (document.getElementById("dollarField") && dollar) {
-            document.getElementById("totalField").value = (rate * dollar).toFixed(2);
-        } else {
-            document.getElementById("totalField").value = 0.00;
-        }
-    }
+
 
 }
 
@@ -58,7 +46,6 @@ function computePeso() {
     }
 
 }
-
 function save() {
     $("#poForm").attr("action", "/po/save"); //Will set it
     $('#totalField').prop('disabled', false)
