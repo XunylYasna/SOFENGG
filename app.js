@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const bcrypt = require('bcryptjs')
 const moment = require('moment');
+const file = "config\\settings.json"
 
 // Body Parser
 app.use(bodyParser.json()); // for parsing application/json
@@ -225,23 +226,21 @@ app.post('/passwordmanager', (req, res) => {
   })
 })
 
-app.post('/headings', (req, res) => {
-  let password = req.body.pw
-  let type = 'CO'
+app.post('/heading', (req, res) => {
+  let jsonData = JSON.parse(fs.readFileSync(file))
+  let heading = jsonData.heading
+  let poNumber = jsonData.poNumber
+  let prfNumber = jsonData.prfNumber
 
-  User.findOne({ type: type }, function (err, doc) {
-    if (err) {
-      console.log(err)
-    }
-    if (doc && password == doc.password) {
-      console.log(doc.password)
-      console.log(password)
-      res.render("headings.hbs")
-    }
-    else {
-      res.redirect(307, 'dashboard3')
-    }
-  })
+  console.log(jsonData)
+
+  res.render("headings.hbs",
+    {
+      layout: 'dashboardLayout',
+      heading:heading,
+      poNumber,
+      prfNumber
+    })
 })
 
 app.post("/staffNew", (req, res) => {

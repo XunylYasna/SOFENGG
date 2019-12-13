@@ -3,23 +3,39 @@ const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth')
 var fs = require("fs");
 const file = "config\\settings.json"
+const User = require("../model/User")
+
 
 
 router.post('/', (req, res) => {
-    // Reading JSON
+    let password = req.body.pw
+    let type = 'CO'
     let jsonData = JSON.parse(fs.readFileSync(file))
     let heading = jsonData.heading
     let poNumber = jsonData.poNumber
-    let prfNumber = jsonData.poNumber
+    let prfNumber = jsonData.prfNumber
 
-    res.render("headings.hbs",
-        {
-            layout: 'dashboardLayout',
-            heading,
-            poNumber,
-            prfNumber
-        })
+    console.log(jsonData)
+
+    User.findOne({ type: type }, function (err, doc) {
+        if (err) {
+            console.log(err)
+        }
+        if (doc && password == doc.password) {
+            res.render("headings.hbs", {
+                layout: 'dashboardLayout',
+                heading,
+                poNumber,
+                prfNumber
+            })
+        }
+        else {
+            res.redirect(307, 'dashboard3')
+        }
+    })
 })
+
+
 
 
 router.post('/saveheading', (req, res) => {
@@ -32,7 +48,7 @@ router.post('/saveheading', (req, res) => {
     // Writing JSON
     fs.writeFileSync(file, JSON.stringify(jsonData));
 
-    res.redirect();
+    res.redirect(307, '/heading');
 });
 
 router.post('/savepo', (req, res) => {
@@ -46,7 +62,7 @@ router.post('/savepo', (req, res) => {
     // Writing JSON
     fs.writeFileSync(file, JSON.stringify(jsonData));
 
-    res.redirect("/headings");
+    res.redirect(307, "/heading");
 });
 
 router.post('/saveprf', (req, res) => {
@@ -62,11 +78,11 @@ router.post('/saveprf', (req, res) => {
     // Writing JSON
     fs.writeFileSync(file, JSON.stringify(jsonData));
 
-    res.redirect("/headings");
+    res.redirect(307, "/heading");
 });
 
 router.get('/cancel', (req, res) => {
-    res.redirect("/headings");
+    res.redirect(307, "/heading");
 })
 
 
