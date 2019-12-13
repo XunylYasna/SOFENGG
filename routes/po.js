@@ -89,7 +89,7 @@ router.post('/save', (req, res) => {
         receivedBy: received
     })
 
-
+    console.log(newPO)
 
 
 
@@ -102,7 +102,8 @@ router.post('/save', (req, res) => {
             jsonData.poNumber = parseInt(jsonData.poNumber) + 1;
             fs.writeFileSync(file, JSON.stringify(jsonData));
 
-            res.redirect('/dashboard')
+            req.flash('success_msg', 'New PRF added.')
+            res.redirect('back')
         })
         .catch(err => {
             console.log(err)

@@ -250,7 +250,7 @@
                                     <tr>
                                         <td>
                                             <input id="name" type="text" class="form-control" size="80"
-                                                placeholder="Enter Passenger's Name" required>
+                                                placeholder="Enter Passenger's Name" value={{paxNames}} required>
                                         </td>
                                         <td>
                                             <div class="text-danger invisible">
@@ -277,7 +277,7 @@
                             <label for="routeField">Route: </label>
                             {{!-- Route Field --}}
                             <textarea class="form-control " rows="5" id="routeField" name="route"
-                                placeholder="Specify Route" value={{route}} required></textarea>
+                                placeholder="Specify Route" required>{{route}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -285,7 +285,7 @@
                             <label for="partField">Particulars: </label>
                             {{!-- Particulars Field --}}
                             <textarea class="form-control" rows="5" id="partField" name="particulars"
-                                placeholder="Specify Particulars" value={{particulars}} required></textarea>
+                                placeholder="Specify Particulars" required>{{particulars}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -315,7 +315,7 @@
                             <label for="docuField">Documentation: </label>
                             {{!-- Documentation Field --}}
                             <textarea class="form-control" rows="5" id="docuField" name="documentation"
-                                placeholder="Enter Documentations" value={{documentations}} required></textarea>
+                                placeholder="Enter Documentations" required>{{documentations}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -343,8 +343,8 @@
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total Field --}}
-                            <input type="text" min="0" value="0" step=".01" id="totalField" name="total"
-                                class="form-control" id="totalField" value="0.00" required>
+                            <input type="text" min="0" step=".01" id="totalField" name="total"
+                                class="form-control" id="totalField" value={{total}} disabled>
                         </div>
                     </div>
                 </div>
