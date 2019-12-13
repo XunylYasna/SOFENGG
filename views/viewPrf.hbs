@@ -92,9 +92,9 @@
                 }
             })
 
-            $('#dashboard').click(() => {
-                alert('reaches here')
-                $('#myDash').submit()
+            $('#dashboard').click((e) => {
+                e.preventDefault()
+                $('#myDash').attr('action', '/dashboard1').submit()
             })
 
         })
@@ -104,9 +104,9 @@
             window.onbeforeunload = null;
         }
 
-        function dashBoar() {
+        /*function dashBoar() {
             $('#myDash').submit()
-        }
+        }*/
 
         function myFunc() {
             var text = $('div#curPass').text()
@@ -412,6 +412,6 @@
 
 {{!-- AUTHENTICATED DASHBOARD --}}
 
-<form action="dashboard1" method="POST" id="myDash">
+<form method="POST" id="myDash">
     <input type="hidden" name="dash" id="dashB" value="dashbo">
 </form>

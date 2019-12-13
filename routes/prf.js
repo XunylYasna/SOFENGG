@@ -11,7 +11,6 @@ const fs = require("fs");
 // ROUTE FOR THE MAP AND POSTS
 
 
-
 router.get('/', (req, res) => {
     //res.render('prf.hbs')
     let type = 'CO'
@@ -133,7 +132,7 @@ router.post('/save', (req, res) => {
 
     const { prfNumber, poNumber, buyer, date, names, route, particulars, airFare, taxField, documentation, dollar, peso, total, prepared, approved, received } = req.body;
 
-
+    console.log(total)
 
     const newPRF = new PRF({
         prfNumber,
@@ -204,26 +203,6 @@ router.post('/dashboard3', (req, res) => {
     });
 })
 
-router.post('/dashboard1', (req, res) => {
-    let invalid = ''
-    PRF.find({}, function (err, prfs) {
-        var dataSet = {};
-
-        prfs.forEach(function (prfs) {
-            dataSet[prfs._id] = prfs;
-        });
-
-        console.log(dataSet)
-
-        res.render("dashboard.hbs", {
-            layout: 'dashboardLayout',
-            dataSet,
-            invalid: invalid
-        })
-    });
-})
-
-
 router.post('/delete', (req, res) => {
 
     let password = req.body.pw
@@ -258,6 +237,7 @@ router.get('/view', (req, res) => {
             console.log(err);
         }
         else {
+            console.log(doc)
             const { prfNumber, poNumber, buyer, date, paxNames, route, particulars, airFare, travelTax, documentations, usAmount, phpAmount, total, preparedBy, approvedBy, receivedBy } = doc;
             res.render('viewPrf.hbs', {
                 prfNumber,
