@@ -6,14 +6,14 @@ function computeDollar() {
 
     if (document.getElementById("dollarField") && dollar) {
         if (document.getElementById("pesoField") && peso) {
-            document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+            document.getElementById("totalField").value = parseFloat(dollar * rate + peso).toFixed(2);
         } else {
             total = 0;
-            document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
+            document.getElementById("totalField").value = parseFloat(dollar * rate + total).toFixed(2);
         }
     } else {
         if (document.getElementById("pesoField") && peso) {
-            document.getElementById("totalField").value = peso.toFixed(2);
+            document.getElementById("totalField").value = parseFloat(peso.toFixed(2));
         } else {
             document.getElementById("totalField").value = 0.00;
         }
@@ -21,14 +21,14 @@ function computeDollar() {
 
     if (document.getElementById("pesoField") && peso) {
         if (document.getElementById("dollarField") && dollar) {
-            document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+            document.getElementById("totalField").value = parseFloat(dollar * rate + peso).toFixed(2);
         } else {
             total = 0;
-            document.getElementById("totalField").value = (peso + total).toFixed(2);
+            document.getElementById("totalField").value = parseFloat(peso + total).toFixed(2);
         }
     } else {
         if (document.getElementById("dollarField") && dollar) {
-            document.getElementById("totalField").value = (rate * dollar).toFixed(2);
+            document.getElementById("totalField").value = parseFloat(rate * dollar).toFixed(2);
         } else {
             document.getElementById("totalField").value = 0.00;
         }
@@ -44,14 +44,14 @@ function computePeso() {
 
     if (document.getElementById("pesoField") && peso) {
         if (document.getElementById("dollarField") && dollar) {
-            document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+            document.getElementById("totalField").value = parseFloat(dollar * rate + peso).toFixed(2);
         } else {
             total = 0;
-            document.getElementById("totalField").value = (peso + total).toFixed(2);
+            document.getElementById("totalField").value = parseFloat(peso + total).toFixed(2);
         }
     } else {
         if (document.getElementById("dollarField") && dollar) {
-            document.getElementById("totalField").value = (rate * dollar).toFixed(2);
+            document.getElementById("totalField").value = parseFloat(rate * dollar).toFixed(2);
         } else {
             document.getElementById("totalField").value = 0.00;
         }
@@ -83,16 +83,16 @@ $(document).ready(function () {
 
     if (document.getElementById("dollarField") && dollar) {
         if (document.getElementById("pesoField") && peso) {
-            document.getElementById("totalField").value = (dollar * rate + peso).toFixed(2);
+            document.getElementById("totalField").value = parseFloat((dollar * rate + peso).toFixed(2));
         } else {
             total = 0;
-            document.getElementById("totalField").value = (dollar * rate + total).toFixed(2);
+            document.getElementById("totalField").value = parseFloat((dollar * rate + total).toFixed(2));
         }
     } else {
         if (document.getElementById("pesoField") && peso) {
-            document.getElementById("totalField").value = peso.toFixed(2);
+            document.getElementById("totalField").value = parseFloat(peso.toFixed(2));
         } else {
-            document.getElementById("totalField").value = 0.00;
+            document.getElementById("totalField").value = 0;
         }
     }
 

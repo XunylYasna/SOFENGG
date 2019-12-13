@@ -274,8 +274,8 @@
                         <div class="form-group form-inline">
                             <label for="totalField">Total: &nbsp;</label>
                             {{!-- Total field --}}
-                            <input required type="text" id="totalField" class="form-control" id="totalField"
-                                name="total" value="{{total}} " disabled>
+                            <input required readonly type="number" step="any" class="form-control" id="totalField"
+                                name="total" value={{total}}>
                         </div>
                     </div>
                 </div>

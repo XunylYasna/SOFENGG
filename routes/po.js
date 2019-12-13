@@ -95,31 +95,33 @@ router.post('/save', (req, res) => {
         receivedBy: received
     })
 
-    console.log(newPO)
 
+    PRF.update(
+        { "prfNumber": prfNumber },
+        {
+            $inc: { poTotal: total }
+        }
+    )
 
-    PRF.updateOne(
-        { prfNumber: prfNumber },
-        { $inc: { poTotal: total } })
+    res.send(prfNumber + " " + total)
 
+    // newPO.save()
+    //     .then(post => {
+    //         console.log("PO added sucessfully " + newPO)
+    //         req.flash('success_msg', 'New PO added.')
 
-    newPO.save()
-        .then(post => {
-            console.log("PO added sucessfully " + newPO)
-            req.flash('success_msg', 'New PO added.')
+    //         let jsonData = JSON.parse(fs.readFileSync(file))
+    //         jsonData.poNumber = parseInt(jsonData.poNumber) + 1;
+    //         fs.writeFileSync(file, JSON.stringify(jsonData));
 
-            let jsonData = JSON.parse(fs.readFileSync(file))
-            jsonData.poNumber = parseInt(jsonData.poNumber) + 1;
-            fs.writeFileSync(file, JSON.stringify(jsonData));
+    //         req.flash('success_msg', 'New PRF added.')
+    //         res.redirect(307, '/purchaseorder')
 
-            req.flash('success_msg', 'New PRF added.')
-            res.redirect(307, '/purchaseorder')
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
 
-        })
-        .catch(err => {
-            console.log(err)
-
-        })
+    //     })
 
 })
 
