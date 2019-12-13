@@ -169,10 +169,9 @@ $(document).ready(function () {
     }
 
     $('#print').on('click', function () {
-
-        $("#header").text('Grand Pacfic Travel & Tours')
+        $('#header').removeClass('invisible');
         window.print();
-        $("#header").empty();
+        $('#header').addClass('invisible');
     });
 });
 

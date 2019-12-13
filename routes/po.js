@@ -17,6 +17,7 @@ const fs = require("fs");
 router.get('/', (req, res) => {
     let type = 'CO'
     let password = 'poop'
+    let jsonData = JSON.parse(fs.readFileSync(file))
 
     User.find({ type: type }, function (err, doc) {
         if (err) {
@@ -28,11 +29,12 @@ router.get('/', (req, res) => {
             var stringify = JSON.stringify(obj);
             var x = JSON.parse(stringify)
             console.log(x[0]['password'])
-            res.render('po.hbs', { password: x[0]['password'] })
+            res.render('po.hbs', { password: x[0]['password'],
+                                   header: jsonData.heading})
         }
         else {
             console.log('failed')
-            res.render('po.hbs')
+            res.render('po.hbs', {header: jsonData.heading})
         }
     })
 })
