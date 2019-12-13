@@ -58,11 +58,11 @@
             //    window.location=document.getElementById('logout').href;
             //}
 
-            $('#dash1').click(()=>{
+            $('#dash1').click(() => {
                 $('#myDash').submit()
             })
 
-            $('#viewPOs').click(()=>{
+            $('#viewPOs').click(() => {
                 $('#myPO').submit()
             })
         })
@@ -98,14 +98,13 @@
 
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
-            <li id="dash1" class="nav-item active">
+            <li id="dash1" class="nav-item">
                 <a class="nav-link" href="#">
                     <span>PRF Forms</span>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 </a>
             </li>
-            <br>
-            <li id="viewPOs" class="nav-item active">
+            <li id="viewPOs" class="nav-item">
                 <a class="nav-link" href="#">
                     <span>Purchase Order Forms</span>
                     <i class="fas fa-fw fa-table"></i>
@@ -132,12 +131,11 @@
                 <a class="nav-link" href="/prf">
                     <span>Create New PRF &#10010</span></a>
             </li>
-            <br>
-            <li class="nav-item">
+            {{!-- <li class="nav-item">
                 <a class="nav-link" href="">
                     <span>Import</span>
                     <i class="fa fa-truck"></i></a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" data-target="#export">
                     <span>Export</span>
@@ -145,7 +143,7 @@
             </li>
             <br>
             <li class="nav-item">
-                <a id= 'logout'class="nav-link" href="/login">
+                <a id='logout' class="nav-link" href="/login">
                     <span>Logout</span>
                     <i class="fa fa-sign-out"></i></a>
             </li>
@@ -281,60 +279,60 @@
     <!-- VIEW MODAL -->
 
     <div class="modal fade" id="viewThis" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">This page requires an admin password to proceed.</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd3"
+                            required="" autocomplete="new-password">
+                        <div class="invalid-feedback">Enter your password too!</div>
                     </div>
-                    <div class="modal-body">This page requires an admin password to proceed.</div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd3"
-                                required="" autocomplete="new-password">
-                            <div class="invalid-feedback">Enter your password too!</div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary" id="btnView" type="button">Enter</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="btnView" type="button">Enter</button>
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- DELETE MODAL -->
-    
-        <div class="modal fade" id="deleteThis" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+
+    <div class="modal fade" id="deleteThis" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Credentials Required</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">This page requires an admin password to proceed.</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd4"
+                            required="" autocomplete="new-password">
+                        <div class="invalid-feedback">Enter your password too!</div>
                     </div>
-                    <div class="modal-body">This page requires an admin password to proceed.</div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" name="pw" class="form-control form-control-lg rounded-0" id="pwd4"
-                                required="" autocomplete="new-password">
-                            <div class="invalid-feedback">Enter your password too!</div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary" id="btnDelete" type="button">Enter</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="btnDelete" type="button">Enter</button>
                 </div>
             </div>
         </div>
+    </div>
 
     {{!-- EXPORT MODAL --}}
 
