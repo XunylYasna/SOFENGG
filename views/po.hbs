@@ -56,7 +56,7 @@
                 $('#myDash').attr('action', '/dashboard1').submit()
             })
 
-            $('#saveBtn').click((e)=>{
+            $('#saveBtn').click((e) => {
                 e.preventDefault()
                 alert('Document will now Save')
                 $('#poForm').attr('action', '/po/save').submit()
@@ -95,8 +95,8 @@
 <div class="form-page">
 
     <div id="curPass" class="invisible">{{password}}</div>
-    
-    <div id="header" class="invisible"><img src="../public/default-image.jpg" >{{header}}</div>
+
+    <div id="header" class="invisible"><img src="/default-image.jpg">{{header}}</div>
 
     {{!-- Header --}}
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -165,8 +165,8 @@
                             </div>
                             {{!-- PRF Number --}}
 
-                            <input type="number" required class="form-control readonly" id="prfNumber" name="prfNumber"
-                                placeholder="Enter PRF#" value={{prfNumber}}>
+                            <input type="number" required readonly class="form-control readonly" id="prfNumber"
+                                name="prfNumber" placeholder="Enter PRF#" value={{prfNumber}}>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -181,8 +181,8 @@
                             </div>
                             {{!-- PO Number --}}
 
-                            <input type="number" required class="form-control readonly" id="poNumber" name="poNumber"
-                                placeholder="Enter PO#" value={{poNumber}}>
+                            <input type="number" required readonly class="form-control readonly" id="poNumber"
+                                name="poNumber" placeholder="Enter PO#" value={{poNumber}}>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-pen" aria-hidden="true"></i>
@@ -192,10 +192,10 @@
                     </div>
                     <div id="viewPRF">
                         {{!-- View PRF button --}}
-                        <button id="addpo" class="btn btn-primary hidden-print" href="backprf" type="submit"
+                        {{!-- <button id="addpo" class="btn btn-primary hidden-print" href="backprf" type="submit"
                             role="button">View PRF &nbsp;
                             <i class="fa fa-file" aria-hidden="true"></i>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
 
