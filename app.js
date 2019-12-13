@@ -311,7 +311,7 @@ app.post('/purchaseorder', (req, res) => {
     console.log(dataSet)
 
     res.render("dashPO.hbs", {
-      layout: 'viewPOS',
+      layout: 'dashboardLayout',
       dataSet,
       invalid: invalid
     })

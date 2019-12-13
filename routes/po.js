@@ -89,7 +89,7 @@ router.post('/save', (req, res) => {
         route: route,
         usAmount: dollar,
         phpAmount: peso,
-        total: total,
+        total,
         preparedBy: prepared,
         approvedBy: approved,
         receivedBy: received
